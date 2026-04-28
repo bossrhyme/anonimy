@@ -1,68 +1,145 @@
-
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anonimy — PDF araçları, ücretsiz</title>
+<meta name="description" content="PDF anonimleştir, birleştir, böl, Word'den PDF'e dönüştür. Tamamen ücretsiz, tarayıcı tabanlı, hiçbir veri sunucuya gönderilmez.">
+<meta property="og:title" content="Anonimy — PDF araçları, ücretsiz">
+<meta property="og:description" content="TC kimlik, isim, telefon, IBAN maskele. PDF birleştir, böl, dönüştür. Ücretsiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;
+  --bg:#f8f9fa;
+  --bg2:#f0f0f2;
+  --text:#111118;
+  --text2:#555566;
+  --text3:#9999aa;
+  --border:#ebebed;
+  --border2:#d8d8dc;
+  --green:#059669;
+  --green-bg:#f0fdf4;
+  --green-mid:#a7f3d0;
+  --green-dark:#065f46;
+  --font:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --r:8px;
+  --rl:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--white);color:var(--text);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 
-.shell{display:grid;grid-template-columns:220px 1fr;min-height:560px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+/* ── NAV ── */
+nav{background:var(--white);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 28px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer}
+.logo-mark{width:30px;height:30px;border-radius:8px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-name{font-size:15px;font-weight:700;color:var(--text);letter-spacing:-.4px}
+.logo-dot{color:var(--green)}
+.nav-links{display:flex;gap:2px;margin-left:6px}
+.nav-a{font-size:13px;color:var(--text2);padding:6px 12px;border-radius:var(--r);cursor:pointer;transition:background .12s,color .12s;white-space:nowrap}
+.nav-a:hover{background:var(--bg);color:var(--text)}
+.nav-a.act{color:var(--green);background:var(--green-bg)}
+.nav-sp{flex:1}
+.free-pill{font-size:11.5px;padding:5px 14px;border-radius:20px;background:var(--green-bg);border:1px solid var(--green-mid);color:var(--green);font-weight:500;display:flex;align-items:center;gap:5px}
+.free-dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
 
-.sidebar{border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;background:var(--color-background-primary)}
-.sb-logo{padding:14px 16px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:9px}
-.sb-mark{width:28px;height:28px;border-radius:7px;background:#E6F1FB;border:0.5px solid #B5D4F4;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sb-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
-.sb-ver{font-size:10px;color:var(--color-text-secondary);margin-left:auto;padding:1px 6px;border-radius:10px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)}
+/* ── PAGES ── */
+.page{display:none}.page.active{display:block}
 
-.sb-section{padding:12px 14px 8px}
-.sb-section-title{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:8px}
-.sb-check{display:flex;align-items:center;gap:8px;padding:4px 5px;border-radius:6px;font-size:12.5px;color:var(--color-text-primary);cursor:pointer;user-select:none;transition:background .1s}
-.sb-check:hover{background:var(--color-background-secondary)}
-.sb-box{width:15px;height:15px;border-radius:4px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s}
-.sb-box.on{background:#185FA5;border-color:#185FA5}
-.sb-box.on::after{content:'';width:7px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+/* ── HERO ── */
+.hero{padding:44px 28px 32px;text-align:center;border-bottom:1px solid var(--border);background:var(--white)}
+.hero-inner{max-width:580px;margin:0 auto}
+.hero-inner{max-width:580px;margin:0 auto}
+.hero h1{font-size:30px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.2;letter-spacing:-.6px}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.hero-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.pill{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;gap:5px;background:var(--white)}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
 
-.sb-divider{height:0.5px;background:var(--color-border-tertiary);margin:6px 14px}
+/* ── LAYOUT ── */
+.wrap{max-width:1160px;margin:0 auto;padding:24px 28px 48px}
+.layout{display:flex;flex-direction:column;gap:18px}
+.main-col{display:flex;flex-direction:column;gap:16px;min-width:0;width:100%}
+.aside-col{display:none}
+/* Diğer araçlar — yatay şerit */
+.ot-strip{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px}
+.ot-strip-title{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:12px}
+.ot-strip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 
-.sb-style{padding:4px 14px 10px}
-.sb-style-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:7px}
-.sb-style-opts{display:flex;flex-direction:column;gap:4px}
-.sb-style-opt{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:7px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;border:0.5px solid transparent;transition:all .1s}
-.sb-style-opt:hover{background:var(--color-background-secondary)}
-.sb-style-opt.sel{background:#E6F1FB;border-color:#B5D4F4;color:#0C447C}
-.sb-radio{width:13px;height:13px;border-radius:50%;border:0.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.sb-radio.on{border-color:#185FA5}
-.sb-radio.on::after{content:'';width:6px;height:6px;border-radius:50%;background:#185FA5;display:block}
+/* ── AD SLOTS ── */
+.ad-slot-wrap{border:1px solid var(--border);border-radius:var(--rl);padding:10px 14px;background:var(--white)}
+.ad-label{font-size:9px;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.ad-block{background:var(--bg);border:1px dashed var(--border2);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:12px}
+.ad-lb{height:90px}.ad-mid{height:80px}.ad-rect{height:250px}
 
-.sb-run{margin:auto 14px 14px;padding:9px 0;border-radius:8px;background:#185FA5;color:#fff;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:opacity .1s}
-.sb-run:hover{opacity:.88}
-.sb-run:active{opacity:.75}
+/* ── TOOL CARD ── */
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
 
-.main{display:flex;flex-direction:column;min-width:0}
-.main-topbar{padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:8px}
-.upload-area{flex:1;display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:8px;border:0.5px dashed var(--color-border-secondary);font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:background .1s}
-.upload-area:hover{background:var(--color-background-secondary)}
-.upload-icon{width:22px;height:22px;border-radius:5px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.topbar-btn{font-size:12px;padding:6px 12px;border-radius:7px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:transparent;cursor:pointer;white-space:nowrap;transition:background .1s}
-.topbar-btn:hover{background:var(--color-background-secondary)}
-.topbar-btn.pdf-btn{background:#E6F1FB;border-color:#B5D4F4;color:#0C447C}
-.topbar-btn.pdf-btn:hover{background:#B5D4F4}
-.topbar-btn:disabled{opacity:.4;cursor:not-allowed}
+.tool-header{padding:18px 22px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--white)}
+.tool-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tool-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:2px}
+.tool-sub{font-size:12.5px;color:var(--text2)}
 
-.editors{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}
-.editor{display:flex;flex-direction:column;border-right:0.5px solid var(--color-border-tertiary);min-width:0}
-.editor:last-child{border-right:none}
-.ed-head{padding:8px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
-.ed-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary)}
-.ed-meta{font-size:11px;color:var(--color-text-secondary)}
-.ed-meta.green{color:#185FA5}
-textarea{width:100%;height:280px;font-size:11.5px;font-family:var(--font-mono);line-height:1.7;padding:12px 14px;resize:none;background:transparent;border:none;color:var(--color-text-primary);outline:none}
-.preview{height:280px;font-size:11.5px;font-family:var(--font-mono);line-height:1.7;padding:12px 14px;overflow-y:auto;color:var(--color-text-primary);word-break:break-word;white-space:pre-wrap}
-.preview-empty{font-size:12px;color:var(--color-text-secondary);padding:2rem 14px}
+/* ── TOPBAR ── */
+.topbar{padding:20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;background:var(--bg)}
+.upload-zone{flex:1;display:flex;align-items:center;gap:14px;padding:28px 24px;border-radius:var(--rl);border:1.5px dashed var(--border2);font-size:14px;color:var(--text2);cursor:pointer;transition:background .12s,border-color .12s;min-height:100px}
+.upload-zone:hover{background:var(--green-bg);border-color:var(--green-mid)}
+.upload-icon{width:44px;height:44px;border-radius:10px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tbtn{font-size:12.5px;padding:7px 14px;border-radius:var(--r);border:1px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;font-family:var(--font);transition:background .12s,border-color .12s;white-space:nowrap}
+.tbtn:hover{background:var(--bg);border-color:var(--border2)}
+.tbtn:disabled{opacity:.35;cursor:not-allowed}
+.tbtn.green{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:500}
+.tbtn.green:hover{background:var(--green-mid)}
+.tbtn.solid{background:var(--green);border-color:var(--green);color:#fff;font-weight:500}
+.tbtn.solid:hover{opacity:.88}
 
-.statsbar{padding:7px 14px;border-top:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--color-background-secondary)}
-.stat-chip{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
-.stat-chip b{color:var(--color-text-primary)}
-.stat-total{margin-left:auto;font-size:11px;font-weight:500;color:var(--color-text-primary)}
+/* ── BODY GRID (anon) ── */
+.body-grid{display:grid;grid-template-columns:204px 1fr}
+.sidebar{border-right:1px solid var(--border);display:flex;flex-direction:column}
+.sb-section{padding:14px 14px 8px}
+.sb-label{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:9px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:5px 6px;border-radius:6px;font-size:13px;color:var(--text);cursor:pointer;user-select:none;transition:background .1s}
+.sb-item:hover{background:var(--bg)}
+.cb{width:15px;height:15px;border-radius:4px;border:1.5px solid var(--border2);background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s}
+.cb.on{background:var(--green);border-color:var(--green)}
+.cb.on::after{content:'';width:7px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+.sb-div{height:1px;background:var(--border);margin:8px 14px}
+.sb-style-wrap{padding:4px 14px 10px}
+.sb-opt{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;font-size:12.5px;color:var(--text2);cursor:pointer;border:1px solid transparent;transition:all .12s}
+.sb-opt:hover{background:var(--bg)}
+.sb-opt.sel{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark)}
+.sb-opt+.sb-opt{margin-top:3px}
+.rd{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.rd.on{border-color:var(--green)}
+.rd.on::after{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);display:block}
+.run-btn{margin:auto 14px 14px;padding:10px 0;border-radius:var(--r);background:var(--green);color:#fff;font-size:13.5px;font-weight:600;text-align:center;cursor:pointer;border:none;width:calc(100% - 28px);font-family:var(--font);letter-spacing:-.1px;transition:opacity .15s}
+.run-btn:hover{opacity:.88}
+.run-btn:active{transform:scale(.99)}
 
-.hn{background:#fef9c3;color:#713f12;border-radius:2px;padding:0 2px}
+/* ── EDITORS ── */
+.editors{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.ed{display:flex;flex-direction:column;border-right:1px solid var(--border);min-width:0}
+.ed:last-child{border-right:none}
+.ed-head{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg)}
+.ed-lbl{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)}
+.ed-meta{font-size:11px;color:var(--text3)}
+.ed-meta.green{color:var(--green);font-weight:500}
+textarea{width:100%;height:300px;font-size:12px;font-family:var(--mono);line-height:1.7;padding:14px;resize:none;background:var(--white);border:none;color:var(--text);outline:none}
+.preview{height:300px;font-size:12px;font-family:var(--mono);line-height:1.7;padding:14px;overflow-y:auto;color:var(--text);word-break:break-word;white-space:pre-wrap}
+.preview-empty{font-size:13px;color:var(--text3);padding:2.5rem 14px;font-family:var(--font)}
+.stats-bar{padding:9px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:var(--bg)}
+.stat-chip{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--white);border:1px solid var(--border);color:var(--text2)}
+.stat-chip b{color:var(--text)}
+.stat-total{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--text)}
+
+/* ── HIGHLIGHTS ── */
+.hn {background:#fef9c3;color:#713f12;border-radius:2px;padding:0 2px}
 .htc{background:#fce7f3;color:#831843;border-radius:2px;padding:0 2px}
 .hph{background:#dbeafe;color:#1e3a8a;border-radius:2px;padding:0 2px}
 .hdt{background:#dcfce7;color:#14532d;border-radius:2px;padding:0 2px}
@@ -73,311 +150,2301 @@ textarea{width:100%;height:280px;font-size:11.5px;font-family:var(--font-mono);l
 .hpl{background:#fdf4ff;color:#581c87;border-radius:2px;padding:0 2px}
 .hpa{background:#fff7ed;color:#9a3412;border-radius:2px;padding:0 2px}
 .htx{background:#f0fdf4;color:#14532d;border-radius:2px;padding:0 2px}
+.hcustom{background:#fef3c7;color:#78350f;border-radius:2px;padding:0 2px;border-bottom:1.5px solid #f59e0b}
+
+/* ── TOOL BODY ── */
+.tool-body{padding:22px}
+
+/* ── DROP AREA ── */
+.drop-area{border:2px dashed var(--border2);border-radius:var(--rl);padding:32px 24px;text-align:center;cursor:pointer;transition:background .12s,border-color .12s}
+.drop-area:hover{background:var(--green-bg);border-color:var(--green-mid)}
+.drop-title{font-size:14.5px;font-weight:500;color:var(--text);margin-bottom:6px}
+.drop-sub{font-size:13px;color:var(--text2)}
+.drop-icon{width:44px;height:44px;border-radius:12px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+
+/* ── FILE LIST ── */
+.file-list{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.file-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r);background:var(--bg);border:1px solid var(--border)}
+.file-icon{width:30px;height:30px;border-radius:7px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-name{flex:1;font-size:13px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-size{font-size:11.5px;color:var(--text3)}
+.file-del{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);border:none;background:transparent;font-size:16px;transition:background .1s}
+.file-del:hover{background:var(--border)}
+
+/* ── PROGRESS ── */
+.prog-wrap{margin-top:14px}
+.prog-label{font-size:12.5px;color:var(--text2);margin-bottom:7px}
+.prog-bg{height:5px;background:var(--bg);border-radius:3px;overflow:hidden}
+.prog-bar{height:100%;background:var(--green);border-radius:3px;width:0;transition:width .3s}
+
+/* ── RESULT ── */
+.result-box{margin-top:16px;padding:16px;border-radius:var(--rl);background:var(--green-bg);border:1px solid var(--green-mid);display:none}
+.result-box.show{display:block}
+.result-ok{color:var(--green-dark);font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:13.5px}
+.result-info{font-size:12.5px;color:var(--text2);margin-bottom:10px}
+
+/* ── PAGE RANGE ── */
+.range-row{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.range-row label{font-size:13px;color:var(--text2)}
+.range-inp{font-size:13px;padding:8px 12px;border-radius:var(--r);border:1.5px solid var(--border2);background:var(--white);color:var(--text);width:160px;font-family:var(--font);transition:border-color .12s}
+.range-inp:focus{outline:none;border-color:var(--green)}
+.check-label{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text2);cursor:pointer}
+
+/* ── COMPRESS LEVELS ── */
+.level-group{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.level-opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r);border:1.5px solid var(--border);cursor:pointer;transition:all .12s}
+.level-opt:hover{border-color:var(--border2);background:var(--bg)}
+.level-opt.sel{border-color:var(--green);background:var(--green-bg)}
+.level-name{font-size:13px;font-weight:500;color:var(--text)}
+.level-desc{font-size:12px;color:var(--text3);margin-left:auto}
+
+/* ── OTHER TOOLS ── */
+.ot-card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:16px}
+.ot-title{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:12px}
+.ot-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ot-item{padding:12px 10px;border-radius:var(--r);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:background .12s,border-color .12s}
+.ot-item:hover{background:var(--bg);border-color:var(--border2)}
+.ot-item.act{border-color:var(--green);background:var(--green-bg)}
+.ot-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.ot-name{font-size:11.5px;color:var(--text2);text-align:center;line-height:1.35}
+
+/* ── HOW IT WORKS ── */
+.how-section{border:1px solid var(--border);border-radius:var(--rl);padding:22px;background:var(--white)}
+.how-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:18px}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.how-step{text-align:center;padding:10px 6px}
+.how-num{width:38px;height:38px;border-radius:10px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.how-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+.how-desc{font-size:11.5px;color:var(--text2);line-height:1.5}
+
+/* ── BATCH MODE ── */
+.mode-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--bg)}
+.mode-tab{font-size:13px;padding:10px 18px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;transition:all .12s;user-select:none}
+.mode-tab:hover{color:var(--text);background:var(--white)}
+.mode-tab.act{color:var(--green);border-bottom-color:var(--green);background:var(--white);font-weight:500}
+.mode-panel{display:none}.mode-panel.act{display:flex;flex-direction:column}
+#panel-batch.act{display:flex;flex-direction:column}
+
+.batch-queue{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:260px;overflow-y:auto}
+.batch-item{display:grid;grid-template-columns:28px 1fr 90px 80px 28px;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r);background:var(--bg);border:1px solid var(--border)}
+.batch-item.done{background:var(--green-bg);border-color:var(--green-mid)}
+.batch-item.error{background:#fff1f2;border-color:#fda4af}
+.batch-item.running{background:#fffbeb;border-color:#fde68a}
+.batch-num{font-size:11px;color:var(--text3);text-align:center;font-weight:500}
+.batch-name{font-size:12.5px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.batch-status{font-size:11px;color:var(--text3)}
+.batch-status.ok{color:var(--green);font-weight:500}
+.batch-status.err{color:#dc2626;font-weight:500}
+.batch-status.run{color:#d97706}
+.batch-dl{font-size:11.5px;padding:4px 10px;border-radius:6px;border:1px solid var(--green-mid);background:var(--green-bg);color:var(--green-dark);cursor:pointer;white-space:nowrap;display:none}
+.batch-dl.show{display:block}
+.batch-del{width:22px;height:22px;border-radius:5px;border:none;background:transparent;color:var(--text3);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center}
+.batch-del:hover{background:var(--border)}
+.batch-overall{padding:10px 0;display:flex;align-items:center;gap:10px}
+.batch-overall-bar-bg{flex:1;height:6px;background:var(--bg2);border-radius:3px;overflow:hidden}
+.batch-overall-bar{height:100%;background:var(--green);border-radius:3px;width:0;transition:width .3s}
+.batch-overall-label{font-size:12px;color:var(--text2);white-space:nowrap}
+
+.harita-btn{font-size:11.5px;padding:4px 11px;border-radius:var(--r);border:1px solid var(--border2);color:var(--text2);background:var(--white);cursor:pointer;transition:background .12s,border-color .12s}
+.harita-btn:hover{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark)}
+
+/* ── FORMAT BADGES ── */
+.fmt-badges{display:flex;gap:4px;flex-shrink:0;margin-left:8px}
+.fmt-badge{font-size:10px;font-weight:500;padding:2px 6px;border-radius:4px;background:var(--green-bg);border:1px solid var(--green-mid);color:var(--green-dark);white-space:nowrap;letter-spacing:.2px}
+
+/* ── OVERLAY PDF BUTTON ── */
+.pdf-dl-group{display:flex;gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--green-mid)}
+.pdf-dl-group .tbtn{border-radius:0;border:none;border-right:1px solid var(--green-mid)}
+.pdf-dl-group .tbtn:last-child{border-right:none}
+.pdf-dl-group .tbtn.green{background:var(--green-bg);color:var(--green-dark)}
+.pdf-dl-group .tbtn.green:hover{background:var(--green-mid)}
+.overlay-btn{background:var(--white)!important;color:var(--green-dark)!important;font-size:11.5px!important}
+.overlay-btn:hover{background:var(--green-bg)!important}
+.overlay-btn:disabled{opacity:.38;cursor:not-allowed}
+
+/* overlay info banner */
+.overlay-info{display:none;margin:0 16px 10px;padding:10px 14px;border-radius:var(--r);background:#f0fdf4;border:1px solid var(--green-mid);font-size:12.5px;color:var(--green-dark);align-items:flex-start;gap:8px}
+.overlay-info.show{display:flex}
+.overlay-info-body{flex:1}
+.overlay-info-title{font-weight:600;margin-bottom:3px}
+
+/* ── CUSTOM RULES ── */
+.sb-custom-wrap{padding:4px 14px 10px}
+.sb-custom-hint{font-size:11px;color:var(--text3);margin-bottom:7px;line-height:1.5}
+.sb-custom-input-row{display:flex;gap:5px;margin-bottom:8px}
+.sb-custom-inp{flex:1;font-size:12px;padding:6px 8px;border-radius:var(--r);border:1.5px solid var(--border2);background:var(--white);color:var(--text);font-family:var(--mono);outline:none;min-width:0}
+.sb-custom-inp:focus{border-color:var(--green)}
+.sb-custom-add{width:28px;height:28px;border-radius:var(--r);border:none;background:var(--green);color:#fff;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .12s}
+.sb-custom-add:hover{opacity:.85}
+.sb-custom-list{display:flex;flex-direction:column;gap:4px}
+.sb-custom-tag{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--border);font-size:11.5px;color:var(--text)}
+.sb-custom-tag-text{flex:1;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.sb-custom-tag-label{font-size:10px;color:var(--text3);flex-shrink:0}
+.sb-custom-tag-del{width:16px;height:16px;border:none;background:transparent;color:var(--text3);cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;border-radius:3px;flex-shrink:0}
+.sb-custom-tag-del:hover{background:var(--border);color:var(--text2)}
+.sb-custom-tag.is-regex{background:#f0f9ff;border-color:#bae6fd}
+.sb-custom-tag.is-regex .sb-custom-tag-label{color:#0369a1}
+
+/* ── NAVIGATOR TOOLBAR ── */
+.nav-toolbar{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);background:var(--bg);flex-wrap:wrap;gap:6px}
+.nav-filter{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap}
+.nav-filter-label{font-size:11px;color:var(--text3);white-space:nowrap}
+.nav-filter-pills{display:flex;gap:4px;flex-wrap:wrap}
+.nfp{font-size:11px;padding:2px 9px;border-radius:20px;border:1px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;transition:all .1s;white-space:nowrap}
+.nfp.on{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:500}
+.nav-controls{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.nav-count{font-size:11.5px;color:var(--text2);min-width:60px;text-align:right}
+.nav-btn{width:24px;height:24px;border-radius:5px;border:1px solid var(--border);background:var(--white);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:background .1s}
+.nav-btn:hover{background:var(--bg2)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* ── EDIT POPUP ── */
+.edit-popup{display:none;padding:10px 12px;border-top:1px solid var(--border);background:var(--white)}
+.edit-popup.show{display:block}
+.edit-popup-label{font-size:11px;color:var(--text2);margin-bottom:7px;font-weight:500}
+.edit-popup-row{display:flex;align-items:center;gap:6px}
+.edit-popup-input{flex:1;font-size:12.5px;padding:6px 10px;border-radius:var(--r);border:1.5px solid var(--green-mid);background:var(--white);color:var(--text);font-family:var(--mono);outline:none}
+.edit-popup-input:focus{border-color:var(--green)}
+.edit-popup-btn{font-size:12px;padding:6px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--white);cursor:pointer;font-family:var(--font);white-space:nowrap;transition:background .1s}
+.edit-popup-btn:hover{background:var(--bg)}
+.edit-popup-btn.apply{background:var(--green);border-color:var(--green);color:#fff;font-weight:500}
+.edit-popup-btn.apply:hover{opacity:.88}
+.edit-popup-btn.restore{color:var(--green-dark);border-color:var(--green-mid);background:var(--green-bg)}
+.edit-popup-btn.cancel{color:var(--text3)}
+
+/* highlighted spans */
+.mask-span{border-radius:3px;padding:1px 3px;cursor:pointer;transition:filter .1s;user-select:none}
+.mask-span:hover{filter:brightness(.9)}
+.mask-span.current-nav{outline:2px solid #f59e0b;outline-offset:1px}
+
+/* ── OCR STATUS ── */
+.ocr-banner{display:none;margin-bottom:10px;padding:12px 16px;border-radius:var(--r);background:#fffbeb;border:1px solid #fde68a;font-size:13px;color:#92400e}
+.ocr-banner.show{display:flex;align-items:flex-start;gap:10px}
+.ocr-banner-icon{flex-shrink:0;margin-top:1px}
+.ocr-banner-body{flex:1}
+.ocr-banner-title{font-weight:600;margin-bottom:4px}
+.ocr-prog{height:4px;background:#fde68a;border-radius:2px;overflow:hidden;margin-top:8px}
+.ocr-prog-bar{height:100%;background:#d97706;border-radius:2px;width:0;transition:width .4s}
+.ocr-mode-tabs{display:flex;gap:6px;margin-bottom:10px}
+.ocr-tab{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text2);background:var(--white);cursor:pointer;transition:all .12s}
+.ocr-tab.act{background:var(--green-bg);border-color:var(--green-mid);color:var(--green-dark);font-weight:500}
+/* ── BATCH MODE ── */
+.batch-panel{display:none;flex-direction:column;gap:0}
+.batch-panel.show{display:flex}
+.batch-drop{border:2px dashed var(--border2);border-radius:var(--rl);padding:24px 20px;text-align:center;cursor:pointer;transition:all .12s;margin:16px}
+.batch-drop:hover{background:var(--green-bg);border-color:var(--green-mid)}
+.batch-drop-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px}
+.batch-drop-sub{font-size:12.5px;color:var(--text2)}
+.batch-file-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
+.batch-file-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);font-size:13px;transition:background .1s}
+.batch-file-row:hover{background:var(--bg)}
+.batch-file-icon{width:28px;height:28px;border-radius:6px;background:var(--green-bg);border:1px solid var(--green-mid);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.batch-file-name{flex:1;color:var(--text);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.batch-file-size{font-size:11.5px;color:var(--text3);flex-shrink:0;min-width:52px;text-align:right}
+.batch-file-status{font-size:11.5px;flex-shrink:0;min-width:100px;text-align:right;color:var(--text3)}
+.batch-file-status.done{color:var(--green);font-weight:500}
+.batch-file-status.running{color:#d97706;font-weight:500}
+.batch-file-status.err{color:#dc2626}
+.batch-file-dl{font-size:11.5px;padding:3px 10px;border-radius:20px;border:1px solid var(--green-mid);background:var(--green-bg);color:var(--green-dark);cursor:pointer;white-space:nowrap;transition:background .12s}
+.batch-file-dl:hover{background:var(--green-mid)}
+.batch-file-del{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text3);border:none;background:transparent;font-size:16px;flex-shrink:0}
+.batch-file-del:hover{background:var(--border)}
+.batch-controls{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;background:var(--bg)}
+.batch-prog-overall{height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex:1}
+.batch-prog-fill{height:100%;background:var(--green);border-radius:2px;width:0;transition:width .3s}
+.batch-summary{font-size:12px;color:var(--text2);flex-shrink:0}
+/* ── PRIVACY BOX ── */
+.privacy-box{border:1px solid var(--border);border-radius:var(--rl);padding:20px 22px;background:var(--white)}
+.privacy-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.privacy-text{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* ── FOOTER ── */
+footer{background:var(--white);border-top:1px solid var(--border);padding:16px 28px;margin-top:8px}
+.footer-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-note{font-size:12.5px;color:var(--text3);display:flex;align-items:center;gap:7px}
+.footer-links{display:flex;gap:20px}
+.footer-link{font-size:12.5px;color:var(--text3);text-decoration:none;transition:color .12s}
+.footer-link:hover{color:var(--text2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:940px){.aside-col{display:none}}
+@media(max-width:700px){.body-grid{grid-template-columns:1fr}.sidebar{border-right:none;border-bottom:1px solid var(--border)}.editors{grid-template-columns:1fr}.ed{border-right:none;border-bottom:1px solid var(--border)}.how-steps{grid-template-columns:repeat(2,1fr)}.nav-links{display:none}.hero h1{font-size:24px}}
 </style>
+</head>
+<body>
 
-<h2 class="sr-only">PDF anonimleştirici — minimal sidebar tasarımı</h2>
-
-<div class="shell">
-
-  <div class="sidebar">
-    <div class="sb-logo">
-      <div class="sb-mark">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-          <rect x="2" y="1" width="11" height="13" rx="2" stroke="#185FA5" stroke-width="1.2"/>
-          <path d="M4 5h7M4 7.5h5M4 10h6" stroke="#185FA5" stroke-width="1" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <span class="sb-name">Anonimleştirici</span>
-      <span class="sb-ver">v5</span>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+  <div class="logo" onclick="go('anon')">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="2" y="1" width="12" height="14" rx="2.5" stroke="#059669" stroke-width="1.3"/>
+        <path d="M5 6h6M5 8.5h4M5 11h5" stroke="#059669" stroke-width="1" stroke-linecap="round"/>
+      </svg>
     </div>
-
-    <div class="sb-section">
-      <div class="sb-section-title">Maskeleme</div>
-      <label class="sb-check"><div class="sb-box on" id="b_name"></div>Kişi adları</label>
-      <label class="sb-check"><div class="sb-box on" id="b_tc"></div>TC kimlik no</label>
-      <label class="sb-check"><div class="sb-box on" id="b_phone"></div>Telefon numarası</label>
-      <label class="sb-check"><div class="sb-box on" id="b_date"></div>Tarihler</label>
-      <label class="sb-check"><div class="sb-box on" id="b_email"></div>E-posta adresi</label>
-      <label class="sb-check"><div class="sb-box on" id="b_addr"></div>Adres / şehir</label>
-      <label class="sb-check"><div class="sb-box on" id="b_iban"></div>IBAN / hesap no</label>
-      <label class="sb-check"><div class="sb-box on" id="b_company"></div>Şirket / kurum</label>
-      <label class="sb-check"><div class="sb-box on" id="b_plate"></div>Plaka numarası</label>
-      <label class="sb-check"><div class="sb-box on" id="b_passport"></div>Pasaport / ehliyet</label>
-      <label class="sb-check"><div class="sb-box on" id="b_tax"></div>Vergi numarası</label>
-    </div>
-
-    <div class="sb-divider"></div>
-
-    <div class="sb-style">
-      <div class="sb-style-label">Maskeleme stili</div>
-      <div class="sb-style-opts">
-        <div class="sb-style-opt sel" data-val="label" onclick="setStyle(this)">
-          <div class="sb-radio on"></div><span>[KİŞİ_1] etiket</span>
-        </div>
-        <div class="sb-style-opt" data-val="star" onclick="setStyle(this)">
-          <div class="sb-radio"></div><span>[*****] yıldız</span>
-        </div>
-        <div class="sb-style-opt" data-val="hash" onclick="setStyle(this)">
-          <div class="sb-radio"></div><span>[GİZLİ] blok</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sb-run" onclick="run()">Anonimleştir</div>
+    <span class="logo-name">anonimy<span class="logo-dot">.app</span></span>
   </div>
+  <div class="nav-links">
+    <span class="nav-a act" id="nav-anon" onclick="go('anon')">Anonimleştir</span>
+    <span class="nav-a" id="nav-merge" onclick="go('merge')">PDF Birleştir</span>
+    <span class="nav-a" id="nav-split" onclick="go('split')">PDF Böl</span>
+    <span class="nav-a" id="nav-word" onclick="go('word')">Word → PDF</span>
+    <span class="nav-a" id="nav-pdf2word" onclick="go('pdf2word')">PDF → Word</span>
+    <span class="nav-a" id="nav-compress" onclick="go('compress')">Sıkıştır</span>
+  </div>
+  <div class="nav-sp"></div>
+  <div class="free-pill"><div class="free-dot"></div>Tamamen ücretsiz</div>
+  </div>
+</nav>
 
-  <div class="main">
-    <div class="main-topbar">
-      <div class="upload-area" id="dropZone" onclick="document.getElementById('fi').click()">
-        <div class="upload-icon">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M6.5 2v7M3 5l3.5-3 3.5 3M2 11h9" stroke="#185FA5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span id="uploadLabel">PDF yükle veya sürükle bırak</span>
-      </div>
-      <input type="file" id="fi" accept=".pdf" style="display:none">
-      <button class="topbar-btn" onclick="doCopy()" id="btnCopy" disabled>Kopyala</button>
-      <button class="topbar-btn" onclick="doTxt()" id="btnTxt" disabled>TXT</button>
-      <button class="topbar-btn pdf-btn" onclick="doPdf()" id="btnPdf" disabled>PDF indir</button>
-    </div>
-
-    <div class="editors">
-      <div class="editor">
-        <div class="ed-head">
-          <span class="ed-label">Orijinal metin</span>
-          <span class="ed-meta" id="origMeta"></span>
-        </div>
-        <textarea id="inp" placeholder="PDF yüklenince burada görünür&#10;ya da doğrudan metin yapıştırın..."></textarea>
-      </div>
-      <div class="editor">
-        <div class="ed-head">
-          <span class="ed-label">Anonimleştirilmiş</span>
-          <span class="ed-meta green" id="anonMeta"></span>
-        </div>
-        <div class="preview" id="prev"><div class="preview-empty">Anonimleştir butonuna basın</div></div>
+<!-- ════ SAYFA 1: ANONİMLEŞTİR ════ -->
+<div class="page active" id="page-anon">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Belgelerinizdeki<br>kişisel verileri <span>maskeleyin</span></h1>
+      <p>TC kimlik, isim, telefon, IBAN ve daha fazlasını tek tıkla anonimleştirin.<br>Tamamen ücretsiz · Sunucusuz · Kayıt gerektirmez</p>
+      <div class="hero-pills">
+        <div class="pill"><div class="pill-dot"></div>100% ücretsiz</div>
+        <div class="pill"><div class="pill-dot"></div>Tarayıcı tabanlı</div>
+        <div class="pill"><div class="pill-dot"></div>KVKK uyumlu</div>
+        <div class="pill"><div class="pill-dot"></div>PDF + metin</div>
+        <div class="pill"><div class="pill-dot"></div>Kayıt yok</div>
       </div>
     </div>
+  </div>
+  <div class="wrap">
+    <div class="ad-slot-wrap" style="margin-bottom:18px">
+      <div class="ad-label">Reklam</div>
+      <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins> -->
+      <div class="ad-block ad-lb">728 × 90 — Leaderboard</div>
+    </div>
+    <div class="layout">
+      <div class="main-col">
+        <div class="tool-card">
+          <!-- Birleşik sekme çubuğu -->
+          <div class="mode-tabs">
+            <span class="mode-tab act" id="mtab-text"    onclick="switchMode('text')">Metin PDF</span>
+            <span class="mode-tab"     id="mtab-ocr"     onclick="switchMode('ocr')">Taranmış / OCR</span>
+            <span class="mode-tab"     id="mtab-batch"   onclick="switchMode('batch')">Toplu işlem</span>
+          </div>
 
-    <div class="statsbar" id="statsbar" style="display:none"></div>
+          <!-- TEK DOSYA PANELİ (metin + ocr modu) -->
+          <div class="mode-panel act" id="panel-single">
+          <div class="topbar">
+            <div class="upload-zone" id="a-dz" onclick="document.getElementById('a-fi').click()">
+              <div class="upload-icon">
+                <svg width="22" height="22" viewBox="0 0 13 13" fill="none"><path d="M6.5 2v7M3 5l3.5-3 3.5 3M2 11h9" stroke="#059669" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span id="a-lbl">Dosya yükle veya sürükle bırak — ya da metin yapıştır</span>
+              <div class="fmt-badges">
+                <span class="fmt-badge">PDF</span>
+                <span class="fmt-badge">DOCX</span>
+                <span class="fmt-badge">TXT</span>
+                <span class="fmt-badge">PNG/JPG</span>
+              </div>
+            </div>
+            <input type="file" id="a-fi" accept=".pdf,.docx,.doc,.txt,.png,.jpg,.jpeg,.tiff,.bmp,.webp,image/*" style="display:none">
+            <button class="tbtn" id="a-cp" onclick="aCopy()" disabled>Kopyala</button>
+            <button class="tbtn" id="a-tt" onclick="aTxt()" disabled>TXT</button>
+            <button class="tbtn" id="a-docx" onclick="aDocx()" disabled>DOCX</button>
+            <div class="pdf-dl-group">
+              <button class="tbtn green" id="a-pp" onclick="aPdf()" disabled>PDF indir</button>
+              <button class="tbtn overlay-btn" id="a-overlay" onclick="aPdfOverlay()" disabled title="Orijinal PDF üzerine siyah kutu çiz">Overlay PDF</button>
+            </div>
+          </div>
+          <div id="ocr-info-bar" style="padding:10px 16px 0;border-bottom:1px solid var(--border);display:none">
+            <div class="ocr-banner" id="ocr-banner">
+              <div class="ocr-banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#d97706" stroke-width="1.2"/><path d="M8 5v4M8 11v.5" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+              <div class="ocr-banner-body">
+                <div class="ocr-banner-title" id="ocr-title">OCR modu aktif</div>
+                <div id="ocr-status">PDF veya görüntü dosyası yükleyin</div>
+                <div class="ocr-prog"><div class="ocr-prog-bar" id="ocr-bar"></div></div>
+              </div>
+            </div>
+            <div class="overlay-info" id="overlay-info">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><rect x="1.5" y="1.5" width="13" height="13" rx="2.5" stroke="#059669" stroke-width="1.2"/><path d="M4 8h8M4 5.5h5M4 10.5h6" stroke="#059669" stroke-width="1" stroke-linecap="round"/></svg>
+              <div class="overlay-info-body">
+                <div class="overlay-info-title">Overlay PDF modu</div>
+                <div>Orijinal PDF üzerine tespit edilen metinler siyah dikdörtgenle kapatılır. Belgenin görsel düzeni korunur.</div>
+              </div>
+            </div>
+          </div>
+          <div class="body-grid">
+            <div class="sidebar">
+              <div class="sb-section">
+                <div class="sb-label">Kişisel veriler</div>
+                <label class="sb-item"><div class="cb on" id="b_name"></div>Kişi adları</label>
+                <label class="sb-item"><div class="cb on" id="b_tc"></div>TC kimlik no</label>
+                <label class="sb-item"><div class="cb on" id="b_phone"></div>Telefon numarası</label>
+                <label class="sb-item"><div class="cb on" id="b_date"></div>Tarihler</label>
+                <label class="sb-item"><div class="cb on" id="b_email"></div>E-posta adresi</label>
+                <label class="sb-item"><div class="cb on" id="b_addr"></div>Adres / şehir</label>
+                <label class="sb-item"><div class="cb on" id="b_iban"></div>IBAN / hesap no</label>
+                <label class="sb-item"><div class="cb on" id="b_company"></div>Şirket / kurum</label>
+                <label class="sb-item"><div class="cb on" id="b_plate"></div>Plaka numarası</label>
+                <label class="sb-item"><div class="cb on" id="b_passport"></div>Pasaport / ehliyet</label>
+                <label class="sb-item"><div class="cb on" id="b_tax"></div>Vergi numarası</label>
+              </div>
+              <div class="sb-div"></div>
+              <div class="sb-style-wrap">
+                <div class="sb-label">Maskeleme stili</div>
+                <div class="sb-opt sel" data-val="label" onclick="aStyle(this)"><div class="rd on"></div>[KİŞİ_1] etiket</div>
+                <div class="sb-opt" data-val="star" onclick="aStyle(this)"><div class="rd"></div>[*****] yıldız</div>
+                <div class="sb-opt" data-val="hash" onclick="aStyle(this)"><div class="rd"></div>[GİZLİ] blok</div>
+              </div>
+              <div class="sb-div"></div>
+              <div class="sb-custom-wrap">
+                <div class="sb-label">Özel kurallar</div>
+                <div class="sb-custom-hint">Kelime veya regex ekleyin</div>
+                <div class="sb-custom-input-row">
+                  <input type="text" id="custom-rule-inp" class="sb-custom-inp" placeholder="kelime veya /regex/i">
+                  <button class="sb-custom-add" onclick="addCustomRule()" title="Ekle">+</button>
+                </div>
+                <div class="sb-custom-list" id="custom-rule-list"></div>
+              </div>
+              <button class="run-btn" onclick="aRun()">Anonimleştir</button>
+            </div>
+            <div style="display:flex;flex-direction:column;min-width:0">
+              <div class="editors">
+                <div class="ed">
+                  <div class="ed-head"><span class="ed-lbl">Orijinal metin</span><span class="ed-meta" id="a-om"></span></div>
+                  <textarea id="a-inp" placeholder="PDF yüklenince burada görünür&#10;ya da doğrudan metin yapıştırın..."></textarea>
+                </div>
+                <div class="ed">
+                  <div class="ed-head">
+                    <span class="ed-lbl">Anonimleştirilmiş</span>
+                    <span class="ed-meta green" id="a-am"></span>
+                  </div>
+                  <!-- Gezgin toolbar -->
+                  <div class="nav-toolbar" id="nav-toolbar" style="display:none">
+                    <div class="nav-filter" id="nav-filter-wrap">
+                      <span class="nav-filter-label">Filtre:</span>
+                      <div class="nav-filter-pills" id="nav-filter-pills"></div>
+                    </div>
+                    <div class="nav-controls">
+                      <span class="nav-count" id="nav-count"></span>
+                      <button class="nav-btn" id="nav-prev" onclick="navMove(-1)">&#8593;</button>
+                      <button class="nav-btn" id="nav-next" onclick="navMove(1)">&#8595;</button>
+                    </div>
+                  </div>
+                  <div class="preview" id="a-prev"><div class="preview-empty">Anonimleştir butonuna basın</div></div>
+                  <!-- Düzenleme popup -->
+                  <div class="edit-popup" id="edit-popup">
+                    <div class="edit-popup-label" id="edit-popup-label">Etiketi düzenle</div>
+                    <div class="edit-popup-row">
+                      <input type="text" class="edit-popup-input" id="edit-popup-input" placeholder="Yeni değer…">
+                      <button class="edit-popup-btn restore" onclick="editRestore()" title="Orijinale geri al">↩</button>
+                      <button class="edit-popup-btn apply" onclick="editApply()">Uygula</button>
+                      <button class="edit-popup-btn cancel" onclick="editClose()">✕</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="stats-bar" id="a-sb" style="display:none">
+                <div id="a-sb-chips" style="display:flex;gap:7px;flex-wrap:wrap;flex:1;align-items:center"></div>
+                <div style="display:flex;gap:6px;flex-shrink:0;margin-left:auto">
+                  <button class="tbtn harita-btn" id="a-map-csv" onclick="downloadMapCsv()" title="CSV olarak indir">Harita CSV</button>
+                  <button class="tbtn harita-btn" id="a-map-pdf" onclick="downloadMapPdf()" title="PDF rapor olarak indir">Harita PDF</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- /panel-single -->
+
+          <!-- TOPLU İŞLEM PANELİ -->
+          <div class="mode-panel" id="panel-batch">
+            <div class="topbar" style="flex-wrap:wrap;gap:8px">
+              <div class="upload-zone" id="b-dz" style="flex:1" onclick="document.getElementById('b-fi').click()">
+                <div class="upload-icon"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 2v7M3 5l3.5-3 3.5 3M2 11h9" stroke="#059669" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <span id="b-lbl">Birden fazla PDF seçin veya sürükleyin</span>
+              </div>
+              <input type="file" id="b-fi" accept=".pdf" multiple style="display:none">
+              <button class="tbtn solid" id="b-run" onclick="batchRun()" disabled>Tümünü işle</button>
+              <button class="tbtn" onclick="batchClear()">Temizle</button>
+            </div>
+            <div style="padding:14px 16px">
+              <div id="b-queue" class="batch-queue"></div>
+              <div class="batch-overall" id="b-overall" style="display:none">
+                <div class="batch-overall-bar-bg"><div class="batch-overall-bar" id="b-overall-bar"></div></div>
+                <span class="batch-overall-label" id="b-overall-label">0 / 0</span>
+              </div>
+              <div style="font-size:12.5px;color:var(--text3);text-align:center;padding:2rem 0;display:none" id="b-empty">
+                Dosya yüklenince burada görünecek
+              </div>
+            </div>
+          </div><!-- /panel-batch -->
+        </div><!-- /tool-card -->
+
+        <div class="ad-slot-wrap">
+          <div class="ad-label">Reklam</div>
+          <div class="ad-block ad-mid">468 × 60</div>
+        </div>
+
+        <div class="how-section">
+          <div class="how-title">Nasıl çalışır</div>
+          <div class="how-steps">
+            <div class="how-step"><div class="how-num"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 7l3.5-4.5L12.5 7M3 15h12" stroke="#059669" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="how-name">Yükle</div><div class="how-desc">PDF veya metin yapıştır</div></div>
+            <div class="how-step"><div class="how-num"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="3.5" width="14" height="11" rx="2.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9h7M5.5 12h5" stroke="#059669" stroke-width="1.1" stroke-linecap="round"/></svg></div><div class="how-name">Seç</div><div class="how-desc">Maskelenecek veri tiplerini işaretle</div></div>
+            <div class="how-step"><div class="how-num"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="1.5" width="15" height="15" rx="3" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l3 3L12.5 6" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="how-name">Maskele</div><div class="how-desc">Tek tıkla otomatik işlem</div></div>
+            <div class="how-step"><div class="how-num"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8.5L9 13l3.5-4.5M3 15h12" stroke="#059669" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="how-name">İndir</div><div class="how-desc">PDF veya TXT olarak kaydet</div></div>
+          </div>
+        </div>
+
+        <div class="privacy-box" id="privacy">
+          <div class="privacy-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4.5v4c0 3 2.2 5.8 6 6.8 3.8-1 6-3.8 6-6.8v-4L8 1.5z" stroke="#059669" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            Gizlilik garantisi
+          </div>
+          <p class="privacy-text">Yüklediğiniz belgeler <strong>hiçbir sunucuya gönderilmez</strong>. Tüm işlem tarayıcınızda gerçekleşir. Dosyalarınız bilgisayarınızdan çıkmaz, log tutulmaz, çerez kullanılmaz. Bu araç KVKK kapsamında kişisel verileri işlemez — çünkü verilerinize hiç erişmez.</p>
+        </div>
+
+        <!-- Diğer araçlar — yatay şerit -->
+        <div class="ot-strip">
+          <div class="ot-strip-title">Diğer araçlar</div>
+          <div class="ot-strip-grid">
+            <div class="ot-item" onclick="go('merge')"><div class="ot-icon" style="background:#fef9c3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2.5" stroke="#854d0e" stroke-width="1.2"/><path d="M5 9h8M5 6.5h5M5 11.5h6" stroke="#854d0e" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">PDF birleştir</div></div>
+            <div class="ot-item" onclick="go('split')"><div class="ot-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 2h7.5l4.5 4.5V16H4V2z" stroke="#15803d" stroke-width="1.2"/><path d="M11.5 2v4.5H16" stroke="#15803d" stroke-width="1.2"/></svg></div><div class="ot-name">PDF böl</div></div>
+            <div class="ot-item" onclick="go('word')"><div class="ot-icon" style="background:#ede9fe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 6.5v9.5h13V6.5L9 2z" stroke="#6d28d9" stroke-width="1.2"/><path d="M6.5 11.5h5M6.5 8.5h4" stroke="#6d28d9" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Word → PDF</div></div>
+            <div class="ot-item" onclick="go('compress')"><div class="ot-icon" style="background:#fce7f3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8l3.5 3.5L12.5 8M3 14.5h12" stroke="#9d174d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ot-name">PDF sıkıştır</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-rect">300 × 250</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- ════ SAYFA 2: PDF BİRLEŞTİR ════ -->
+<div class="page" id="page-merge">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>PDF dosyalarını <span>birleştirin</span></h1>
+      <p>Birden fazla PDF'i tek dosyada toplayın. Sınırsız dosya, tamamen ücretsiz.</p>
+      <div class="hero-pills"><div class="pill"><div class="pill-dot"></div>Sınırsız dosya</div><div class="pill"><div class="pill-dot"></div>Sayfa sırası korunur</div><div class="pill"><div class="pill-dot"></div>Ücretsiz</div></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="layout">
+      <div class="main-col">
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-lb">728 × 90</div></div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon-wrap" style="background:#fef9c3;border:1px solid #fde68a"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="18" height="18" rx="3.5" stroke="#854d0e" stroke-width="1.4"/><path d="M6 11h10M6 7.5h6.5M6 14.5h8" stroke="#854d0e" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+            <div><div class="tool-title">PDF birleştir</div><div class="tool-sub">Birden fazla PDF'i tek dosyaya birleştir</div></div>
+          </div>
+          <div class="tool-body">
+            <div class="drop-area" id="m-drop" onclick="document.getElementById('m-fi').click()">
+              <div class="drop-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v11M6.5 7l4.5-4.5L15.5 7M4 18.5h14" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="drop-title">PDF dosyalarını seçin veya sürükleyin</div>
+              <div class="drop-sub">Birden fazla dosya seçebilirsiniz</div>
+              <input type="file" id="m-fi" accept=".pdf" multiple style="display:none">
+            </div>
+            <div class="file-list" id="m-list"></div>
+            <div class="prog-wrap" id="m-pw" style="display:none"><div class="prog-label" id="m-pl">Birleştiriliyor…</div><div class="prog-bg"><div class="prog-bar" id="m-pb"></div></div></div>
+            <div class="result-box" id="m-res">
+              <div class="result-ok"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l2.8 2.8L12.5 6.5" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Birleştirme tamamlandı!</div>
+              <button class="tbtn green" id="m-dl">PDF indir</button>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="tbtn solid" id="m-btn" onclick="mMerge()" disabled>Birleştir</button>
+              <button class="tbtn" onclick="mClear()">Temizle</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Diğer araçlar yatay şerit -->
+        <div class="ot-strip">
+          <div class="ot-strip-title">Diğer araçlar</div>
+          <div class="ot-strip-grid"><div class="ot-item" onclick="go('anon')"><div class="ot-icon" style="background:#f0fdf4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="2.5" stroke="#059669" stroke-width="1.2"/><path d="M5 6h8M5 9h6M5 12h7" stroke="#059669" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Anonimleştir</div></div><div class="ot-item act" ><div class="ot-icon" style="background:#fef9c3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2.5" stroke="#854d0e" stroke-width="1.2"/><path d="M5 9h8M5 6.5h5M5 11.5h6" stroke="#854d0e" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">PDF birleştir</div></div><div class="ot-item" onclick="go('split')"><div class="ot-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 2h7.5l4.5 4.5V16H4V2z" stroke="#15803d" stroke-width="1.2"/><path d="M11.5 2v4.5H16" stroke="#15803d" stroke-width="1.2"/></svg></div><div class="ot-name">PDF böl</div></div><div class="ot-item" onclick="go('word')"><div class="ot-icon" style="background:#ede9fe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 6.5v9.5h13V6.5L9 2z" stroke="#6d28d9" stroke-width="1.2"/><path d="M6.5 11.5h5M6.5 8.5h4" stroke="#6d28d9" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Word → PDF</div></div><div class="ot-item" onclick="go('compress')"><div class="ot-icon" style="background:#fce7f3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8l3.5 3.5L12.5 8M3 14.5h12" stroke="#9d174d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ot-name">PDF sıkıştır</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ════ SAYFA 3: PDF BÖL ════ -->
+<div class="page" id="page-split">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>PDF'i sayfalara <span>bölün</span></h1>
+      <p>Belirli sayfaları çıkarın veya her sayfayı ayrı dosyaya ayırın.</p>
+      <div class="hero-pills"><div class="pill"><div class="pill-dot"></div>Sayfa aralığı</div><div class="pill"><div class="pill-dot"></div>Her sayfa ayrı</div><div class="pill"><div class="pill-dot"></div>Ücretsiz</div></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="layout">
+      <div class="main-col">
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-lb">728 × 90</div></div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon-wrap" style="background:#dcfce7;border:1px solid #86efac"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 2h9.5l5.5 5.5V20H5V2z" stroke="#15803d" stroke-width="1.4"/><path d="M14.5 2v5.5H20" stroke="#15803d" stroke-width="1.4"/><path d="M8.5 12h5M8.5 15h3.5" stroke="#15803d" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+            <div><div class="tool-title">PDF böl</div><div class="tool-sub">Sayfaları seç ve ayrı dosya olarak indir</div></div>
+          </div>
+          <div class="tool-body">
+            <div class="drop-area" id="s-drop" onclick="document.getElementById('s-fi').click()">
+              <div class="drop-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v11M6.5 7l4.5-4.5L15.5 7M4 18.5h14" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="drop-title">PDF dosyasını seçin veya sürükleyin</div>
+              <div class="drop-sub" id="s-info">Tek bir PDF yükleyin</div>
+              <input type="file" id="s-fi" accept=".pdf" style="display:none">
+            </div>
+            <div class="range-row">
+              <label>Sayfa aralığı:</label>
+              <input type="text" class="range-inp" id="s-range" placeholder="örn: 1-3, 5, 7-9">
+              <label class="check-label"><input type="checkbox" id="s-all"> Her sayfayı ayrı indir</label>
+            </div>
+            <div class="prog-wrap" id="s-pw" style="display:none"><div class="prog-label" id="s-pl">İşleniyor…</div><div class="prog-bg"><div class="prog-bar" id="s-pb"></div></div></div>
+            <div class="result-box" id="s-res">
+              <div class="result-ok"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l2.8 2.8L12.5 6.5" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Bölme tamamlandı!</div>
+              <div id="s-dl-list" style="display:flex;flex-direction:column;gap:7px;margin-top:4px"></div>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="tbtn solid" id="s-btn" onclick="sSplit()" disabled>Böl ve indir</button>
+              <button class="tbtn" onclick="sClear()">Temizle</button>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Diğer araçlar yatay şerit -->
+        <div class="ot-strip">
+          <div class="ot-strip-title">Diğer araçlar</div>
+          <div class="ot-strip-grid"><div class="ot-item" onclick="go('anon')"><div class="ot-icon" style="background:#f0fdf4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="2.5" stroke="#059669" stroke-width="1.2"/><path d="M5 6h8M5 9h6M5 12h7" stroke="#059669" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Anonimleştir</div></div><div class="ot-item" onclick="go('merge')"><div class="ot-icon" style="background:#fef9c3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2.5" stroke="#854d0e" stroke-width="1.2"/><path d="M5 9h8M5 6.5h5M5 11.5h6" stroke="#854d0e" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">PDF birleştir</div></div><div class="ot-item act" ><div class="ot-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 2h7.5l4.5 4.5V16H4V2z" stroke="#15803d" stroke-width="1.2"/><path d="M11.5 2v4.5H16" stroke="#15803d" stroke-width="1.2"/></svg></div><div class="ot-name">PDF böl</div></div><div class="ot-item" onclick="go('word')"><div class="ot-icon" style="background:#ede9fe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 6.5v9.5h13V6.5L9 2z" stroke="#6d28d9" stroke-width="1.2"/><path d="M6.5 11.5h5M6.5 8.5h4" stroke="#6d28d9" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Word → PDF</div></div><div class="ot-item" onclick="go('compress')"><div class="ot-icon" style="background:#fce7f3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8l3.5 3.5L12.5 8M3 14.5h12" stroke="#9d174d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ot-name">PDF sıkıştır</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ════ SAYFA 4: WORD → PDF ════ -->
+<div class="page" id="page-word">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Word dosyasını <span>PDF'e dönüştür</span></h1>
+      <p>.docx dosyalarınızı anında PDF formatına çevirin. Ücretsiz, tarayıcıda.</p>
+      <div class="hero-pills"><div class="pill"><div class="pill-dot"></div>.docx destekli</div><div class="pill"><div class="pill-dot"></div>Anında dönüşüm</div><div class="pill"><div class="pill-dot"></div>Ücretsiz</div></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="layout">
+      <div class="main-col">
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-lb">728 × 90</div></div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon-wrap" style="background:#ede9fe;border:1px solid #c4b5fd"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L3 7.5V20h16V7.5L11 2z" stroke="#6d28d9" stroke-width="1.4"/><path d="M7.5 13h7M7.5 9.5h5.5" stroke="#6d28d9" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+            <div><div class="tool-title">Word → PDF</div><div class="tool-sub">.docx dosyasını PDF formatına dönüştür</div></div>
+          </div>
+          <div class="tool-body">
+            <div class="drop-area" id="w-drop" onclick="document.getElementById('w-fi').click()">
+              <div class="drop-icon" style="background:#ede9fe;border-color:#c4b5fd"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v11M6.5 7l4.5-4.5L15.5 7M4 18.5h14" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="drop-title">.docx dosyasını seçin veya sürükleyin</div>
+              <div class="drop-sub" id="w-info">Microsoft Word formatı (.docx) desteklenir</div>
+              <input type="file" id="w-fi" accept=".docx,.doc" style="display:none">
+            </div>
+            <div class="prog-wrap" id="w-pw" style="display:none"><div class="prog-label">Dönüştürülüyor…</div><div class="prog-bg"><div class="prog-bar" id="w-pb"></div></div></div>
+            <div class="result-box" id="w-res">
+              <div class="result-ok"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l2.8 2.8L12.5 6.5" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Dönüştürme tamamlandı!</div>
+              <button class="tbtn green" id="w-dl">PDF indir</button>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="tbtn solid" id="w-btn" onclick="wConvert()" disabled>PDF'e dönüştür</button>
+              <button class="tbtn" onclick="wClear()">Temizle</button>
+            </div>
+            <div style="margin-top:14px;padding:12px 14px;background:var(--bg);border-radius:var(--r);border:1px solid var(--border);font-size:12.5px;color:var(--text2);line-height:1.6">
+              Not: Karmaşık biçimlendirmeler (tablolar, sütunlar, görseller) basitleştirilebilir. En iyi sonuç için sade metin belgeler önerilir.
+            </div>
+          </div>
+        </div>
+      
+        <!-- Diğer araçlar yatay şerit -->
+        <div class="ot-strip">
+          <div class="ot-strip-title">Diğer araçlar</div>
+          <div class="ot-strip-grid"><div class="ot-item" onclick="go('anon')"><div class="ot-icon" style="background:#f0fdf4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="2.5" stroke="#059669" stroke-width="1.2"/><path d="M5 6h8M5 9h6M5 12h7" stroke="#059669" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Anonimleştir</div></div><div class="ot-item" onclick="go('merge')"><div class="ot-icon" style="background:#fef9c3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2.5" stroke="#854d0e" stroke-width="1.2"/><path d="M5 9h8M5 6.5h5M5 11.5h6" stroke="#854d0e" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">PDF birleştir</div></div><div class="ot-item" onclick="go('split')"><div class="ot-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 2h7.5l4.5 4.5V16H4V2z" stroke="#15803d" stroke-width="1.2"/><path d="M11.5 2v4.5H16" stroke="#15803d" stroke-width="1.2"/></svg></div><div class="ot-name">PDF böl</div></div><div class="ot-item act" ><div class="ot-icon" style="background:#ede9fe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 6.5v9.5h13V6.5L9 2z" stroke="#6d28d9" stroke-width="1.2"/><path d="M6.5 11.5h5M6.5 8.5h4" stroke="#6d28d9" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">Word → PDF</div></div><div class="ot-item" onclick="go('compress')"><div class="ot-icon" style="background:#fce7f3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8l3.5 3.5L12.5 8M3 14.5h12" stroke="#9d174d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ot-name">PDF sıkıştır</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ════ SAYFA 5: PDF SIKIŞTIR ════ -->
+<div class="page" id="page-compress">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>PDF dosyasını <span>sıkıştırın</span></h1>
+      <p>PDF boyutunu küçültün. Kalite seviyesini siz seçin.</p>
+      <div class="hero-pills"><div class="pill"><div class="pill-dot"></div>3 kalite seviyesi</div><div class="pill"><div class="pill-dot"></div>Boyut küçültme</div><div class="pill"><div class="pill-dot"></div>Ücretsiz</div></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="layout">
+      <div class="main-col">
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-lb">728 × 90</div></div>
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon-wrap" style="background:#fce7f3;border:1px solid #f9a8d4"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v13M6.5 10.5l4.5 5 4.5-5M4 19h14" stroke="#9d174d" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="tool-title">PDF sıkıştır</div><div class="tool-sub">Dosya boyutunu küçült, kaliteyi sen belirle</div></div>
+          </div>
+          <div class="tool-body">
+            <div class="drop-area" id="c-drop" onclick="document.getElementById('c-fi').click()">
+              <div class="drop-icon" style="background:#fce7f3;border-color:#f9a8d4"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v11M6.5 7l4.5-4.5L15.5 7M4 18.5h14" stroke="#9d174d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="drop-title">PDF dosyasını seçin veya sürükleyin</div>
+              <div class="drop-sub" id="c-info">Tek bir PDF yükleyin</div>
+              <input type="file" id="c-fi" accept=".pdf" style="display:none">
+            </div>
+            <div style="margin-top:18px">
+              <div style="font-size:13px;font-weight:500;color:var(--text2);margin-bottom:10px">Sıkıştırma seviyesi</div>
+              <div class="level-group">
+                <label class="level-opt"><input type="radio" name="cl" value="low" style="accent-color:var(--green)"><div><div class="level-name">Düşük sıkıştırma</div></div><span class="level-desc">Yüksek kalite · az küçülme</span></label>
+                <label class="level-opt sel"><input type="radio" name="cl" value="med" checked style="accent-color:var(--green)"><div><div class="level-name">Orta sıkıştırma</div></div><span class="level-desc">Dengeli · önerilen</span></label>
+                <label class="level-opt"><input type="radio" name="cl" value="high" style="accent-color:var(--green)"><div><div class="level-name">Yüksek sıkıştırma</div></div><span class="level-desc">Küçük boyut · daha düşük kalite</span></label>
+              </div>
+            </div>
+            <div class="prog-wrap" id="c-pw" style="display:none"><div class="prog-label">Sıkıştırılıyor…</div><div class="prog-bg"><div class="prog-bar" id="c-pb"></div></div></div>
+            <div class="result-box" id="c-res">
+              <div class="result-ok"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l2.8 2.8L12.5 6.5" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Sıkıştırma tamamlandı!</div>
+              <div id="c-sz" class="result-info"></div>
+              <button class="tbtn green" id="c-dl">PDF indir</button>
+            </div>
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="tbtn solid" id="c-btn" onclick="cCompress()" disabled>Sıkıştır</button>
+              <button class="tbtn" onclick="cClear()">Temizle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- ════ SAYFA 6: PDF → WORD ════ -->
+<div class="page" id="page-pdf2word">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>PDF'i <span>Word'e dönüştürün</span></h1>
+      <p>PDF dosyanızdaki metni .docx formatına çevirin. Ücretsiz, tarayıcıda, kayıt gerektirmez.</p>
+      <div class="hero-pills">
+        <div class="pill"><div class="pill-dot"></div>Metin korunur</div>
+        <div class="pill"><div class="pill-dot"></div>Başlık tespiti</div>
+        <div class="pill"><div class="pill-dot"></div>Ücretsiz</div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="layout">
+      <div class="main-col">
+        <div class="ad-slot-wrap"><div class="ad-label">Reklam</div><div class="ad-block ad-lb">728 × 90</div></div>
+
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon-wrap" style="background:#dbeafe;border:1px solid #93c5fd">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <rect x="2" y="1" width="18" height="20" rx="3" stroke="#1d4ed8" stroke-width="1.4"/>
+                <path d="M6 7h10M6 10.5h8M6 14h9M6 17.5h6" stroke="#1d4ed8" stroke-width="1.1" stroke-linecap="round"/>
+                <path d="M13 1v5h7" stroke="#1d4ed8" stroke-width="1.3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="tool-title">PDF → Word (.docx)</div>
+              <div class="tool-sub">PDF içeriğini düzenlenebilir Word belgesine aktar</div>
+            </div>
+          </div>
+          <div class="tool-body">
+            <div class="drop-area" id="p2w-drop" onclick="document.getElementById('p2w-fi').click()">
+              <div class="drop-icon" style="background:#dbeafe;border-color:#93c5fd">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2.5v11M6.5 7l4.5-4.5L15.5 7M4 18.5h14" stroke="#1d4ed8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="drop-title">PDF dosyasını seçin veya sürükleyin</div>
+              <div class="drop-sub" id="p2w-info">Metin tabanlı PDF desteklenir</div>
+              <input type="file" id="p2w-fi" accept=".pdf" style="display:none">
+            </div>
+
+            <!-- Seçenekler -->
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:13px;font-weight:500;color:var(--text2);margin-bottom:4px">Dönüştürme seçenekleri</div>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer">
+                <input type="checkbox" id="p2w-headings" checked style="accent-color:var(--green)"> Başlıkları otomatik tespit et (ALL CAPS satırlar)
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer">
+                <input type="checkbox" id="p2w-pages" checked style="accent-color:var(--green)"> Sayfa sonu işaretçisi ekle
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer">
+                <input type="checkbox" id="p2w-clean" checked style="accent-color:var(--green)"> Boş satırları temizle (OCR artıkları)
+              </label>
+            </div>
+
+            <div class="prog-wrap" id="p2w-pw" style="display:none">
+              <div class="prog-label" id="p2w-pl">Dönüştürülüyor…</div>
+              <div class="prog-bg"><div class="prog-bar" id="p2w-pb"></div></div>
+            </div>
+
+            <div class="result-box" id="p2w-res">
+              <div class="result-ok">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#059669" stroke-width="1.4"/><path d="M5.5 9l2.8 2.8L12.5 6.5" stroke="#059669" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Dönüştürme tamamlandı!
+              </div>
+              <div id="p2w-stats" style="font-size:12.5px;color:var(--text2);margin-bottom:10px"></div>
+              <button class="tbtn green" id="p2w-dl">Word indir (.docx)</button>
+            </div>
+
+            <div style="margin-top:16px;display:flex;gap:10px">
+              <button class="tbtn solid" id="p2w-btn" onclick="p2wConvert()" disabled>Word'e dönüştür</button>
+              <button class="tbtn" onclick="p2wClear()">Temizle</button>
+            </div>
+
+            <div style="margin-top:14px;padding:12px 14px;background:var(--bg);border-radius:var(--r);border:1px solid var(--border);font-size:12.5px;color:var(--text2);line-height:1.6">
+              <strong style="color:var(--text)">Not:</strong> Bu araç PDF'deki ham metni Word'e aktarır. Tablolar, görseller ve karmaşık düzenler korunamaz. Taranmış (görüntü tabanlı) PDF'ler için önce OCR sekmesini kullanın.
+            </div>
+          </div>
+        </div>
+
+        <!-- Diğer araçlar yatay şerit -->
+        <div class="ot-strip">
+          <div class="ot-strip-title">Diğer araçlar</div>
+          <div class="ot-strip-grid">
+            <div class="ot-item" onclick="go('anon')"><div class="ot-icon" style="background:#f0fdf4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="2.5" stroke="#059669" stroke-width="1.2"/></svg></div><div class="ot-name">Anonimleştir</div></div>
+            <div class="ot-item" onclick="go('merge')"><div class="ot-icon" style="background:#fef9c3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2.5" stroke="#854d0e" stroke-width="1.2"/></svg></div><div class="ot-name">PDF birleştir</div></div>
+            <div class="ot-item" onclick="go('split')"><div class="ot-icon" style="background:#dcfce7"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 2h7.5l4.5 4.5V16H4V2z" stroke="#15803d" stroke-width="1.2"/><path d="M11.5 2v4.5H16" stroke="#15803d" stroke-width="1.2"/></svg></div><div class="ot-name">PDF böl</div></div>
+            <div class="ot-item" onclick="go('word')"><div class="ot-icon" style="background:#ede9fe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2.5 6.5v9.5h13V6.5L9 2z" stroke="#6d28d9" stroke-width="1.2"/></svg></div><div class="ot-name">Word → PDF</div></div>
+            <div class="ot-item act"><div class="ot-icon" style="background:#dbeafe"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="1" width="14" height="16" rx="2.5" stroke="#1d4ed8" stroke-width="1.2"/><path d="M5 6h8M5 9h6M5 12h7" stroke="#1d4ed8" stroke-width="1" stroke-linecap="round"/></svg></div><div class="ot-name">PDF → Word</div></div>
+            <div class="ot-item" onclick="go('compress')"><div class="ot-icon" style="background:#fce7f3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5v9M5.5 8l3.5 3.5L12.5 8M3 14.5h12" stroke="#9d174d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ot-name">PDF sıkıştır</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+  <div class="footer-note">
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L2 3.5V7c0 2.8 2 5.2 4.5 6C9 12.2 11 9.8 11 7V3.5L6.5 1z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/></svg>
+    Hiçbir veri sunucuya gönderilmez · Tamamen ücretsiz · © 2025 anonimy.app
+  </div>
+  <div class="footer-links">
+    <a href="#privacy" class="footer-link">Gizlilik politikası</a>
+    <a href="#" class="footer-link">Kullanım şartları</a>
+    <a href="mailto:info@anonimy.app" class="footer-link">İletişim</a>
+  </div>
+  </div>
+</footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-let cleanText='', origLines=[], maskStyle='label';
-const counters={};
-
-const NAMES=['Ahmet','Mehmet','Mustafa','Ali','Hüseyin','Hasan','İbrahim','İsmail','Ömer','Süleyman','Murat','Osman','Yusuf','Can','Cem','Caner','Emre','Berk','Alp','Serkan','Volkan','Burak','Tolga','Kemal','Selim','Tarık','Tarkan','Uğur','Utku','Umut','Taner','Tuncay','Turgut','Savaş','Samet','Serhat','Ercan','Erdem','Erhan','Ersin','Erdal','Enes','Fatih','Ferhat','Fikret','Furkan','Gökhan','Görkem','Haluk','Hamza','Hayri','İlhan','Kadir','Kamil','Koray','Kürşat','Levent','Lütfi','Mesut','Metin','Mücahit','Nuri','Oğuz','Onur','Orhan','Özcan','Ramazan','Recep','Rıza','Sami','Sedat','Semih','Tamer','Tayfun','Tunç','Ümit','Veli','Yaşar','Yiğit','Zafer','Zeki','Çağatay','Çağrı','Batuhan','Bahadır','Barış','Berkay','Cenk','Cevdet','Cihan','Deniz','Doğan','Doğukan','Doruk','Ege','Emir','Eren','Eyüp','Hakan','Harun','Kaan','Kenan','Mahmut','Mert','Muhammet','Ozan','Özgür','Ayşe','Fatma','Zeynep','Emine','Hatice','Elif','Merve','Aslı','Selin','Derya','Burcu','Gözde','Leyla','Nur','Nalan','Pınar','Sevda','Sevinç','Sibel','Songül','Suna','Şule','Tuba','Tuğba','Tuğçe','Türkan','Ülkü','Ümran','Yasemin','Yeliz','Zühal','Arzu','Aycan','Aynur','Aysel','Aysu','Ayten','Azize','Bahar','Berrak','Beyza','Binnaz','Canan','Cemre','Defne','Didem','Dilara','Dilan','Ebru','Ece','Esra','Figen','Filiz','Gül','Gülcan','Güler','Gülnur','Gülsüm','Hacer','Hanife','Havva','Hilal','İnci','İrem','Kadriye','Kübra','Latife','Mehtap','Melek','Melisa','Meral','Mine','Müge','Nazan','Neşe','Nihal','Nilüfer','Nisa','Nuray','Özge','Özlem','Reyhan','Rukiye','Sabiha','Saadet','Şerife','Şeyma','Şükran','Tülay','Vildan','Yılmaz','Kaya','Demir','Çelik','Şahin','Yıldız','Özdemir','Arslan','Doğan','Kılıç','Kaplan','Korkmaz','Kurt','Polat','Aydın','Erdoğan','Tekin','Aktaş','Çetin','Sarı','Yavuz','Öztürk','Koç','Aslan','Kara','Taş','Cengiz','Bayrak','Duman','Özer','Ateş','Acar','Bulut','Keskin','Güven','Akın','Akman','Aksu','Altın','Arıkan','Avcı','Aydoğan','Aygün','Ayhan','Balcı','Baş','Başaran','Bayraktar','Bayram','Bilgin','Bozkurt','Boz','Budak','Coşkun','Çakır','Çalışkan','Çoban','Dalkılıç','Demirci','Demirkol','Dinç','Doğru','Dursun','Ekici','Elmas','Ergin','Erkan','Eroğlu','Erol','Ertan','Esen','Genç','Gökçe','Güçlü','Güneş','Gürbüz','Işık','İnan','Karahan','Karataş','Koçak','Kuş','Küçük','Mutlu','Okay','Oral','Önal','Önder','Özer','Özkan','Özmen','Sağlam','Saraç','Sevim','Soylu','Şener','Şimşek','Tatar','Tekeli','Temiz','Tok','Toprak','Tunca','Uçar','Usta','Uzun','Ünsal','Ünal','Yalçın','Yanık','Yıldırım','Yücel'];
-const CITIES=['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Şanlıurfa','Kocaeli','Mersin','Diyarbakır','Hatay','Manisa','Kayseri','Samsun','Balıkesir','Kahramanmaraş','Van','Aydın','Denizli','Sakarya','Tekirdağ','Muğla','Trabzon','Erzurum','Ordu','Eskişehir','Malatya','Elazığ','Mardin','Gebze','Pendik','Kadıköy','Üsküdar','Bağcılar','Bahçelievler','Esenler','Başakşehir','Kartal','Maltepe','Ataşehir','Beşiktaş','Beyoğlu','Şişli','Bakırköy','Güngören','Fatih','Eyüpsultan','Gaziosmanpaşa','Sultangazi','Çekmeköy','Sancaktepe','Tuzla','Ümraniye','Zeytinburnu','Kağıthane','Sarıyer','Adıyaman','Afyon','Ağrı','Aksaray','Amasya','Artvin','Bartın','Batman','Bilecik','Bingöl','Bitlis','Bolu','Burdur','Çanakkale','Çankırı','Çorum','Edirne','Erzincan','Giresun','Gümüşhane','Hakkari','Iğdır','Isparta','Karabük','Karaman','Kastamonu','Kilis','Kırıkkale','Kırklareli','Kırşehir','Kütahya','Muş','Nevşehir','Niğde','Osmaniye','Rize','Siirt','Sinop','Sivas','Şırnak','Tokat','Tunceli','Uşak','Yalova','Yozgat','Zonguldak'];
-
-function setStyle(el){
-  document.querySelectorAll('.sb-style-opt').forEach(o=>{
-    o.classList.remove('sel');
-    o.querySelector('.sb-radio').classList.remove('on');
-  });
-  el.classList.add('sel');
-  el.querySelector('.sb-radio').classList.add('on');
-  maskStyle=el.dataset.val;
+/* ── NAV ── */
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-a').forEach(n=>n.classList.remove('act'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('act');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-document.querySelectorAll('.sb-check').forEach(lbl=>{
-  lbl.addEventListener('click',()=>{
-    const box=lbl.querySelector('.sb-box');
-    box.classList.toggle('on');
+/* ── UTILS ── */
+function dlBlob(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),8000)}
+const TRM={'ş':'s','Ş':'S','ı':'i','İ':'I','ğ':'g','Ğ':'G','ü':'u','Ü':'U','ö':'o','Ö':'O','ç':'c','Ç':'C'};
+const lat=s=>s.replace(/[şŞıİğĞüÜöÖçÇ]/g,m=>TRM[m]||m);
+
+/* ════════════════════════════
+   ANONİMLEŞTİRİCİ
+════════════════════════════ */
+let aTxt='',aOL=[],aMS='label';const aC={};
+let maskMapData=[]; /* [{label, original, type, count}] — harita için */
+
+const NAMES=[
+'Ahmet','Mehmet','Mustafa','Ali','Hüseyin','Hasan','İbrahim','İsmail','Ömer','Süleyman',
+'Murat','Osman','Yusuf','Can','Cem','Caner','Emre','Berk','Alp','Serkan',
+'Volkan','Burak','Tolga','Kemal','Selim','Tarık','Tarkan','Uğur','Utku','Umut',
+'Taner','Tuncay','Turgut','Savaş','Samet','Serhat','Ercan','Erdem','Erhan','Ersin',
+'Erdal','Enes','Fatih','Ferhat','Fikret','Furkan','Gökhan','Görkem','Haluk','Hamza',
+'Hayri','İlhan','Kadir','Kamil','Koray','Kürşat','Levent','Lütfi','Mesut','Metin',
+'Mücahit','Nuri','Oğuz','Onur','Orhan','Özcan','Ramazan','Recep','Rıza','Sami',
+'Sedat','Semih','Tamer','Tayfun','Tunç','Ümit','Veli','Yaşar','Yiğit','Zafer',
+'Zeki','Çağatay','Çağrı','Batuhan','Bahadır','Barış','Berkay','Cenk','Cevdet','Cihan',
+'Doğukan','Doruk','Ege','Emir','Eren','Eyüp','Hakan','Harun','Kaan','Kenan',
+'Mahmut','Mert','Muhammet','Ozan','Özgür','Niyazi','Necati','Necip','Nevzat','Nihat',
+'Nizameddin','Nurettin','Oktay','Orçun','Özkan','Tahir','Talat','Talip','Temel','Timur',
+'Tunahan','Turhan','Turan','Tufan','Ufuk','Ulaş','Ural','Veysel','Yener','Yunus',
+'Zülküf','Zülfü','Abdülkadir','Abdurrahman','Abdülhamit','Abdüllatif','Ahmetcan','Ahmethan','Akif','Akın',
+'Aladdin','Alican','Alihan','Alparslan','Alper','Alpay','Alperen','Altan','Altay','Aras',
+'Ardahan','Arın','Arman','Arsal','Arslan','Artun','Asaf','Asım','Aslan','Atahan',
+'Atakan','Atalay','Atay','Atıf','Atılay','Atlas','Atuf','Ayan','Aykut','Ayman',
+'Aytaç','Aytaş','Aytunç','Aytürk','Aytuğ','Azat','Aziz','Baha','Bahri','Baki',
+'Balin','Baran','Bariş','Bartu','Baver','Bedri','Behçet','Behzat','Bekir','Bektaş',
+'Belgin','Berkan','Berker','Berkin','Berkant','Besim','Beşir','Bilal','Bilge','Bilgehan',
+'Bilginer','Binali','Birol','Boran','Bora','Boray','Boyraz','Bülent','Buğra','Bulut',
+'Burhan','Cahit','Cafer','Cavit','Celal','Cemal','Cemil','Cesur','Cihat','Coskun',
+'Cumali','Cahangir','Çetin','Çınar','Çoşkun','Daniş','Davut','Demir','Denizhan','Derin',
+'Dinçer','Doğu','Duhan','Duran','Ebubekir','Edip','Efehan','Efendi','Egemen','Emirhan',
+'Emrah','Engin','Enver','Eray','Erçin','Erdinç','Erdoğan','Erkan','Erkut','Ersel',
+'Ersen','Erşan','Ertan','Ertuğrul','Ethem','Evren','Fatin','Fazıl','Feridun','Ferit',
+'Ferzan','Fethi','Fevzi','Fikri','Fuat','Galip','Gamze','Gazi','Gediz','Gencay',
+'Genco','Gökay','Gökberk','Gökçe','Gökalp','Gökmen','Göksel','Güner','Güney','Güngör',
+'Gürhan','Gürsel','Güven','Hacı','Hadi','Halil','Halim','Hamdi','Hamit','Haydar',
+'Hayrullah','Hikmet','Hilmi','İhsan','İlker','İlkin','İlkay','İlktan','İlter','İnan',
+'İnanç','İsrafil','İzzet','Kağan','Kahraman','Kasım','Kayahan','Kayalp','Kayhan','Kazım',
+'Kıvanç','Korhan','Korkmaz','Kudret','Kutluhan','Kutsal','Kubilay','Lütfü','Mahir','Mansur',
+'Mazlum','Mecit','Mehdi','Mete','Metehan','Mevlüt','Mirhan','Mirza','Muammer','Muharrem',
+'Münir','Muzaffer','Müfit','Naci','Nadir','Nail','Namık','Nasuh','Nazım','Nazif',
+'Nazmi','Nedim','Özdemir','Reşat','Rauf','Rifat','Sabahattin','Sabri','Sadık','Saffet',
+'Şadan','Şakir','Şevket','Şükrü','Şinasi','Şahin','Şeref','Şerif','Talha','Tekin',
+'Tolgahan','Tolunay','Toprak','Türker','Türkmen','Uğurcan','Yalçın','Yavuz','Yetkin','Yüksel',
+'Zekeriya','Zeynel','Zinnur','Ayşe','Fatma','Zeynep','Emine','Hatice','Elif','Merve',
+'Aslı','Selin','Derya','Burcu','Gözde','Leyla','Nur','Nalan','Pınar','Sevda',
+'Sevinç','Sibel','Songül','Suna','Şule','Tuba','Tuğba','Tuğçe','Türkan','Ülkü',
+'Ümran','Yasemin','Yeliz','Zühal','Arzu','Aycan','Aynur','Aysel','Aysu','Ayten',
+'Azize','Bahar','Berrak','Beyza','Binnaz','Canan','Cemre','Defne','Didem','Dilara',
+'Dilan','Ebru','Ece','Esra','Figen','Filiz','Gül','Gülcan','Güler','Gülnur',
+'Gülsüm','Hacer','Hanife','Havva','Hilal','İnci','İrem','Kadriye','Kübra','Latife',
+'Mehtap','Melek','Melisa','Meral','Mine','Müge','Nazan','Neşe','Nihal','Nilüfer',
+'Nisa','Nuray','Özge','Özlem','Reyhan','Rukiye','Sabiha','Saadet','Şerife','Şeyma',
+'Şükran','Tülay','Vildan','Açelya','Adalet','Adviye','Afife','Afşin','Ahu','Aida',
+'Aisha','Aişe','Akasya','Akgül','Aleyna','Aliye','Almila','Alsu','Altınay','Altun',
+'Anar','Ane','Anet','Anfisa','Anıl','Anita','Anka','Anlar','Anşin','Arda',
+'Arife','Arısu','Armaghan','Asena','Asiye','Asli','Aslıhan','Asuman','Ateş','Atike',
+'Atilla','Atiye','Ayla','Aylin','Ayliz','Aymerve','Ayşegül','Ayşenur','Ayşen','Ayşim',
+'Aytül','Ayverdi','Azra','Bahriye','Baldan','Başak','Bengisu','Beren','Beril','Berina',
+'Berivan','Berna','Berre','Beste','Beyhan','Beysun','Billur','Bircan','Birce','Bire',
+'Birgül','Birnur','Buse','Büşra','Büşranur','Cansel','Cansu','Cemile','Ceyda','Ceylan',
+'Ceylin','Cezmi','Ciler','Çağla','Çiğdem','Çiler','Dağıstan','Damla','Dane','Delal',
+'Deniz','Diba','Dila','Dilanur','Dilek','Dilnoza','Dina','Dudu','Duygu','Döne',
+'Ebrar','Eda','Edanur','Elifnur','Elifsu','Elita','Eliz','Eliza','Elvan','Emina',
+'Enise','Esma','Esmahan','Fadime','Feride','Feyza','Firdevs','Fitnat','Fulya','Gizem',
+'Gonca','Güldane','Güldeste','Gülendam','Gülfem','Gülhan','Güllü','Gülnar','Gülşah','Gülşen',
+'Gülten','Gülüzar','Gülyeter','Güneş','Hafize','Handan','Hayriye','Hazal','Helin','Hicran',
+'Hira','Hülya','Işıl','Işın','İdil','İklim','İlayda','İlknur','İlksen','İlksu',
+'İmren','İpek','İvana','İzel','Kadri','Kader','Kamer','Kamile','Kamuran','Kanar',
+'Kardelen','Karina','Kavya','Kazibe','Kezban','Kıvılcım','Kızılay','Lamia','Lara','Larin',
+'Larissa','Leda','Lehan','Lena','Lina','Lora','Lubna','Lüzum','Mahinur','Mahire',
+'Maide','Majda','Manolya','Mavi','Medine','Melike','Meltem','Meryem','Meziyet','Mihrap',
+'Mihriban','Mihriye','Mina','Mira','Miray','Miraysu','Mirela','Mirjam','Mizgin','Münire',
+'Mürüvvet','Naciye','Nagehan','Naile','Najla','Nare','Narin','Nasibe','Natali','Nazlı',
+'Nazlıcan','Nergis','Nesibe','Nesrin','Neval','Nevim','Nevra','Nihan','Nilay','Nilda',
+'Nilgün','Nilsu','Nuran','Nurcan','Nurdan','Nurgül','Nurhayat','Nuriye','Nurizade','Nurten',
+'Oya','Özgenur','Özgün','Öznur','Özsu','Papatya','Perihan','Pervin','Petek','Rana',
+'Rabia','Rahime','Raziye','Remziye','Saba','Sabire','Sabriye','Safiye','Salime','Sare',
+'Sariye','Seda','Selda','Sema','Semine','Semra','Semrin','Serap','Seray','Şahika',
+'Şahnaz','Şebnem','Şefika','Şengül','Şeniz','Şenol','Şensoy','Şiir','Şilan','Şimşek',
+'Şirin','Şükufe','Taliha','Tamara','Tamay','Tansu','Taşkın','Teslime','Tevhide','Tihriye',
+'Tuana','Tülin','Ulviye','Ummahan','Umran','Unzile','Ümmahan','Ümmügülsüm','Vahide','Veda',
+'Vedat','Venüs','Verda','Vilda','Yıldız','Yildiz','Yonca','Yrsa','Yudum','Zeliha',
+'Zennure','Zerrin','Zeyno','Zinnet','Ziynet','Zübeyde','Zülfiye','Zümrüt','Yılmaz','Kaya',
+'Çelik','Doğan','Kılıç','Kaplan','Kurt','Polat','Aydın','Aktaş','Sarı','Öztürk',
+'Koç','Kara','Taş','Cengiz','Bayrak','Duman','Özer','Acar','Keskin','Akman',
+'Aksu','Altın','Arıkan','Avcı','Aydoğan','Aygün','Ayhan','Balcı','Baş','Başaran',
+'Bayraktar','Bayram','Bilgin','Bozkurt','Boz','Budak','Coşkun','Çakır','Çalışkan','Çoban',
+'Dalkılıç','Demirci','Demirkol','Dinç','Doğru','Dursun','Ekici','Elmas','Ergin','Eroğlu',
+'Erol','Esen','Genç','Güçlü','Gürbüz','Işık','Karahan','Karataş','Koçak','Kuş',
+'Küçük','Mutlu','Okay','Oral','Önal','Önder','Özmen','Sağlam','Saraç','Sevim',
+'Soylu','Şener','Tatar','Tekeli','Temiz','Tok','Tunca','Uçar','Usta','Uzun',
+'Ünsal','Ünal','Yanık','Yıldırım','Yücel','Abacı','Abdik','Ağaoğlu','Ağar','Ağartan',
+'Ağca','Ağıl','Ağırdır','Ağırman','Ağırtaş','Ahıska','Akalın','Akbaş','Akbulut','Akça',
+'Akçay','Akdemir','Akdoğan','Akgün','Akgüneş','Akoğlu','Akpınar','Aksoy','Aktan','Aktürk',
+'Aktuğ','Akünal','Akyıldız','Akyol','Akyüz','Alacaatlı','Alaçam','Alagöz','Alar','Alataş',
+'Albayrak','Alıcı','Alkan','Alkaş','Alkaya','Alpaslan','Altınbaş','Altıner','Altınkaya','Altıntaş',
+'Alver','Amca','Amil','Anbarcı','Apaydın','Arı','Arıburun','Arıcan','Arıdamar','Arıkaya',
+'Arıköy','Arıoğlu','Arıöz','Arıtürk','Arslaner','Aşık','Aşkın','Aşkıner','Ataay','Ataer',
+'Ataman','Atan','Ataş','Ataşen','Atbaş','Atcı','Atıcı','Atik','Atiker','Atış',
+'Atılgan','Atılım','Atıman','Avşar','Ayaz','Aydoğdu','Ayduran','Ayışığı','Aykın','Ayrancı',
+'Azak','Bağ','Bağcı','Bağdatlı','Bağır','Bağlı','Bal','Balamir','Balat','Baldık',
+'Balık','Balkış','Balkuş','Balta','Baltacı','Baltalı','Baltekin','Barutçu','Bayar','Bayat',
+'Baydan','Bayındır','Baykal','Baykam','Baykara','Baykuş','Baymak','Baysal','Baytok','Baytun',
+'Bezci','Biber','Bildik','Biter','Bitik','Bitmez','Bor','Boranlı','Börklü','Börtlük',
+'Böyük','Bulduk','Bülbül','Büyük','Büyükbaş','Büyükdoğan','Büyükkaya','Canbaz','Cansever','Cansız',
+'Cantürk','Canyılmaz','Celayir','Cerit','Ceyhan','Cılız','Cömert','Dadaş','Dağcı','Dağdelen',
+'Dağdeviren','Dalgalı','Dalkıran','Derinöz','Doğanay','Doğaner','Doğanoğlu','Dolaşır','Dolmacı','Durmuş',
+'Durna','Durmaz','Emekli','Erbay','Erdoğmuş','Erge','Ergil','Ergün','Erkılıç','Erkmen',
+'Erşahin','Ertekin','Eser','Eşki','Eşkil','Fidan','Fındık','Gencer','Gezgin','Gönültaş',
+'Güleç','Gülmez','Güloğlu','Gülsoy','Gülyüz','Günaydın','Günay','Gündem','Güneri','Gürel',
+'Görür','Hamarat','Hamurcu','Hanım','Harmancı','Hatun','Hayırsever','Ilgar','Işıktaş','İçen',
+'İçöz','İğci','İleri','İpekçi','İplikçi','Kabakçı','Kabalak','Kalafat','Kalay','Kalender',
+'Kandemir','Kantarcı','Kapıcı','Kaptan','Karaaslan','Karabacak','Karabay','Karaboğa','Karaboyun','Karabük',
+'Karacabey','Karaçam','Karadaş','Karadeniz','Karaduman','Karaer','Karaferye','Karahasanoğlu','Karaismail','Karakaya',
+'Karakılıç','Karakoç','Karakuş','Karalı','Karamanoglu','Karamehmet','Karamık','Karasoy','Karasü','Karatay',
+'Karcı','Karslı','Kasapoğlu','Kavak','Kavlak','Kayadibi','Kayalı','Kayar','Kazar','Keleş',
+'Keser','Kılınç','Kıraç','Kırlı','Kırmızı','Kırpınar','Kıvrak','Kızılkaya','Kızılkuzu','Kocabaş',
+'Kocaer','Kocakurt','Kocaman','Saygılı','Seçkin','Serez','Solak','Soyal','Söylemez','Sulak',
+'Sümer','Tatlı','Tekbaş','Tekelioğlu','Tepeli','Tireli','Toker','Toros','Tosun','Tüfekci',
+'Turanlı','Ulukan','Ulus','Urhan','Uruk','Uyar','Uysal','Uzunoğlu','Vardar','Varol',
+'Vatansever','Yağcı','Yalın','Yazar','Yazıcı','Yeni','Yeşil','Yeşilırmak','Yiğiter','Yolcu',
+'Yörük','Yüksek','Yüksekkaya','Abdullah','Abdülaziz','Abdülvahap','Muhammed','Mehmed','Salih','Saliha',
+'Zekeriyya','Yahya','İshak','Musa','Abbas','Zübeyr','Nuh','Lokman','İdris','İlyas',
+'Zülkifl','Saad','Sad','Şaban','Safer','Zilhicce'
+];
+
+
+const CITIES=['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Şanlıurfa','Kocaeli','Mersin','Diyarbakır','Hatay','Manisa','Kayseri','Samsun','Balıkesir','Kahramanmaraş','Van','Aydın','Denizli','Sakarya','Tekirdağ','Muğla','Trabzon','Erzurum','Ordu','Eskişehir','Malatya','Elazığ','Mardin','Gebze','Pendik','Kadıköy','Üsküdar','Bağcılar','Bahçelievler','Esenler','Başakşehir','Kartal','Maltepe','Ataşehir','Beşiktaş','Beyoğlu','Şişli','Bakırköy','Güngören','Fatih','Eyüpsultan','Gaziosmanpaşa','Sultangazi','Çekmeköy','Sancaktepe','Tuzla','Ümraniye','Zeytinburnu','Kağıthane','Sarıyer','Adıyaman','Afyon','Ağrı','Aksaray','Amasya','Artvin','Bartın','Batman','Bilecik','Bingöl','Bitlis','Bolu','Burdur','Çanakkale','Çankırı','Çorum','Edirne','Erzincan','Giresun','Gümüşhane','Hakkari','Iğdır','Isparta','Karabük','Karaman','Kastamonu','Kilis','Kırıkkale','Kırklareli','Kırşehir','Kütahya','Muş','Nevşehir','Niğde','Osmaniye','Rize','Siirt','Sinop','Sivas','Şırnak','Tokat','Tunceli','Uşak','Yalova','Yozgat','Zonguldak'];
+
+function aStyle(el){document.querySelectorAll('.sb-opt').forEach(o=>{o.classList.remove('sel');o.querySelector('.rd').classList.remove('on')});el.classList.add('sel');el.querySelector('.rd').classList.add('on');aMS=el.dataset.val}
+document.querySelectorAll('.sb-item').forEach(l=>l.addEventListener('click',()=>l.querySelector('.cb').classList.toggle('on')));
+
+/* OCR mode */
+let aMode='text';
+function setMode(m){ switchMode(m); }  /* geriye dönük uyumluluk */
+
+function switchMode(m){
+  aMode=m;
+  /* Tab aktif durumu */
+  ['text','ocr','batch'].forEach(id=>{
+    const el=document.getElementById('mtab-'+id);
+    if(el) el.classList.toggle('act', id===m);
   });
-});
 
-const dz=document.getElementById('dropZone');
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.style.background='var(--color-background-secondary)'});
-dz.addEventListener('dragleave',()=>dz.style.background='');
-dz.addEventListener('drop',e=>{e.preventDefault();dz.style.background='';handleFile(e.dataTransfer.files[0])});
-document.getElementById('fi').addEventListener('change',e=>handleFile(e.target.files[0]));
+  const singlePanel=document.getElementById('panel-single');
+  const batchPanel=document.getElementById('panel-batch');
+  const ocrInfoBar=document.getElementById('ocr-info-bar');
+  const banner=document.getElementById('ocr-banner');
 
-async function handleFile(f){
-  if(!f||f.type!=='application/pdf')return;
-  document.getElementById('uploadLabel').textContent='Okunuyor…';
+  if(m==='batch'){
+    /* Toplu işlem */
+    singlePanel.classList.remove('act');
+    batchPanel.classList.add('act');
+    if(ocrInfoBar) ocrInfoBar.style.display='none';
+  } else {
+    /* Tek dosya (metin veya ocr) */
+    singlePanel.classList.add('act');
+    batchPanel.classList.remove('act');
+
+    if(m==='ocr'){
+      if(ocrInfoBar) ocrInfoBar.style.display='block';
+      banner.classList.add('show');
+      document.getElementById('ocr-title').textContent='OCR modu aktif';
+      document.getElementById('ocr-status').textContent='PDF veya görüntü dosyası yükleyin (PNG, JPG, TIFF, BMP, WEBP)';
+      document.getElementById('a-fi').accept='.pdf,image/png,image/jpeg,image/jpg,image/tiff,image/bmp,image/webp';
+      document.getElementById('a-lbl').textContent='Taranmış PDF veya görüntü yükle';
+    } else {
+      if(ocrInfoBar) ocrInfoBar.style.display='none';
+      banner.classList.remove('show');
+      document.getElementById('a-fi').accept='.pdf';
+      document.getElementById('a-lbl').textContent='PDF yükle veya sürükle bırak — ya da aşağıya metin yapıştır';
+    }
+  }
+}
+
+const aDZ=document.getElementById('a-dz');
+aDZ.addEventListener('dragover',e=>{e.preventDefault();aDZ.style.background='var(--green-bg)';aDZ.style.borderColor='var(--green-mid)'});
+aDZ.addEventListener('dragleave',()=>{aDZ.style.background='';aDZ.style.borderColor=''});
+aDZ.addEventListener('drop',e=>{e.preventDefault();aDZ.style.background='';aDZ.style.borderColor='';aPDF(e.dataTransfer.files[0])});
+document.getElementById('a-fi').addEventListener('change',e=>aPDF(e.target.files[0]));
+
+function setOcrStatus(title,status,pct){
+  document.getElementById('ocr-title').textContent=title;
+  document.getElementById('ocr-status').textContent=status;
+  document.getElementById('ocr-bar').style.width=pct+'%';
+}
+
+async function aPDF(f){
+  if(!f)return;
+  const isImg=f.type.startsWith('image/');
+  const isPdf=f.type==='application/pdf';
+  const isTxt=f.type==='text/plain'||f.name.endsWith('.txt');
+  const isDocx=f.name.endsWith('.docx')||f.name.endsWith('.doc')||
+    f.type==='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+
+  if(!isImg&&!isPdf&&!isTxt&&!isDocx){
+    alert('Desteklenen formatlar: PDF, DOCX, TXT, PNG, JPG');return;
+  }
+
+  /* Orijinal PDF bytes'ını sakla (overlay için) */
+  if(isPdf){const ab=await f.arrayBuffer();aOrigPdfBytes=ab.slice(0);}
+  else{aOrigPdfBytes=null;}
+
+  document.getElementById('a-lbl').textContent='Okunuyor…';
+  document.getElementById('a-inp').value='';
+  document.getElementById('a-om').textContent='';
+
+  /* ── TXT ── */
+  if(isTxt){
+    try{
+      const text=await f.text();
+      document.getElementById('a-inp').value=text;
+      aOL=text.split('\n');
+      document.getElementById('a-lbl').textContent=f.name+' — '+(f.size/1024).toFixed(0)+' KB';
+      document.getElementById('a-om').textContent=aOL.length+' satır';
+    }catch(e){document.getElementById('a-lbl').textContent='Hata: '+e.message}
+    return;
+  }
+
+  /* ── DOCX ── */
+  if(isDocx){
+    try{
+      if(typeof mammoth==='undefined'){alert('Kütüphane yükleniyor, bir saniye sonra tekrar deneyin.');return}
+      const ab=await f.arrayBuffer();
+      const result=await mammoth.extractRawText({arrayBuffer:ab});
+      const text=result.value.trim();
+      document.getElementById('a-inp').value=text;
+      aOL=text.split('\n');
+      document.getElementById('a-lbl').textContent=f.name+' — '+(f.size/1024).toFixed(0)+' KB';
+      document.getElementById('a-om').textContent=aOL.length+' satır';
+    }catch(e){document.getElementById('a-lbl').textContent='Hata: '+e.message}
+    return;
+  }
+
+  /* ── OCR modu (görüntü veya taranmış PDF) ── */
+  if(aMode==='ocr'){
+    const banner=document.getElementById('ocr-banner');
+    banner.classList.add('show');
+    setOcrStatus('OCR başlatılıyor…','Tesseract yükleniyor',5);
+
+    try{
+      let pages=[];
+
+      if(isPdf){
+        /* PDF → canvas sayfaları */
+        const ab=await f.arrayBuffer();
+        const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+        setOcrStatus('PDF okunuyor…','Sayfalar görüntüye dönüştürülüyor',10);
+        for(let i=1;i<=pdf.numPages;i++){
+          const pg=await pdf.getPage(i);
+          const vp=pg.getViewport({scale:2.5}); /* yüksek çözünürlük → daha iyi OCR */
+          const canvas=document.createElement('canvas');
+          canvas.width=vp.width;canvas.height=vp.height;
+          await pg.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+          pages.push({canvas,num:i,total:pdf.numPages});
+        }
+      } else {
+        /* Görüntü dosyası */
+        const url=URL.createObjectURL(f);
+        const img=new Image();
+        await new Promise(res=>{img.onload=res;img.src=url});
+        const canvas=document.createElement('canvas');
+        canvas.width=img.width;canvas.height=img.height;
+        canvas.getContext('2d').drawImage(img,0,0);
+        pages.push({canvas,num:1,total:1});
+        URL.revokeObjectURL(url);
+      }
+
+      /* Tesseract worker — Türkçe + İngilizce */
+      setOcrStatus('OCR hazırlanıyor…','Dil modeli yükleniyor (tur+eng)',15);
+      const worker=await Tesseract.createWorker('tur+eng',1,{
+        logger:m=>{
+          if(m.status==='recognizing text'){
+            const pct=15+Math.round(m.progress*75);
+            setOcrStatus(
+              `Sayfa ${pages.findIndex(p=>p.num===currentPage)+1}/${pages.length} okunuyor…`,
+              `Karakter tanıma: %${Math.round(m.progress*100)}`,
+              pct
+            );
+          }
+        }
+      });
+
+      let fullText='';
+      let currentPage=1;
+      for(const {canvas,num,total} of pages){
+        currentPage=num;
+        setOcrStatus(`Sayfa ${num}/${total} okunuyor…`,'Metin tanıma devam ediyor',15+Math.round((num-1)/total*75));
+        const {data:{text}}=await worker.recognize(canvas);
+        fullText+=text.trim()+'\n\n';
+      }
+      await worker.terminate();
+
+      const t=fullText.trim();
+      document.getElementById('a-inp').value=t;
+      aOL=t.split('\n');
+      const wc=t.split(/\s+/).filter(Boolean).length;
+      document.getElementById('a-lbl').textContent=f.name+' — OCR tamamlandı';
+      document.getElementById('a-om').textContent=pages.length+' sayfa · ~'+wc+' kelime';
+      setOcrStatus('OCR tamamlandı',pages.length+' sayfa okundu, metin hazır',100);
+
+    }catch(e){
+      setOcrStatus('OCR hatası',e.message,0);
+      document.getElementById('a-lbl').textContent='Hata: '+e.message;
+    }
+    return;
+  }
+
+  /* ── Normal metin PDF modu ── */
   try{
+    if(!isPdf){alert('Normal modda yalnızca PDF desteklenir. OCR moduna geçin.');return;}
     const ab=await f.arrayBuffer();
     const pdf=await pdfjsLib.getDocument({data:ab}).promise;
     let full='';
     for(let i=1;i<=pdf.numPages;i++){
-      const pg=await pdf.getPage(i);
-      const tc=await pg.getTextContent();
-      let lastY=null,line='';
-      for(const item of tc.items){
-        const y=item.transform?item.transform[5]:null;
-        if(lastY!==null&&Math.abs(y-lastY)>4){full+=line.trim()+'\n';line='';}
-        line+=item.str+(item.hasEOL?' ':' ');
-        lastY=y;
-      }
-      if(line.trim())full+=line.trim()+'\n';
-      full+='\n';
+      const pg=await pdf.getPage(i);const tc=await pg.getTextContent();
+      let ly=null,line='';
+      for(const item of tc.items){const y=item.transform?item.transform[5]:null;if(ly!==null&&Math.abs(y-ly)>4){full+=line.trim()+'\n';line='';}line+=item.str+' ';ly=y;}
+      if(line.trim())full+=line.trim()+'\n';full+='\n';
     }
+    /* Metin bulunamadıysa otomatik OCR'a yönlendir */
     const t=full.trim();
-    document.getElementById('inp').value=t;
-    origLines=t.split('\n');
-    document.getElementById('uploadLabel').textContent=f.name+' — '+pdf.numPages+' sayfa';
-    document.getElementById('origMeta').textContent=pdf.numPages+' sayfa';
-  }catch(e){
-    document.getElementById('uploadLabel').textContent='Hata: PDF okunamadı';
-  }
+    if(t.length<50){
+      const banner=document.getElementById('ocr-banner');
+      banner.classList.add('show');
+      setOcrStatus('Metin bulunamadı','Bu PDF taranmış görünüyor. OCR moduna geçip tekrar yükleyin.',0);
+      document.getElementById('a-lbl').textContent='Taranmış PDF tespit edildi — OCR moduna geçin';
+      return;
+    }
+    document.getElementById('a-inp').value=t;
+    aOL=t.split('\n');
+    document.getElementById('a-lbl').textContent=f.name+' — '+pdf.numPages+' sayfa';
+    document.getElementById('a-om').textContent=pdf.numPages+' sayfa';
+  }catch(e){document.getElementById('a-lbl').textContent='Hata: '+e.message}
 }
 
-document.getElementById('inp').addEventListener('input',()=>{
-  origLines=document.getElementById('inp').value.split('\n');
-  document.getElementById('origMeta').textContent=origLines.length+' satır';
+document.getElementById('a-inp').addEventListener('input',()=>{aOL=document.getElementById('a-inp').value.split('\n');document.getElementById('a-om').textContent=aOL.length+' satır'});
+
+function aOn(id){return document.getElementById(id).classList.contains('on')}
+function aLbl(t){if(aMS==='star')return '[*****]';if(aMS==='hash')return '[GİZLİ]';if(!aC[t])aC[t]=0;aC[t]++;const L={name:'KİŞİ',tc:'TC_NO',phone:'TELEFON',date:'TARİH',email:'EPOSTA',addr:'ADRES',iban:'IBAN',company:'KURUM',plate:'PLAKA',passport:'PASAPORT',tax:'VERGİ_NO',custom:'ÖZEL'};return '['+L[t]+'_'+aC[t]+']'}
+
+/* ── Gezgin state ── */
+let navSpans=[];   // tüm span elementleri
+let navIdx=-1;     // aktif index
+let navFilter='';  // filtre (tip adı veya '')
+let editSpan=null; // düzenlenen span
+
+const CM={KİŞİ:'hn',TC_NO:'htc',TELEFON:'hph',TARİH:'hdt',EPOSTA:'hem',ADRES:'had',IBAN:'hib',KURUM:'hco',PLAKA:'hpl',PASAPORT:'hpa',VERGİ_NO:'htx',ÖZEL:'hcustom'};
+const TLong={KİŞİ:'Kişi',TC_NO:'TC no',TELEFON:'Telefon',TARİH:'Tarih',EPOSTA:'E-posta',ADRES:'Adres',IBAN:'IBAN',KURUM:'Kurum',PLAKA:'Plaka',PASAPORT:'Pasaport',VERGİ_NO:'Vergi',ÖZEL:'Özel kural'};
+
+/* ── Özel kurallar ── */
+let customRules=[];  /* [{raw, label, isRegex, re}] */
+
+function addCustomRule(){
+  const inp=document.getElementById('custom-rule-inp');
+  const raw=inp.value.trim();
+  if(!raw)return;
+
+  /* Regex mi? /pattern/flags formatı */
+  const regexMatch=raw.match(/^\/(.+)\/([gimsuy]*)$/);
+  let isRegex=false,re=null,label='';
+  if(regexMatch){
+    try{re=new RegExp(regexMatch[1],regexMatch[2]||'g');isRegex=true;label='regex'}
+    catch(e){alert('Geçersiz regex: '+e.message);return}
+  } else {
+    /* Normal kelime — tam kelime eşleşmesi, büyük/küçük harf duyarsız */
+    const escaped=raw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    re=new RegExp('\\b'+escaped+'\\b','gi');
+    label='kelime';
+  }
+
+  customRules.push({raw,label,isRegex,re});
+  inp.value='';
+  renderCustomRules();
+}
+
+function removeCustomRule(i){
+  customRules.splice(i,1);
+  renderCustomRules();
+}
+
+function renderCustomRules(){
+  const list=document.getElementById('custom-rule-list');
+  if(!customRules.length){list.innerHTML='';return}
+  list.innerHTML=customRules.map((r,i)=>
+    `<div class="sb-custom-tag${r.isRegex?' is-regex':''}">
+      <span class="sb-custom-tag-text" title="${r.raw}">${r.raw}</span>
+      <span class="sb-custom-tag-label">${r.label}</span>
+      <button class="sb-custom-tag-del" onclick="removeCustomRule(${i})" title="Kaldır">×</button>
+    </div>`
+  ).join('');
+}
+
+/* Enter tuşuyla da ekle */
+document.getElementById('custom-rule-inp').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){e.preventDefault();addCustomRule()}
 });
 
-function isOn(id){return document.getElementById(id).classList.contains('on')}
-
-function getLabel(type){
-  if(maskStyle==='star')return '[*****]';
-  if(maskStyle==='hash')return '[GİZLİ]';
-  if(!counters[type])counters[type]=0;
-  counters[type]++;
-  const L={name:'KİŞİ',tc:'TC_NO',phone:'TELEFON',date:'TARİH',email:'EPOSTA',addr:'ADRES',iban:'IBAN',company:'KURUM',plate:'PLAKA',passport:'PASAPORT',tax:'VERGİ_NO'};
-  return '['+L[type]+'_'+counters[type]+']';
-}
-
-function run(){
-  Object.keys(counters).forEach(k=>counters[k]=0);
-  let text=document.getElementById('inp').value;
+function aRun(){
+  Object.keys(aC).forEach(k=>aC[k]=0);
+  maskMapData=[];  /* haritayı sıfırla */
+  let text=document.getElementById('a-inp').value;
   if(!text.trim()){alert('Önce PDF yükleyin veya metin girin.');return;}
-  origLines=text.split('\n');
-  const cnt={};
-  const rep=(type,re)=>{text=text.replace(re,()=>{cnt[type]=(cnt[type]||0)+1;return getLabel(type)})};
-
-  if(isOn('b_tc'))      rep('tc',/\b[1-9]\d{10}\b/g);
-  if(isOn('b_iban'))    rep('iban',/\bTR\s?\d{2}[\s\d]{20,28}\b/gi);
-  if(isOn('b_phone')){
-    rep('phone',/(?:\+90|0090)[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);
-    rep('phone',/0\s?[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}/g);
-    rep('phone',/\(\d{3,4}\)\s?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);
-  }
-  if(isOn('b_email'))   rep('email',/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g);
-  if(isOn('b_plate'))   rep('plate',/\b\d{2}\s?[A-ZÇĞİÖŞÜa-zçğişöü]{1,3}\s?\d{2,4}\b/g);
-  if(isOn('b_tax'))     rep('tax',/\b\d{10}\b/g);
-  if(isOn('b_passport'))rep('passport',/\b[A-Z]{1,2}\d{7,9}\b/g);
-  if(isOn('b_date')){
-    rep('date',/\b\d{1,2}[.\/\-]\d{1,2}[.\/\-]\d{4}\b/g);
-    rep('date',/\b\d{1,2}\s+(?:Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+\d{4}\b/gi);
-  }
-  if(isOn('b_company')) rep('company',/\b[\wÇçĞğİıÖöŞşÜü]+(?:\s[\wÇçĞğİıÖöŞşÜü]+){0,3}\s*(?:A\.?Ş\.?|Anonim\s*Şirket|Ltd\.?\s*Şti\.?|Limited\s*Şirket|Holding|Group|Grup|Bankası|Bank|Sigorta|Finans|Faktoring|Leasing|Yatırım|Menkul|Teknoloji|Yazılım|Danışmanlık|Müşavirlik|Hukuk|Avukatlık|Bürosu|Ortaklığı|Kooperatif)\b/gi);
-  if(isOn('b_addr')){
+  aOL=text.split('\n');const cnt={};
+  const rep=(t,re)=>{text=text.replace(re,(match)=>{
+    cnt[t]=(cnt[t]||0)+1;
+    const lbl=aLbl(t);
+    maskMapData.push({label:lbl,original:match,type:t});
+    return lbl;
+  })};
+  if(aOn('b_tc'))rep('tc',/\b[1-9]\d{10}\b/g);
+  if(aOn('b_iban'))rep('iban',/\bTR\s?\d{2}[\s\d]{20,28}\b/gi);
+  if(aOn('b_phone')){rep('phone',/(?:\+90|0090)[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);rep('phone',/0\s?[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}/g)}
+  if(aOn('b_email'))rep('email',/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g);
+  if(aOn('b_plate'))rep('plate',/\b\d{2}\s?[A-ZÇĞİÖŞÜa-zçğişöü]{1,3}\s?\d{2,4}\b/g);
+  if(aOn('b_tax'))rep('tax',/\b\d{10}\b/g);
+  if(aOn('b_passport'))rep('passport',/\b[A-Z]{1,2}\d{7,9}\b/g);
+  if(aOn('b_date')){rep('date',/\b\d{1,2}[.\/\-]\d{1,2}[.\/\-]\d{4}\b/g);rep('date',/\b\d{1,2}\s+(?:Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+\d{4}\b/gi)}
+  if(aOn('b_company'))rep('company',/\b[\wÇçĞğİıÖöŞşÜü]+(?:\s[\wÇçĞğİıÖöŞşÜü]+){0,3}\s*(?:A\.?Ş\.?|Ltd\.?\s*Şti\.?|Holding|Group|Grup|Bankası|Bank|Sigorta|Finans|Teknoloji|Yazılım|Danışmanlık|Hukuk|Avukatlık|Bürosu|Mahkemesi|Müdürlüğü|Savcılığı|Noterliği|Belediyesi|Kaymakamlığı|Valiliği|Bakanlığı)\b/gi);
+  if(aOn('b_addr')){
+    /* Şehir/ilçe adları */
     rep('addr',new RegExp('\\b('+CITIES.join('|')+')\\b','g'));
-    rep('addr',/\b(?:Cad(?:desi)?\.?|Sok(?:ak)?\.?|Mah(?:allesi)?\.?|Blv\.?|Bulvarı|No\s*[:.]?\s*\d+(?:\/\d+)?|Apt\.?|Daire\s*\d+|Kat\s*\d+|Posta\s*[Kk]odu\s*:?\s*\d{5})\b[^.\n]*/gi);
+    /* Doğru adres maskesi:
+       - "Silahtarağa Mah." → Mah. korunur, önceki mahalle adı maskelenir
+       - "Şehitler Sk. No:5" → sokak adı maskelenir, No ve sonrası da maskelenir
+       - Cadde/Sokak ismi maskelenir (önceki kelime dahil)
+       - No: → numara maskelenir ama "No" kelimesi korunur
+    */
+    /* Cadde/Sokak: önündeki isim + Cad/Sk etiketi birlikte maskele */
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,30}?\s+(?:Cad(?:desi)?|Blv(?:arı)?|Bulvarı)\.?(?:\s+No\.?\s*[:.]?\s*\d+(?:\/\d+)?)?/gi);
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,25}?\s+(?:Sok(?:ak)?|Sk)\.?(?:\s+No\.?\s*[:.]?\s*\d+(?:\/\d+)?)?/gi);
+    /* Mahalle: önündeki isim maskelenir, Mah./Mahallesi etiketi kalır ama maskelenir */
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,30}?\s+(?:Mah(?:allesi)?)\.?/gi);
+    /* No: → numara maskelenir */
+    rep('addr',/\bNo\.?\s*[:.]?\s*\d+(?:\/\d+)?/gi);
+    /* Daire / Kat */
+    rep('addr',/\b(?:Daire|D\.?)\s*[:.]?\s*\d+/gi);
+    rep('addr',/\bKat\.?\s*[:.]?\s*\d+/gi);
+    /* Posta kodu */
+    rep('addr',/\b\d{5}\b/g);
   }
-  if(isOn('b_name')){
-    const nr=new RegExp('\\b('+NAMES.join('|')+')'+'(\\s+('+NAMES.join('|')+'))?\\b','g');
-    rep('name',nr);
-    rep('name',/\b[A-ZÇĞİÖŞÜ]{2,}(?:\s[A-ZÇĞİÖŞÜ]{2,})+\b/g);
-    rep('name',/(?:Sayın|Sevgili|Davacı|Sanık|Başvurucu|Müvekkil|Müşteri|Vatandaş)\s+[A-ZÇĞİÖŞÜa-zçğişöü]+(?:\s+[A-ZÇĞİÖŞÜa-zçğişöü]+)*/gi);
+  if(aOn('b_name')){
+    /* ── 1. Bilinen isim + soyisim (1-3 kelime) ── */
+    rep('name',new RegExp('\\b('+NAMES.join('|')+')'+'((?:\\s+(?:'+NAMES.join('|')+'))){0,3}\\b','g'));
+
+    /* ── 2. Hukuki unvan + isim kalıpları ── */
+    rep('name',/\b(?:Av(?:ukat)?|Stj\.?\s*Av|Yrd\.?\s*Av|Uzm\.?\s*Av|Avukat)\.?\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/g);
+    rep('name',/\b(?:Hâkim|Hakim|C\.?\s*Savcısı|Cumhuriyet\s+Savcısı|Savcı|Yargıç)\.?\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/g);
+    rep('name',/\b(?:Noter|Noterliğinden|Bilirkişi|Uzman|Uzm\.|Dr\.|Prof\.?\s*Dr\.|Doç\.?\s*Dr\.|Op\.?\s*Dr\.)\.?\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/g);
+
+    /* ── 3. MÜŞTEKİ/ŞÜPHELİ bloğu: "MÜŞTEKİ :ÜMMÜHAN SÜSLÜ , MUHARREM Kızı" ── */
+    /* ALL CAPS etiket sonrası isimler — büyük harf ve başlık case karışık */
+    rep('name',/\b(?:MÜŞTEKİ|ŞÜPHELİ|DAVACI|DAVALI|SANIK|MAĞDUR|KATİL|KATİLAN|MÜDAHİL|BORÇLU|ALACAKLI)\s*:\s*([A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+){0,3})/g);
+
+    /* ── 4. Akrabalık ilişkisi: "MUHARREM Kızı", "HASAN Oğlu", "Ali Eşi" ── */
+    rep('name',/[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+\s+(?:Kızı|Oğlu|Eşi|Karısı|Kocası|Babası|Annesi|Kardeşi|Torunu|Amcası|Dayısı|Halası|Teyzesi|Yeğeni|Dedesi|Ninesi)/gi);
+
+    /* ── 5. Hukuki taraf/sıfat + isim kalıpları ── */
+    rep('name',/\b(?:Davacı|Davalı|Sanık|Mağdur|Müşteki|Müdahil|Müdahale[cd]en|Katılan|Şüpheli|Borçlu|Alacaklı|Müteselsil|Kefil|Keşideci|Hamil|Lehdar)\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/gi);
+    rep('name',/\b(?:Sayın|Müvekkil(?:im|iniz)?|Veli|Vasi|Kanuni\s+Temsilci|Yasal\s+Temsilci|Temsilci|Yetkili)\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/gi);
+
+    /* ── 6. Bağlaç sonrası isimler ── */
+    rep('name',/\b(?:aleyhine|lehine|hakkında|tarafından|adına|namına)\s+(?:açılan\s+dava[a-zçğışöü]*\s+)?([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})/gi);
+    rep('name',/\b(?:nüfusuna\s+kayıtlı|doğumlu|nüfus\s+cüzdanı\s+sahibi|kimliğine\s+sahip)\s+([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})/gi);
+    rep('name',/([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})\s+(?:adlı|isimli|lakaplı|olarak\s+bilinen)\b/gi);
+    rep('name',/\b([A-ZÇĞİÖŞÜ][a-zçğışöü]{2,})(?:'(?:in|ın|un|ün|nin|nın|nun|nün|e|a|ye|ya|i|ı|u|ü|yi|yı|yu|yü|den|dan|ten|tan|de|da|te|ta))\b/g);
+
+    /* ── 7. İmza / kaşe bloğu kalıpları ── */
+    rep('name',/(?:İmzalayan|İmza\s+Sahibi|Ad\s+[Ss]oyad|Adı\s+[Ss]oyadı|Düzenleyen|Onaylayan|Hazırlayan)\s*[:\-]?\s*([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})/gi);
+
+    /* ── 8. ALL CAPS isimler (resmi belge, büyük harf blokları) ── */
+    rep('name',/\b[A-ZÇĞİÖŞÜ]{2,}(?:\s[A-ZÇĞİÖŞÜ]{2,}){1,4}\b/g);
+
+    /* ── 9. Listede olmayan isimler — hibrit yaklaşım ── */
+    /* Bilinmeyen ad + bilinen soyisim */
+    rep('name',new RegExp('[A-ZÇĞİÖŞÜ][a-zçğışöü]{3,}(?:\\s+(?:'+NAMES.join('|')+'))\\b','g'));
+    /* Bilinen ad + bilinmeyen soyisim */
+    rep('name',new RegExp('\\b(?:'+NAMES.join('|')+')\\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]{3,}\\b','g'));
+    /* Arapça/İslami prefix'li isimler */
+    rep('name',/\b(?:Abdullah|Abdurrahman|Abdülkadir|Abdülhamit|Abdülaziz|Abdüllatif|Abdülvahap|Muhammed|Mehmed)[a-zçğışöü]*(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]{2,}){0,2}\b/gi);
+    /* 2 kelimeli Büyük-Büyük (cümle/noktalama başı hariç, kurum adı hariç) */
+    rep('name',/(?<![.:!?]\s)(?<!\n)\b([A-ZÇĞİÖŞÜ][a-zçğışöü]{2,})\s+([A-ZÇĞİÖŞÜ][a-zçğışöü]{2,})\b(?!\s*[A-Za-zÇçĞğİıÖöŞşÜü]*(?:Mahkemesi|Müdürlüğü|Bankası|Üniversitesi|İlçesi|İli|Caddesi|Sokağı|Bulvarı))/g);
   }
 
-  cleanText=text;
+  /* ── Özel kurallar ── */
+  customRules.forEach(rule=>{
+    /* her run için regex'i sıfırla (lastIndex sorunu) */
+    rule.re.lastIndex=0;
+    const freshRe=rule.isRegex
+      ? new RegExp(rule.re.source, rule.re.flags.includes('g')?rule.re.flags:rule.re.flags+'g')
+      : new RegExp(rule.re.source,'gi');
+    text=text.replace(freshRe,(match)=>{
+      cnt['custom']=(cnt['custom']||0)+1;
+      const lbl=aLbl('custom');
+      maskMapData.push({label:lbl,original:match,type:'custom',rule:rule.raw});
+      return lbl;
+    });
+  });
+
+  aTxt=text;
   const total=Object.values(cnt).reduce((a,b)=>a+b,0);
 
-  const CM={KİŞİ:'hn',TC_NO:'htc',TELEFON:'hph',TARİH:'hdt',EPOSTA:'hem',ADRES:'had',IBAN:'hib',KURUM:'hco',PLAKA:'hpl',PASAPORT:'hpa',VERGİ_NO:'htx'};
+  /* ── HTML render: tıklanabilir span'lar ── */
+  let spanIdx=0;
   let html=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  if(maskStyle==='label'){
+  if(aMS==='label'){
     html=html.replace(/\[([A-ZÇĞİÖŞÜ_]+)_\d+\]/g,(m,k)=>{
-      const base=Object.keys(CM).find(x=>k.startsWith(x));
-      return '<span class="'+(base?CM[base]:'hn')+'">'+m+'</span>';
+      const typeKey=Object.keys(CM).find(x=>k.startsWith(x))||'KİŞİ';
+      const cls=CM[typeKey]||'hn';
+      const idx=spanIdx++;
+      return `<span class="mask-span ${cls}" data-idx="${idx}" data-label="${m}" data-type="${typeKey}" data-orig="" onclick="editOpen(this)">${m}</span>`;
     });
   }
-  document.getElementById('prev').innerHTML=html||'<div class="preview-empty">Maskelenecek veri bulunamadı</div>';
-  document.getElementById('anonMeta').textContent=total+' veri maskelendi';
+  const prev=document.getElementById('a-prev');
+  prev.innerHTML=html||'<div class="preview-empty">Maskelenecek veri bulunamadı</div>';
 
-  const TL={name:'Kişi',tc:'TC',phone:'Tel',date:'Tarih',email:'E-posta',addr:'Adres',iban:'IBAN',company:'Kurum',plate:'Plaka',passport:'Pasaport',tax:'Vergi'};
-  let sh='';
-  Object.entries(cnt).forEach(([k,v])=>{sh+='<span class="stat-chip">'+TL[k]+': <b>'+v+'</b></span>'});
-  sh+='<span class="stat-total">Toplam: '+total+'</span>';
-  const sb=document.getElementById('statsbar');
-  sb.style.display='flex';sb.innerHTML=sh;
-
-  ['btnCopy','btnTxt','btnPdf'].forEach(id=>document.getElementById(id).disabled=false);
-}
-
-function doCopy(){
-  if(!cleanText)return;
-  navigator.clipboard.writeText(cleanText).then(()=>{
-    const b=document.getElementById('btnCopy'),o=b.textContent;
-    b.textContent='✓';setTimeout(()=>b.textContent=o,1500);
+  /* orijinal değerleri bul ve span'lara kaydet */
+  const origWords=aOL.join('\n');
+  document.querySelectorAll('.mask-span').forEach((sp,i)=>{
+    /* basit: orijinal metinden o pozisyondaki kelimeyi bulmak yerine index kullan */
+    sp.dataset.orig=sp.dataset.orig||'';
   });
+
+  /* gezgin güncelle */
+  navSpans=Array.from(document.querySelectorAll('.mask-span'));
+  navFilter='';navIdx=-1;
+  editClose();
+  buildNavFilter(cnt);
+  updateNavCount();
+  document.getElementById('nav-toolbar').style.display=navSpans.length?'flex':'none';
+
+  /* stats bar */
+  document.getElementById('a-am').textContent=total+' veri maskelendi';
+  const TL2={name:'Kişi',tc:'TC',phone:'Tel',date:'Tarih',email:'E-posta',addr:'Adres',iban:'IBAN',company:'Kurum',plate:'Plaka',passport:'Pasaport',tax:'Vergi',custom:'Özel'};
+  let sh='';Object.entries(cnt).forEach(([k,v])=>{sh+='<span class="stat-chip">'+TL2[k]+': <b>'+v+'</b></span>'});
+  sh+='<span class="stat-total">Toplam: '+total+'</span>';
+  const sb=document.getElementById('a-sb');sb.style.display='flex';
+  document.getElementById('a-sb-chips').innerHTML=sh;
+  ['a-cp','a-tt','a-docx','a-pp','a-overlay'].forEach(id=>document.getElementById(id).disabled=false);
 }
 
-function doTxt(){
-  if(!cleanText)return;
-  const a=document.createElement('a');
-  a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(cleanText);
-  a.download='anonimlestirilmis.txt';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+/* ── Gezgin: filtre pilleri ── */
+function buildNavFilter(cnt){
+  const wrap=document.getElementById('nav-filter-pills');
+  const TL2={name:'Kişi',tc:'TC',phone:'Tel',date:'Tarih',email:'E-posta',addr:'Adres',iban:'IBAN',company:'Kurum',plate:'Plaka',passport:'Pasaport',tax:'Vergi',custom:'Özel'};
+  const typeMap={name:'KİŞİ',tc:'TC_NO',phone:'TELEFON',date:'TARİH',email:'EPOSTA',addr:'ADRES',iban:'IBAN',company:'KURUM',plate:'PLAKA',passport:'PASAPORT',tax:'VERGİ_NO',custom:'ÖZEL'};
+  let html='<span class="nfp on" data-type="" onclick="setNavFilter(this,\'\')">Tümü</span>';
+  Object.entries(cnt).forEach(([k,v])=>{
+    if(v>0){
+      const typeKey=typeMap[k]||k;
+      html+=`<span class="nfp" data-type="${typeKey}" onclick="setNavFilter(this,'${typeKey}')">${TL2[k]||k} (${v})</span>`;
+    }
+  });
+  wrap.innerHTML=html;
 }
 
-const TR_MAP={'ş':'s','Ş':'S','ı':'i','İ':'I','ğ':'g','Ğ':'G','ü':'u','Ü':'U','ö':'o','Ö':'O','ç':'c','Ç':'C'};
-const lat=s=>s.replace(/[şŞıİğĞüÜöÖçÇ]/g,m=>TR_MAP[m]||m);
-
-function isHeading(line){
-  const t=line.trim();
-  if(!t||t.length>80||/[.,:;?!]$/.test(t))return false;
-  return /^[A-ZÇĞİÖŞÜ\s\d\-\.\/]{4,}$/.test(t);
+function setNavFilter(el,type){
+  document.querySelectorAll('.nfp').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  navFilter=type;navIdx=-1;
+  updateNavCount();
+  editClose();
 }
 
-function doPdf(){
-  if(!cleanText)return;
-  const btn=document.getElementById('btnPdf');
+function getFilteredSpans(){
+  return navFilter?navSpans.filter(s=>s.dataset.type===navFilter):navSpans;
+}
+
+function updateNavCount(){
+  const filtered=getFilteredSpans();
+  const total=filtered.length;
+  const el=document.getElementById('nav-count');
+  el.textContent=total>0?(navIdx>=0?`${navIdx+1} / ${total}`:`${total} eşleşme`):'0 eşleşme';
+  document.getElementById('nav-prev').disabled=total===0||navIdx<=0;
+  document.getElementById('nav-next').disabled=total===0||navIdx>=total-1;
+}
+
+function navMove(dir){
+  const filtered=getFilteredSpans();
+  if(!filtered.length)return;
+  navSpans.forEach(s=>s.classList.remove('current-nav'));
+  navIdx=Math.max(0,Math.min(filtered.length-1,(navIdx<0&&dir>0)?0:navIdx+dir));
+  const sp=filtered[navIdx];
+  sp.classList.add('current-nav');
+  sp.scrollIntoView({block:'center',behavior:'smooth'});
+  updateNavCount();
+}
+
+/* ── Elle düzenleme ── */
+function editOpen(span){
+  editSpan=span;
+  const popup=document.getElementById('edit-popup');
+  popup.classList.add('show');
+  const inp=document.getElementById('edit-popup-input');
+  inp.value=span.textContent;
+  document.getElementById('edit-popup-label').textContent=
+    'Düzenle: '+span.dataset.label+
+    (TLong[span.dataset.type]?' ('+TLong[span.dataset.type]+')':'');
+  inp.focus();inp.select();
+  /* gezgin: aktif yap */
+  navSpans.forEach(s=>s.classList.remove('current-nav'));
+  span.classList.add('current-nav');
+  navIdx=getFilteredSpans().indexOf(span);
+  updateNavCount();
+}
+
+function editApply(){
+  if(!editSpan)return;
+  const val=document.getElementById('edit-popup-input').value.trim();
+  if(!val)return;
+  editSpan.textContent=val;
+  editSpan.style.opacity='0.7';
+  syncCleanText();
+  editClose();
+}
+
+function editRestore(){
+  if(!editSpan)return;
+  editSpan.textContent=editSpan.dataset.label;
+  editSpan.style.opacity='';
+  syncCleanText();
+  editClose();
+}
+
+function editClose(){
+  document.getElementById('edit-popup').classList.remove('show');
+  editSpan=null;
+}
+
+/* önizlemeden temiz text güncelle */
+function syncCleanText(){
+  const prev=document.getElementById('a-prev');
+  /* span'ların textContent ile düz metin üret */
+  function walk(node){
+    if(node.nodeType===3)return node.textContent;
+    if(node.classList&&node.classList.contains('mask-span'))return node.textContent;
+    return Array.from(node.childNodes).map(walk).join('');
+  }
+  aTxt=walk(prev);
+}
+
+/* Enter tuşu ile uygula */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.getElementById('edit-popup').classList.contains('show')){e.preventDefault();editApply()}
+  if(e.key==='Escape')editClose();
+});
+
+function aCopy(){if(!aTxt)return;syncCleanText();navigator.clipboard.writeText(aTxt).then(()=>{const b=document.getElementById('a-cp'),o=b.textContent;b.textContent='✓ Kopyalandı';setTimeout(()=>b.textContent=o,1600)})}
+function aTxt2(){if(!aTxt)return;syncCleanText();const a=document.createElement('a');a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(aTxt);a.download='anonimlestirilmis.txt';document.body.appendChild(a);a.click();document.body.removeChild(a)}
+document.getElementById('a-tt').addEventListener('click',aTxt2);
+
+async function aDocx(){
+  if(!aTxt){alert('Önce anonimleştirin.');return}
+  if(typeof docx==='undefined'){alert('DOCX kütüphanesi yükleniyor, bir saniye sonra tekrar deneyin.');return}
+
+  const btn=document.getElementById('a-docx');
   btn.disabled=true;btn.textContent='Oluşturuluyor…';
+
   try{
-    const {jsPDF}=window.jspdf;
-    const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+    syncCleanText();
+    const{Document,Packer,Paragraph,TextRun,HeadingLevel,AlignmentType,BorderStyle}=docx;
+
+    const lines=aTxt.split('\n');
+    const docChildren=[];
+
+    /* Belge başlığı */
+    docChildren.push(new Paragraph({
+      children:[new TextRun({text:'Anonimleştirilmiş Belge',bold:true,size:28,color:'1a1a2e'})],
+      heading:HeadingLevel.HEADING_1,
+      spacing:{after:200},
+    }));
+
+    /* Tarih + açıklama */
+    docChildren.push(new Paragraph({
+      children:[new TextRun({
+        text:'Kişisel veriler maskelenmistir — '+new Date().toLocaleDateString('tr-TR'),
+        size:18,color:'888899',italics:true
+      })],
+      spacing:{after:300},
+    }));
+
+    /* Yatay çizgi */
+    docChildren.push(new Paragraph({
+      border:{bottom:{style:BorderStyle.SINGLE,size:6,color:'cccccc'}},
+      spacing:{after:300},
+      children:[],
+    }));
+
+    /* Maskeleme renk haritası — etikete göre renk */
+    const tagColors={
+      'KİŞİ':'FEF9C3',   /* sarı */
+      'TC_NO':'FCE7F3',  /* pembe */
+      'TELEFON':'DBEAFE',/* mavi */
+      'TARİH':'DCFCE7',  /* yeşil */
+      'EPOSTA':'EDE9FE', /* mor */
+      'ADRES':'FFEDD5',  /* turuncu */
+      'IBAN':'D1FAE5',   /* mint */
+      'KURUM':'E0F2FE',  /* açık mavi */
+      'PLAKA':'FDF4FF',  /* lila */
+      'PASAPORT':'FFF7ED',/* krem */
+      'VERGİ_NO':'F0FDF4',/* açık yeşil */
+      'ÖZEL':'FEF3C7',   /* altın */
+    };
+
+    const tagRe=/\[([A-ZÇĞİÖŞÜ_]+)_\d+\]/g;
+
+    for(const rawLine of lines){
+      if(!rawLine.trim()){
+        docChildren.push(new Paragraph({children:[],spacing:{after:100}}));
+        continue;
+      }
+
+      /* başlık satırı tespiti */
+      const isH=rawLine.trim().length<80&&/^[A-ZÇĞİÖŞÜ\s\d\-\.\/]{4,}$/.test(rawLine.trim())&&!/[.,:;?!]$/.test(rawLine.trim());
+
+      /* satırı etiket ve düz metin parçalarına böl */
+      const runs=[];
+      let lastIdx=0;
+      let m;
+      tagRe.lastIndex=0;
+      while((m=tagRe.exec(rawLine))!==null){
+        /* etiket öncesi düz metin */
+        if(m.index>lastIdx){
+          const plain=rawLine.slice(lastIdx,m.index);
+          if(plain) runs.push(new TextRun({
+            text:plain,
+            size:isH?22:20,
+            bold:isH,
+            color:isH?'111118':'333344',
+          }));
+        }
+        /* etiket — renkli arka plan */
+        const typeKey=m[1].replace(/_\d+$/,'');
+        const bgColor=tagColors[typeKey]||'FEF9C3';
+        runs.push(new TextRun({
+          text:m[0],
+          size:isH?22:20,
+          bold:true,
+          color:'1a1a2e',
+          highlight:undefined,
+          shading:{type:'solid',color:bgColor,fill:bgColor},
+        }));
+        lastIdx=m.index+m[0].length;
+      }
+      /* kalan düz metin */
+      if(lastIdx<rawLine.length){
+        const rest=rawLine.slice(lastIdx);
+        if(rest) runs.push(new TextRun({
+          text:rest,
+          size:isH?22:20,
+          bold:isH,
+          color:isH?'111118':'333344',
+        }));
+      }
+
+      docChildren.push(new Paragraph({
+        children:runs.length?runs:[new TextRun({text:rawLine,size:20})],
+        heading:isH?HeadingLevel.HEADING_2:undefined,
+        spacing:{after:isH?160:80},
+      }));
+    }
+
+    /* Belgeyi oluştur */
+    const doc=new Document({
+      styles:{default:{document:{run:{font:'Calibri',size:20,color:'333344'}}}},
+      sections:[{
+        properties:{},
+        children:docChildren,
+      }],
+    });
+
+    const blob=await Packer.toBlob(doc);
+    dlBlob(blob,'anonimlestirilmis.docx');
+
+  }catch(e){
+    alert('DOCX hatası: '+e.message);
+    console.error(e);
+  }finally{
+    btn.disabled=false;btn.textContent='DOCX';
+  }
+}
+
+function aIsH(l){const t=l.trim();return t.length>3&&t.length<80&&!/[.,:;?!]$/.test(t)&&/^[A-ZÇĞİÖŞÜ\s\d\-\.\/]{4,}$/.test(t)}
+
+function aPdf(){
+  if(!aTxt)return;const btn=document.getElementById('a-pp');btn.disabled=true;btn.textContent='Oluşturuluyor…';
+  try{
+    const{jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
     const PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
-    const ML=50,MR=50,MT=70,MB=55,TW=PW-ML-MR,LH=15;
-
-    doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(25);
-    doc.text(lat('ANONIMLESTIRILMİS BELGE'),ML,MT-22);
-    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(150);
-    doc.text(lat('Kisisel veriler maskelenmistir  —  '+new Date().toLocaleDateString('tr-TR')),ML,MT-10);
+    const ML=52,MR=52,MT=72,MB=56,TW=PW-ML-MR,LH=15;
+    doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(20);
+    doc.text(lat('ANONIMLESTIRILMİS BELGE'),ML,MT-24);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(155);
+    doc.text(lat('Kisisel veriler maskelenmistir — '+new Date().toLocaleDateString('tr-TR')),ML,MT-11);
     doc.setDrawColor(210);doc.setLineWidth(0.5);doc.line(ML,MT,PW-MR,MT);
-
-    let y=MT+LH+6;
-    const anonLines=cleanText.split('\n');
-    for(let i=0;i<anonLines.length;i++){
-      const line=anonLines[i];
-      const orig=(origLines[i]||'').trim();
-      const h=isHeading(orig);
-      if(!line.trim()){y+=h?8:LH*0.45;continue;}
-      if(h){y+=10;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(20);}
-      else{doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.setTextColor(40);}
+    let y=MT+LH+7;
+    const aL=aTxt.split('\n');
+    for(let i=0;i<aL.length;i++){
+      const line=aL[i],orig=(aOL[i]||'').trim(),h=aIsH(orig);
+      if(!line.trim()){y+=h?9:LH*0.45;continue}
+      if(h){y+=12;doc.setFont('helvetica','bold');doc.setFontSize(11.5);doc.setTextColor(20)}
+      else{doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.setTextColor(40)}
       const wrapped=doc.splitTextToSize(lat(line),TW);
       for(const wl of wrapped){
-        if(y+LH>PH-MB){
-          doc.addPage();y=MT;
-          doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(160);
-          doc.text('(devami)',ML,y);doc.line(ML,y+4,PW-MR,y+4);y+=LH+6;
-          doc.setFont(h?'helvetica':'helvetica',h?'bold':'normal');
-          doc.setFontSize(h?11:9.5);doc.setTextColor(h?20:40);
-        }
+        if(y+LH>PH-MB){doc.addPage();y=MT;doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(160);doc.text('(devami)',ML,y);doc.line(ML,y+4,PW-MR,y+4);y+=LH+7;doc.setFont(h?'helvetica':'helvetica',h?'bold':'normal');doc.setFontSize(h?11.5:9.5);doc.setTextColor(h?20:40)}
         doc.text(wl,ML,y);y+=LH;
       }
       if(h)y+=5;
     }
     const tp=doc.internal.getNumberOfPages();
-    for(let i=1;i<=tp;i++){
-      doc.setPage(i);doc.setFontSize(8);doc.setTextColor(170);
-      doc.setDrawColor(220);doc.setLineWidth(0.4);doc.line(ML,PH-30,PW-MR,PH-30);
-      doc.text(i+' / '+tp,PW/2,PH-18,{align:'center'});
+    for(let i=1;i<=tp;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(170);doc.setDrawColor(220);doc.setLineWidth(0.4);doc.line(ML,PH-30,PW-MR,PH-30);doc.text(i+' / '+tp,PW/2,PH-17,{align:'center'})}
+    dlBlob(doc.output('blob'),'anonimlestirilmis.pdf');
+  }catch(e){alert('PDF hatası: '+e.message)}
+  finally{btn.disabled=false;btn.textContent='PDF indir'}
+}
+
+/* ════════════════════════════
+   MOD SEKMELERİ
+════════════════════════════ */
+/* ════════════════════════════
+   TOPLU İŞLEM
+════════════════════════════ */
+let bFiles=[];  // {file, blob, status}
+
+const bDZ=document.getElementById('b-dz');
+bDZ.addEventListener('dragover',e=>{e.preventDefault();bDZ.style.background='var(--green-bg)';bDZ.style.borderColor='var(--green-mid)'});
+bDZ.addEventListener('dragleave',()=>{bDZ.style.background='';bDZ.style.borderColor=''});
+bDZ.addEventListener('drop',e=>{e.preventDefault();bDZ.style.background='';bDZ.style.borderColor='';bAddFiles(e.dataTransfer.files)});
+document.getElementById('b-fi').addEventListener('change',e=>bAddFiles(e.target.files));
+
+function bAddFiles(files){
+  [...files].forEach(f=>{
+    if(f.type==='application/pdf'&&!bFiles.find(x=>x.file.name===f.name&&x.file.size===f.size)){
+      bFiles.push({file:f,blob:null,status:'bekliyor'});
     }
-    const blob=doc.output('blob');
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;a.download='anonimlestirilmis.pdf';
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url),8000);
-  }catch(e){alert('PDF hatası: '+e.message);}
-  finally{btn.disabled=false;btn.textContent='PDF indir';}
+  });
+  bRender();
+}
+
+function bRender(){
+  const queue=document.getElementById('b-queue');
+  const empty=document.getElementById('b-empty');
+  const runBtn=document.getElementById('b-run');
+  if(!bFiles.length){queue.innerHTML='';empty.style.display='block';runBtn.disabled=true;return;}
+  empty.style.display='none';runBtn.disabled=false;
+  queue.innerHTML=bFiles.map((item,i)=>{
+    const sz=(item.file.size/1024).toFixed(0)+' KB';
+    const stClass=item.status==='tamam'?'ok':item.status==='hata'?'err':item.status==='işleniyor'?'run':'';
+    const stText=item.status==='bekliyor'?'bekliyor':item.status==='işleniyor'?'işleniyor…':item.status==='tamam'?'✓ tamamlandı':'✗ hata';
+    const dlShow=item.status==='tamam'?'show':'';
+    return `<div class="batch-item ${item.status==='tamam'?'done':item.status==='hata'?'error':item.status==='işleniyor'?'running':''}" id="bi-${i}">
+      <span class="batch-num">${i+1}</span>
+      <span class="batch-name" title="${item.file.name}">${item.file.name}</span>
+      <span class="batch-status ${stClass}">${stText}</span>
+      <button class="batch-dl ${dlShow}" onclick="bDownload(${i})">İndir</button>
+      <button class="batch-del" onclick="bRemove(${i})" title="Kaldır">×</button>
+    </div>`;
+  }).join('');
+}
+
+function bRemove(i){bFiles.splice(i,1);bRender()}
+function bClear(){bFiles=[];bRender();document.getElementById('b-overall').style.display='none';document.getElementById('b-lbl').textContent='Birden fazla PDF seçin veya sürükleyin'}
+function batchClear(){bClear()}
+
+function bDownload(i){
+  const item=bFiles[i];
+  if(!item||!item.blob)return;
+  dlBlob(item.blob,item.file.name.replace(/\.pdf$/i,'')+'_anon.pdf');
+}
+
+function bGetCleanText(text){
+  /* aynı regex motorunu kullan ama sayaç bağımsız */
+  const cnt2={};let n=0;
+  function lbl(type){n++;const L={name:'KİŞİ',tc:'TC_NO',phone:'TELEFON',date:'TARİH',email:'EPOSTA',addr:'ADRES',iban:'IBAN',company:'KURUM',plate:'PLAKA',passport:'PASAPORT',tax:'VERGİ_NO'};return'['+L[type]+'_'+n+']'}
+  const rep=(t,re)=>{text=text.replace(re,()=>{cnt2[t]=(cnt2[t]||0)+1;return lbl(t)})};
+  if(aOn('b_tc'))rep('tc',/\b[1-9]\d{10}\b/g);
+  if(aOn('b_iban'))rep('iban',/\bTR\s?\d{2}[\s\d]{20,28}\b/gi);
+  if(aOn('b_phone')){rep('phone',/(?:\+90|0090)[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);rep('phone',/0\s?[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}/g)}
+  if(aOn('b_email'))rep('email',/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g);
+  if(aOn('b_plate'))rep('plate',/\b\d{2}\s?[A-ZÇĞİÖŞÜa-zçğişöü]{1,3}\s?\d{2,4}\b/g);
+  if(aOn('b_tax'))rep('tax',/\b\d{10}\b/g);
+  if(aOn('b_passport'))rep('passport',/\b[A-Z]{1,2}\d{7,9}\b/g);
+  if(aOn('b_date')){rep('date',/\b\d{1,2}[.\/\-]\d{1,2}[.\/\-]\d{4}\b/g);rep('date',/\b\d{1,2}\s+(?:Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+\d{4}\b/gi)}
+  if(aOn('b_company'))rep('company',/\b[\wÇçĞğİıÖöŞşÜü]+(?:\s[\wÇçĞğİıÖöŞşÜü]+){0,3}\s*(?:A\.?Ş\.?|Ltd\.?\s*Şti\.?|Holding|Group|Grup|Bankası|Bank|Sigorta|Finans|Teknoloji|Yazılım|Danışmanlık|Hukuk|Avukatlık|Bürosu|Mahkemesi|Müdürlüğü|Savcılığı|Noterliği|Belediyesi|Kaymakamlığı|Valiliği|Bakanlığı)\b/gi);
+  if(aOn('b_addr')){
+    rep('addr',new RegExp('\\b('+CITIES.join('|')+')\\b','g'));
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,30}?\s+(?:Cad(?:desi)?|Blv(?:arı)?|Bulvarı)\.?(?:\s+No\.?\s*[:.]?\s*\d+(?:\/\d+)?)?/gi);
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,25}?\s+(?:Sok(?:ak)?|Sk)\.?(?:\s+No\.?\s*[:.]?\s*\d+(?:\/\d+)?)?/gi);
+    rep('addr',/[A-ZÇĞİÖŞÜa-zçğışöü\s]{2,30}?\s+(?:Mah(?:allesi)?)\.?/gi);
+    rep('addr',/\bNo\.?\s*[:.]?\s*\d+(?:\/\d+)?/gi);
+    rep('addr',/\b(?:Daire|D\.?)\s*[:.]?\s*\d+/gi);
+    rep('addr',/\bKat\.?\s*[:.]?\s*\d+/gi);
+    rep('addr',/\b\d{5}\b/g);
+  }
+  if(aOn('b_name')){
+    rep('name',new RegExp('\\b('+NAMES.join('|')+')'+'((?:\\s+(?:'+NAMES.join('|')+'))){0,3}\\b','g'));
+    rep('name',/\b(?:Av(?:ukat)?|Stj\.?\s*Av|Hâkim|Hakim|C\.?\s*Savcısı|Savcı|Yargıç|Bilirkişi|Dr\.|Prof\.?\s*Dr\.|Doç\.?\s*Dr\.)\.?\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/g);
+    rep('name',/\b(?:MÜŞTEKİ|ŞÜPHELİ|DAVACI|DAVALI|SANIK|MAĞDUR|MÜDAHİL|BORÇLU|ALACAKLI)\s*:\s*([A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+){0,3})/g);
+    rep('name',/[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜa-zçğışöü]+\s+(?:Kızı|Oğlu|Eşi|Karısı|Kocası|Babası|Annesi|Kardeşi|Torunu)/gi);
+    rep('name',/\b(?:Davacı|Davalı|Sanık|Mağdur|Müşteki|Müdahil|Katılan|Şüpheli|Borçlu|Alacaklı|Kefil|Sayın|Müvekkil(?:im|iniz)?|Veli|Vasi|Temsilci)\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}/gi);
+    rep('name',/\b(?:aleyhine|lehine|hakkında|tarafından|adına|namına|nüfusuna\s+kayıtlı|doğumlu)\s+(?:\w+\s+)?([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})/gi);
+    rep('name',/(?:Ad\s+[Ss]oyad|Adı\s+[Ss]oyadı|İmzalayan|Düzenleyen)\s*[:\-]?\s*([A-ZÇĞİÖŞÜ][a-zçğışöü]+(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3})/gi);
+    rep('name',new RegExp('[A-ZÇĞİÖŞÜ][a-zçğışöü]{3,}(?:\\s+(?:'+NAMES.join('|')+'))\\b','g'));
+    rep('name',new RegExp('\\b(?:'+NAMES.join('|')+')\\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]{3,}\\b','g'));
+    rep('name',/\b(?:Abdullah|Abdurrahman|Abdülkadir|Abdülhamit|Abdülaziz|Abdüllatif|Muhammed|Mehmed)[a-zçğışöü]*(?:\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]{2,}){0,2}\b/gi);
+    rep('name',/\b[A-ZÇĞİÖŞÜ]{2,}(?:\s[A-ZÇĞİÖŞÜ]{2,}){1,4}\b/g);
+    rep('name',/(?<![.:!?]\s)(?<!\n)\b([A-ZÇĞİÖŞÜ][a-zçğışöü]{2,})\s+([A-ZÇĞİÖŞÜ][a-zçğışöü]{2,})\b(?!\s*[A-Za-zÇçĞğİıÖöŞşÜü]*(?:Mahkemesi|Müdürlüğü|Bankası|Üniversitesi|İlçesi|İli|Caddesi|Sokağı|Bulvarı))/g);
+  }
+  return{text,cnt:cnt2};
+}
+
+async function bExtractText(f){
+  const ab=await f.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+  let full='';
+  for(let i=1;i<=pdf.numPages;i++){
+    const pg=await pdf.getPage(i);const tc=await pg.getTextContent();
+    let ly=null,line='';
+    for(const item of tc.items){const y=item.transform?item.transform[5]:null;if(ly!==null&&Math.abs(y-ly)>4){full+=line.trim()+'\n';line='';}line+=item.str+' ';ly=y;}
+    if(line.trim())full+=line.trim()+'\n';full+='\n';
+  }
+  return full.trim();
+}
+
+function bTextToPdf(cleanText){
+  const{jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+  const PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
+  const ML=52,MR=52,MT=70,MB=55,TW=PW-ML-MR,LH=15;
+  doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(20);
+  doc.text(lat('ANONIMLESTIRILMİS BELGE'),ML,MT-22);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(155);
+  doc.text(lat('Kisisel veriler maskelenmistir — '+new Date().toLocaleDateString('tr-TR')),ML,MT-10);
+  doc.setDrawColor(210);doc.setLineWidth(0.5);doc.line(ML,MT,PW-MR,MT);
+  let y=MT+LH+6;
+  for(const line of cleanText.split('\n')){
+    if(!line.trim()){y+=LH*0.45;continue}
+    doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.setTextColor(40);
+    const wrapped=doc.splitTextToSize(lat(line),TW);
+    for(const wl of wrapped){if(y+LH>PH-MB){doc.addPage();y=MT}doc.text(wl,ML,y);y+=LH;}
+  }
+  const tp=doc.internal.getNumberOfPages();
+  for(let i=1;i<=tp;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(170);doc.setDrawColor(220);doc.setLineWidth(0.4);doc.line(ML,PH-30,PW-MR,PH-30);doc.text(i+' / '+tp,PW/2,PH-17,{align:'center'})}
+  return doc.output('blob');
+}
+
+async function batchRun(){
+  if(!bFiles.length)return;
+  const runBtn=document.getElementById('b-run');
+  runBtn.disabled=true;runBtn.textContent='İşleniyor…';
+  const overall=document.getElementById('b-overall');
+  const bar=document.getElementById('b-overall-bar');
+  const lbl=document.getElementById('b-overall-label');
+  overall.style.display='flex';
+  let done=0;
+  const total=bFiles.length;
+
+  for(let i=0;i<bFiles.length;i++){
+    if(bFiles[i].status==='tamam')continue; /* zaten işlenmiş */
+    bFiles[i].status='işleniyor';bRender();
+    try{
+      const rawText=await bExtractText(bFiles[i].file);
+      const{text:clean}=bGetCleanText(rawText);
+      const blob=bTextToPdf(clean);
+      bFiles[i].blob=blob;
+      bFiles[i].status='tamam';
+    }catch(e){
+      bFiles[i].status='hata';
+    }
+    done++;
+    const pct=Math.round(done/total*100);
+    bar.style.width=pct+'%';
+    lbl.textContent=done+' / '+total;
+    bRender();
+  }
+  runBtn.disabled=false;runBtn.textContent='Tümünü işle';
+  /* hepsi tamam mı → zip butonu ekle */
+  const allDone=bFiles.every(f=>f.status==='tamam');
+  if(allDone&&bFiles.length>1){
+    lbl.textContent=total+' dosya tamamlandı — her dosyayı ayrı ayrı indirin';
+  }
+}
+
+/* ════════════════════════════
+   PDF OVERLAY (orijinal üzerine siyah kutu)
+════════════════════════════ */
+let aOrigPdfBytes=null; /* yüklenen orijinal PDF'in bytes'ı — aPDF içinde set edilir */
+
+async function aPdfOverlay(){
+  if(!aTxt){alert('Önce anonimleştirin.');return}
+  if(!aOrigPdfBytes){alert('Overlay için orijinal PDF gerekli. OCR veya görüntü modunda overlay desteklenmez.');return}
+  if(typeof PDFLib==='undefined'){alert('pdf-lib kütüphanesi yükleniyor, bir saniye sonra tekrar deneyin.');return}
+
+  const btn=document.getElementById('a-overlay');
+  btn.disabled=true;btn.textContent='Overlay oluşturuluyor…';
+
+  try{
+    const{PDFDocument,rgb,degrees}=PDFLib;
+
+    /* 1. Orijinal PDF yükle */
+    const pdfDoc=await PDFDocument.load(aOrigPdfBytes,{ignoreEncryption:true});
+    const pages=pdfDoc.getPages();
+
+    /* 2. Her sayfayı pdf.js ile render et → metin pozisyonlarını al */
+    const pdfJsDoc=await pdfjsLib.getDocument({data:aOrigPdfBytes.slice(0)}).promise;
+
+    /* maskelenmesi gereken metinleri bul:
+       aTxt içindeki [ETİKET_N] etiketleri → orijinal metinde karşılık gelen pozisyonları bul */
+    const origText=document.getElementById('a-inp').value;
+
+    /* anonimleştirilmiş metindeki etiketleri regex ile bul,
+       orijinal metindeki karşılıkları tespit et */
+    const maskMap=[]; /* [{pageIdx, x, y, w, h}] */
+
+    for(let pi=0;pi<pdfJsDoc.numPages;pi++){
+      const page=await pdfJsDoc.getPage(pi+1);
+      const tc=await page.getTextContent();
+      const vp=page.getViewport({scale:1});
+      const pdfPage=pages[pi];
+      const {width:pw,height:ph}=pdfPage.getSize();
+      /* pdf.js koordinatları → pdf-lib koordinatları (Y ekseni ters) */
+      const scaleX=pw/vp.width;
+      const scaleY=ph/vp.height;
+
+      /* her text item'ın bbox'ını al */
+      for(const item of tc.items){
+        if(!item.str||!item.str.trim())continue;
+        const tx=item.transform;
+        /* tx = [scaleX, skewY, skewX, scaleY, x, y] */
+        const x=tx[4];
+        const y=tx[5];
+        const fontSize=Math.abs(tx[3])||10;
+        const w=item.width||fontSize*item.str.length*0.6;
+        const h=fontSize*1.2;
+
+        /* bu metin parçasının anonimleştirilmiş versiyonda maskelendi mi? */
+        const isRedacted=checkIfRedacted(item.str,origText,aTxt);
+        if(isRedacted){
+          maskMap.push({
+            pageIdx:pi,
+            x:x*scaleX,
+            y:y*scaleY,
+            w:w*scaleX,
+            h:h*scaleY
+          });
+        }
+      }
+    }
+
+    /* 3. Her sayfaya siyah dikdörtgen çiz */
+    maskMap.forEach(({pageIdx,x,y,w,h})=>{
+      const page=pages[pageIdx];
+      const {height:ph}=page.getSize();
+      page.drawRectangle({
+        x:Math.max(0,x-2),
+        y:Math.max(0,y-2),
+        width:Math.min(w+4,page.getSize().width-x+2),
+        height:h+4,
+        color:rgb(0,0,0),
+        opacity:1,
+      });
+    });
+
+    /* 4. İndir */
+    const pdfBytes=await pdfDoc.save();
+    dlBlob(new Blob([pdfBytes],{type:'application/pdf'}),'overlay_anonimlestirilmis.pdf');
+
+    /* overlay info banner göster */
+    const info=document.getElementById('overlay-info');
+    info.classList.add('show');
+    info.querySelector('.overlay-info-body div:last-child').textContent=
+      maskMap.length+' metin bölgesi kapatıldı · orijinal PDF düzeni korundu';
+
+  }catch(e){
+    alert('Overlay hatası: '+e.message+'\n\nNot: Şifreli PDF\'ler overlay\'i desteklemeyebilir.');
+    console.error(e);
+  }finally{
+    btn.disabled=false;btn.textContent='Overlay PDF';
+  }
+}
+
+function checkIfRedacted(str,origText,anonText){
+  /* str orijinal metinde var ama anonText'te yok → maskelendi */
+  if(!str||str.length<2)return false;
+  /* kısa str için daha kesin: orijinal konumla eşleş */
+  const escaped=str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const origHas=new RegExp(escaped).test(origText);
+  const anonHas=new RegExp(escaped).test(anonText);
+  return origHas&&!anonHas;
+}
+
+/* ════════════════════════════
+   MASKELEME HARİTASI
+════════════════════════════ */
+const TLType={name:'Kişi adı',tc:'TC kimlik',phone:'Telefon',date:'Tarih',email:'E-posta',addr:'Adres/şehir',iban:'IBAN/hesap',company:'Şirket/kurum',plate:'Plaka',passport:'Pasaport/ehliyet',tax:'Vergi no',custom:'Özel kural'};
+
+function downloadMapCsv(){
+  if(!maskMapData.length){alert('Önce anonimleştirin.');return}
+  const rows=[['Etiket','Orijinal Değer','Veri Tipi','Özel Kural']];
+  maskMapData.forEach(({label,original,type,rule})=>{
+    rows.push([
+      label,
+      original.replace(/"/g,'""'),
+      TLType[type]||type,
+      rule||''
+    ]);
+  });
+  const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\r\n');
+  const bom='\uFEFF'; /* BOM: Excel'in Türkçe karakterleri doğru okuması için */
+  const blob=new Blob([bom+csv],{type:'text/csv;charset=utf-8'});
+  dlBlob(blob,'maskeleme_haritasi.csv');
+}
+
+function downloadMapPdf(){
+  if(!maskMapData.length){alert('Önce anonimleştirin.');return}
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+  const PW=doc.internal.pageSize.getWidth();
+  const PH=doc.internal.pageSize.getHeight();
+  const ML=40,MR=40,MT=70,MB=50;
+  const cols=[ML, ML+110, ML+240, ML+350];
+  const colW=[106, 126, 106, PW-MR-cols[3]];
+  const RH=18;
+
+  /* başlık */
+  doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(20);
+  doc.text(lat('MASKELEME HARİTASI'),ML,MT-22);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(140);
+  doc.text(lat('Belge: anonimlestirilmis — '+new Date().toLocaleDateString('tr-TR')+'  —  Toplam: '+maskMapData.length+' eşleşme'),ML,MT-10);
+  doc.setDrawColor(180);doc.setLineWidth(0.5);doc.line(ML,MT,PW-MR,MT);
+
+  let y=MT+14;
+
+  /* tablo başlığı */
+  const headers=['Etiket','Orijinal Değer','Veri Tipi','Özel Kural'];
+  doc.setFillColor(240,253,244);
+  doc.rect(ML,y-12,PW-ML-MR,RH,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(6,95,70);
+  headers.forEach((h,i)=>doc.text(lat(h),cols[i]+3,y));
+  y+=RH;
+  doc.setDrawColor(167,243,208);doc.setLineWidth(0.5);doc.line(ML,y-4,PW-MR,y-4);
+
+  /* tablo satırları */
+  doc.setFont('helvetica','normal');doc.setFontSize(8.5);
+  maskMapData.forEach(({label,original,type,rule},idx)=>{
+    if(y+RH>PH-MB){
+      doc.addPage();y=MT;
+      /* tekrar başlık */
+      doc.setFillColor(240,253,244);doc.rect(ML,y-12,PW-ML-MR,RH,'F');
+      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(6,95,70);
+      headers.forEach((h,i)=>doc.text(lat(h),cols[i]+3,y));
+      y+=RH;doc.setDrawColor(167,243,208);doc.line(ML,y-4,PW-MR,y-4);
+      doc.setFont('helvetica','normal');doc.setFontSize(8.5);
+    }
+    /* zebra */
+    if(idx%2===0){doc.setFillColor(249,250,251);doc.rect(ML,y-12,PW-ML-MR,RH,'F')}
+    doc.setTextColor(40);
+    const cells=[label,original,TLType[type]||type,rule||'—'];
+    cells.forEach((cell,i)=>{
+      const truncated=doc.splitTextToSize(lat(cell),colW[i]-6)[0];
+      doc.text(truncated,cols[i]+3,y);
+    });
+    /* ince alt çizgi */
+    doc.setDrawColor(235);doc.setLineWidth(0.3);doc.line(ML,y+5,PW-MR,y+5);
+    y+=RH;
+  });
+
+  /* footer */
+  const tp=doc.internal.getNumberOfPages();
+  for(let i=1;i<=tp;i++){
+    doc.setPage(i);doc.setFontSize(7.5);doc.setTextColor(180);
+    doc.setDrawColor(220);doc.setLineWidth(0.3);doc.line(ML,PH-32,PW-MR,PH-32);
+    doc.text('Maskeleme haritasi — gizli belge',ML,PH-20);
+    doc.text(i+' / '+tp,PW/2,PH-20,{align:'center'});
+  }
+
+  dlBlob(doc.output('blob'),'maskeleme_haritasi.pdf');
+}
+
+/* ════════════════════════════
+   PDF → WORD
+════════════════════════════ */
+let p2wFile=null, p2wBlob=null;
+
+const p2wDrop=document.getElementById('p2w-drop');
+p2wDrop.addEventListener('dragover',e=>{e.preventDefault();p2wDrop.style.background='#eff6ff';p2wDrop.style.borderColor='#93c5fd'});
+p2wDrop.addEventListener('dragleave',()=>{p2wDrop.style.background='';p2wDrop.style.borderColor=''});
+p2wDrop.addEventListener('drop',e=>{e.preventDefault();p2wDrop.style.background='';p2wDrop.style.borderColor='';p2wLoad(e.dataTransfer.files[0])});
+document.getElementById('p2w-fi').addEventListener('change',e=>p2wLoad(e.target.files[0]));
+
+async function p2wLoad(f){
+  if(!f||f.type!=='application/pdf')return;
+  p2wFile=f;
+  document.getElementById('p2w-info').textContent=f.name+' — '+(f.size/1024).toFixed(0)+' KB';
+  document.getElementById('p2w-btn').disabled=false;
+  document.getElementById('p2w-res').classList.remove('show');
+}
+
+function p2wClear(){
+  p2wFile=null;p2wBlob=null;
+  document.getElementById('p2w-info').textContent='Metin tabanlı PDF desteklenir';
+  document.getElementById('p2w-btn').disabled=true;
+  document.getElementById('p2w-res').classList.remove('show');
+}
+
+async function p2wConvert(){
+  if(!p2wFile){alert('Önce PDF yükleyin.');return}
+  if(typeof docx==='undefined'){alert('DOCX kütüphanesi yükleniyor, bir saniye sonra tekrar deneyin.');return}
+
+  const btn=document.getElementById('p2w-btn');
+  btn.disabled=true;btn.textContent='Dönüştürülüyor…';
+  const pw=document.getElementById('p2w-pw'),pb=document.getElementById('p2w-pb'),pl=document.getElementById('p2w-pl');
+  pw.style.display='block';pb.style.width='5%';
+
+  const useHeadings=document.getElementById('p2w-headings').checked;
+  const usePageBreak=document.getElementById('p2w-pages').checked;
+  const cleanEmpty=document.getElementById('p2w-clean').checked;
+
+  try{
+    /* 1. pdf.js ile metin çıkar */
+    const ab=await p2wFile.arrayBuffer();
+    const pdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
+    const totalPages=pdfDoc.numPages;
+    pb.style.width='10%';
+
+    let allPages=[];
+    for(let i=1;i<=totalPages;i++){
+      pl.textContent=`Sayfa ${i}/${totalPages} okunuyor…`;
+      pb.style.width=Math.round(10+((i-1)/totalPages)*60)+'%';
+      const pg=await pdfDoc.getPage(i);
+      const tc=await pg.getTextContent();
+
+      /* Satır birleştirme: y koordinatına göre grupla */
+      const lineMap=new Map();
+      for(const item of tc.items){
+        if(!item.str)continue;
+        const y=Math.round(item.transform[5]/3)*3; /* ~3pt tolerans */
+        if(!lineMap.has(y)) lineMap.set(y,[]);
+        lineMap.get(y).push({x:item.transform[4],text:item.str});
+      }
+      /* y büyükten küçüğe sırala (PDF koordinatı aşağıdan yukarıya) */
+      const sortedYs=[...lineMap.keys()].sort((a,b)=>b-a);
+      const pageLines=sortedYs.map(y=>{
+        const items=lineMap.get(y).sort((a,b)=>a.x-b.x);
+        return items.map(it=>it.text).join(' ').trim();
+      }).filter(l=>l.length>0);
+
+      allPages.push(pageLines);
+    }
+
+    pb.style.width='72%';
+    pl.textContent='Word belgesi oluşturuluyor…';
+
+    /* 2. docx ile Word belgesi üret */
+    const {Document,Packer,Paragraph,TextRun,HeadingLevel,PageBreak,AlignmentType}=docx;
+
+    const children=[];
+    let totalLines=0, headingCount=0;
+
+    /* Belge başlığı */
+    children.push(new Paragraph({
+      children:[new TextRun({text:p2wFile.name.replace(/\.pdf$/i,''),bold:true,size:32,color:'1a1a2e'})],
+      heading:HeadingLevel.TITLE,
+      spacing:{after:300},
+    }));
+    children.push(new Paragraph({
+      children:[new TextRun({text:'PDF\'den dönüştürüldü — '+new Date().toLocaleDateString('tr-TR'),size:18,color:'888899',italics:true})],
+      spacing:{after:400},
+    }));
+
+    for(let pi=0;pi<allPages.length;pi++){
+      const pageLines=allPages[pi];
+      const filteredLines=cleanEmpty
+        ? pageLines.filter((l,i)=>l.trim()||pageLines[i-1]?.trim()) /* tek boş satır */
+        : pageLines;
+
+      for(const rawLine of filteredLines){
+        totalLines++;
+        const line=rawLine.trim();
+
+        if(!line){
+          children.push(new Paragraph({children:[],spacing:{after:80}}));
+          continue;
+        }
+
+        /* Başlık tespiti */
+        const isH=useHeadings&&line.length>2&&line.length<120
+          &&/^[A-ZÇĞİÖŞÜ0-9\s\-\.\/\:\(\)]{3,}$/.test(line)
+          &&!/[a-zçğışöü]/.test(line);
+
+        if(isH) headingCount++;
+
+        children.push(new Paragraph({
+          children:[new TextRun({
+            text:line,
+            size:isH?24:20,
+            bold:isH,
+            color:isH?'111118':'333344',
+            font:'Calibri',
+          })],
+          heading:isH?HeadingLevel.HEADING_2:undefined,
+          spacing:{after:isH?180:80},
+        }));
+      }
+
+      /* Sayfa sonu işaretçisi */
+      if(usePageBreak&&pi<allPages.length-1){
+        children.push(new Paragraph({
+          children:[
+            new TextRun({text:'— Sayfa '+(pi+1)+' sonu —',size:16,color:'bbbbcc',italics:true}),
+            new PageBreak(),
+          ],
+          spacing:{after:200},
+        }));
+      }
+    }
+
+    pb.style.width='88%';
+
+    const doc=new Document({
+      styles:{default:{document:{run:{font:'Calibri',size:20,color:'333344'}}}},
+      sections:[{properties:{},children}],
+    });
+
+    p2wBlob=await Packer.toBlob(doc);
+    pb.style.width='100%';
+
+    document.getElementById('p2w-stats').textContent=
+      totalPages+' sayfa · '+totalLines+' satır'+(headingCount?' · '+headingCount+' başlık tespiti':'');
+    document.getElementById('p2w-dl').onclick=()=>dlBlob(p2wBlob,p2wFile.name.replace(/\.pdf$/i,'')+'.docx');
+    document.getElementById('p2w-res').classList.add('show');
+    pw.style.display='none';
+
+  }catch(e){
+    pw.style.display='none';
+    alert('Dönüştürme hatası: '+e.message);
+    console.error(e);
+  }finally{
+    btn.disabled=false;btn.textContent='Word\'e dönüştür';
+  }
+}
+
+let mFiles=[],mBlob=null;
+const mDrop=document.getElementById('m-drop');
+mDrop.addEventListener('dragover',e=>{e.preventDefault();mDrop.style.background='var(--green-bg)';mDrop.style.borderColor='var(--green-mid)'});
+mDrop.addEventListener('dragleave',()=>{mDrop.style.background='';mDrop.style.borderColor=''});
+mDrop.addEventListener('drop',e=>{e.preventDefault();mDrop.style.background='';mDrop.style.borderColor='';mAdd(e.dataTransfer.files)});
+document.getElementById('m-fi').addEventListener('change',e=>mAdd(e.target.files));
+
+function mAdd(files){[...files].forEach(f=>{if(f.type==='application/pdf')mFiles.push(f)});mRender()}
+function mRender(){
+  const list=document.getElementById('m-list');
+  list.innerHTML=mFiles.map((f,i)=>`<div class="file-item"><div class="file-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="#059669" stroke-width="1.1"/><path d="M3 5h8M3 7.5h5M3 10h6" stroke="#059669" stroke-width=".9" stroke-linecap="round"/></svg></div><span class="file-name">${f.name}</span><span class="file-size">${(f.size/1024).toFixed(0)} KB</span><button class="file-del" onclick="mRm(${i})">×</button></div>`).join('');
+  document.getElementById('m-btn').disabled=mFiles.length<2;
+  document.getElementById('m-res').classList.remove('show');
+}
+function mRm(i){mFiles.splice(i,1);mRender()}
+function mClear(){mFiles=[];mBlob=null;mRender()}
+
+async function mMerge(){
+  if(mFiles.length<2){alert('En az 2 PDF gerekli.');return}
+  const pw=document.getElementById('m-pw'),pb=document.getElementById('m-pb'),pl=document.getElementById('m-pl');
+  pw.style.display='block';pb.style.width='0';document.getElementById('m-btn').disabled=true;
+  const{jsPDF}=window.jspdf;const out=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});let first=true;
+  for(let fi=0;fi<mFiles.length;fi++){
+    pl.textContent=`${fi+1}/${mFiles.length}: ${mFiles[fi].name}`;pb.style.width=Math.round((fi/mFiles.length)*90)+'%';
+    try{
+      const ab=await mFiles[fi].arrayBuffer();const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+      for(let pi=1;pi<=pdf.numPages;pi++){
+        const pg=await pdf.getPage(pi);const vp=pg.getViewport({scale:1.5});
+        const canvas=document.createElement('canvas');canvas.width=vp.width;canvas.height=vp.height;
+        await pg.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+        const img=canvas.toDataURL('image/jpeg',0.85);
+        const pw2=out.internal.pageSize.getWidth(),ph2=out.internal.pageSize.getHeight();
+        if(!first)out.addPage();first=false;
+        out.addImage(img,'JPEG',0,0,pw2,ph2);
+      }
+    }catch(e){}
+  }
+  pb.style.width='100%';mBlob=out.output('blob');
+  document.getElementById('m-dl').onclick=()=>dlBlob(mBlob,'birlestirilmis.pdf');
+  document.getElementById('m-res').classList.add('show');
+  pw.style.display='none';document.getElementById('m-btn').disabled=false;
+}
+
+/* ════════════════════════════
+   PDF BÖL
+════════════════════════════ */
+let sPdfDoc=null,sPdfFile=null;
+const sDrop=document.getElementById('s-drop');
+sDrop.addEventListener('dragover',e=>{e.preventDefault();sDrop.style.background='var(--green-bg)';sDrop.style.borderColor='var(--green-mid)'});
+sDrop.addEventListener('dragleave',()=>{sDrop.style.background='';sDrop.style.borderColor=''});
+sDrop.addEventListener('drop',e=>{e.preventDefault();sDrop.style.background='';sDrop.style.borderColor='';sLoad(e.dataTransfer.files[0])});
+document.getElementById('s-fi').addEventListener('change',e=>sLoad(e.target.files[0]));
+
+async function sLoad(f){
+  if(!f||f.type!=='application/pdf')return;
+  sPdfFile=f;const ab=await f.arrayBuffer();
+  sPdfDoc=await pdfjsLib.getDocument({data:ab}).promise;
+  document.getElementById('s-info').textContent=f.name+' — '+sPdfDoc.numPages+' sayfa';
+  document.getElementById('s-btn').disabled=false;
+  document.getElementById('s-res').classList.remove('show');
+}
+function sClear(){sPdfDoc=null;sPdfFile=null;document.getElementById('s-info').textContent='Tek bir PDF yükleyin';document.getElementById('s-btn').disabled=true;document.getElementById('s-res').classList.remove('show')}
+
+async function sSplit(){
+  if(!sPdfDoc){alert('Önce PDF yükleyin.');return}
+  const allP=document.getElementById('s-all').checked;const rangeStr=document.getElementById('s-range').value.trim();const total=sPdfDoc.numPages;
+  let pages=[];
+  if(allP){for(let i=1;i<=total;i++)pages.push([i])}
+  else{
+    if(!rangeStr){alert('Sayfa aralığı girin.');return}
+    for(const g of rangeStr.split(',')){const t=g.trim();if(t.includes('-')){const[a,b]=t.split('-').map(Number);const arr=[];for(let i=a;i<=b&&i<=total;i++)arr.push(i);if(arr.length)pages.push(arr)}else{const n=parseInt(t);if(!isNaN(n)&&n>=1&&n<=total)pages.push([n])}}
+    if(!pages.length){alert('Geçerli sayfa numarası girin.');return}
+  }
+  const pw=document.getElementById('s-pw'),pb=document.getElementById('s-pb'),pl=document.getElementById('s-pl');
+  pw.style.display='block';pb.style.width='0';
+  const{jsPDF}=window.jspdf;const dlList=document.getElementById('s-dl-list');dlList.innerHTML='';
+  for(let gi=0;gi<pages.length;gi++){
+    pl.textContent=`Parça ${gi+1}/${pages.length}`;pb.style.width=Math.round((gi/pages.length)*90)+'%';
+    const pNums=pages[gi];const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});let first=true;
+    for(const pn of pNums){try{const pg=await sPdfDoc.getPage(pn);const vp=pg.getViewport({scale:1.5});const canvas=document.createElement('canvas');canvas.width=vp.width;canvas.height=vp.height;await pg.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;const img=canvas.toDataURL('image/jpeg',0.9);const pw2=doc.internal.pageSize.getWidth(),ph2=doc.internal.pageSize.getHeight();if(!first)doc.addPage();first=false;doc.addImage(img,'JPEG',0,0,pw2,ph2)}catch(e){}}
+    const blob=doc.output('blob');const name=pages.length===1?'bolunmus.pdf':'bolunmus_'+(gi+1)+'.pdf';
+    const btn=document.createElement('button');btn.className='tbtn green';btn.style.width='100%';btn.style.justifyContent='flex-start';btn.style.textAlign='left';
+    btn.textContent=(pNums.length===1?'Sayfa '+pNums[0]:pNums[0]+'-'+pNums[pNums.length-1]+'. sayfalar')+' — İndir';
+    btn.onclick=()=>dlBlob(blob,name);dlList.appendChild(btn);
+  }
+  pb.style.width='100%';pw.style.display='none';document.getElementById('s-res').classList.add('show');
+}
+
+/* ════════════════════════════
+   WORD → PDF
+════════════════════════════ */
+let wFile=null;
+const wDrop=document.getElementById('w-drop');
+wDrop.addEventListener('dragover',e=>{e.preventDefault();wDrop.style.background='#f5f3ff';wDrop.style.borderColor='#c4b5fd'});
+wDrop.addEventListener('dragleave',()=>{wDrop.style.background='';wDrop.style.borderColor=''});
+wDrop.addEventListener('drop',e=>{e.preventDefault();wDrop.style.background='';wDrop.style.borderColor='';wLoad(e.dataTransfer.files[0])});
+document.getElementById('w-fi').addEventListener('change',e=>wLoad(e.target.files[0]));
+function wLoad(f){if(!f)return;wFile=f;document.getElementById('w-info').textContent=f.name+' — '+(f.size/1024).toFixed(0)+' KB';document.getElementById('w-btn').disabled=false;document.getElementById('w-res').classList.remove('show')}
+function wClear(){wFile=null;document.getElementById('w-info').textContent='Microsoft Word formatı (.docx) desteklenir';document.getElementById('w-btn').disabled=true;document.getElementById('w-res').classList.remove('show')}
+async function wConvert(){
+  if(!wFile){alert('.docx dosyası yükleyin.');return}
+  const pw=document.getElementById('w-pw'),pb=document.getElementById('w-pb');pw.style.display='block';pb.style.width='20%';
+  try{
+    const ab=await wFile.arrayBuffer();pb.style.width='50%';
+    const result=await mammoth.extractRawText({arrayBuffer:ab});pb.style.width='75%';
+    const{jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+    const PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
+    const ML=52,MR=52,MT=60,MB=52,TW=PW-ML-MR,LH=14;
+    doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(30);let y=MT;
+    for(const line of result.value.split('\n')){if(!line.trim()){y+=LH*0.5;continue}const wrapped=doc.splitTextToSize(lat(line),TW);for(const wl of wrapped){if(y+LH>PH-MB){doc.addPage();y=MT}doc.text(wl,ML,y);y+=LH}}
+    pb.style.width='100%';const blob=doc.output('blob');
+    document.getElementById('w-dl').onclick=()=>dlBlob(blob,wFile.name.replace(/\.docx?$/,'')+'.pdf');
+    pw.style.display='none';document.getElementById('w-res').classList.add('show');
+  }catch(e){pw.style.display='none';alert('Hata: '+e.message)}
+}
+
+/* ════════════════════════════
+   PDF SIKIŞTIR
+════════════════════════════ */
+let cFile=null,cPdfDoc=null;
+const cDrop=document.getElementById('c-drop');
+cDrop.addEventListener('dragover',e=>{e.preventDefault();cDrop.style.background='#fff1f2';cDrop.style.borderColor='#fda4af'});
+cDrop.addEventListener('dragleave',()=>{cDrop.style.background='';cDrop.style.borderColor=''});
+cDrop.addEventListener('drop',e=>{e.preventDefault();cDrop.style.background='';cDrop.style.borderColor='';cLoad(e.dataTransfer.files[0])});
+document.getElementById('c-fi').addEventListener('change',e=>cLoad(e.target.files[0]));
+
+document.querySelectorAll('input[name="cl"]').forEach(r=>{r.addEventListener('change',()=>{document.querySelectorAll('.level-opt').forEach(l=>{l.classList.remove('sel');l.style.border=''});r.closest('.level-opt').classList.add('sel')})});
+
+async function cLoad(f){if(!f||f.type!=='application/pdf')return;cFile=f;const ab=await f.arrayBuffer();cPdfDoc=await pdfjsLib.getDocument({data:ab}).promise;document.getElementById('c-info').textContent=f.name+' — '+cPdfDoc.numPages+' sayfa · '+(f.size/1024).toFixed(0)+' KB';document.getElementById('c-btn').disabled=false;document.getElementById('c-res').classList.remove('show')}
+function cClear(){cFile=null;cPdfDoc=null;document.getElementById('c-info').textContent='Tek bir PDF yükleyin';document.getElementById('c-btn').disabled=true;document.getElementById('c-res').classList.remove('show')}
+async function cCompress(){
+  if(!cPdfDoc){alert('Önce PDF yükleyin.');return}
+  const level=document.querySelector('input[name="cl"]:checked').value;
+  const quality=level==='low'?0.9:level==='med'?0.65:0.4;const scale=level==='low'?1.2:level==='med'?1.0:0.75;
+  const pw=document.getElementById('c-pw'),pb=document.getElementById('c-pb');pw.style.display='block';pb.style.width='0';document.getElementById('c-btn').disabled=true;
+  const{jsPDF}=window.jspdf;const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});const origSize=cFile.size;
+  for(let pi=1;pi<=cPdfDoc.numPages;pi++){
+    pb.style.width=Math.round((pi/cPdfDoc.numPages)*95)+'%';
+    try{const pg=await cPdfDoc.getPage(pi);const vp=pg.getViewport({scale});const canvas=document.createElement('canvas');canvas.width=vp.width;canvas.height=vp.height;await pg.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;const img=canvas.toDataURL('image/jpeg',quality);const pw2=doc.internal.pageSize.getWidth(),ph2=doc.internal.pageSize.getHeight();if(pi>1)doc.addPage();doc.addImage(img,'JPEG',0,0,pw2,ph2)}catch(e){}
+  }
+  pb.style.width='100%';const blob=doc.output('blob');const saved=Math.round((1-blob.size/origSize)*100);
+  document.getElementById('c-sz').textContent='Orijinal: '+(origSize/1024).toFixed(0)+' KB → Yeni: '+(blob.size/1024).toFixed(0)+' KB ('+(saved>0?'%'+saved+' küçüldü':'boyut değişmedi')+')';
+  document.getElementById('c-dl').onclick=()=>dlBlob(blob,'sikistirilmis.pdf');
+  pw.style.display='none';document.getElementById('c-res').classList.add('show');document.getElementById('c-btn').disabled=false;
 }
 </script>
+</body>
+</html>
