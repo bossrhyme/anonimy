@@ -1,0 +1,383 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden}
+
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:560px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+
+.sidebar{border-right:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;background:var(--color-background-primary)}
+.sb-logo{padding:14px 16px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:9px}
+.sb-mark{width:28px;height:28px;border-radius:7px;background:#E6F1FB;border:0.5px solid #B5D4F4;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.sb-ver{font-size:10px;color:var(--color-text-secondary);margin-left:auto;padding:1px 6px;border-radius:10px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)}
+
+.sb-section{padding:12px 14px 8px}
+.sb-section-title{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:8px}
+.sb-check{display:flex;align-items:center;gap:8px;padding:4px 5px;border-radius:6px;font-size:12.5px;color:var(--color-text-primary);cursor:pointer;user-select:none;transition:background .1s}
+.sb-check:hover{background:var(--color-background-secondary)}
+.sb-box{width:15px;height:15px;border-radius:4px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s}
+.sb-box.on{background:#185FA5;border-color:#185FA5}
+.sb-box.on::after{content:'';width:7px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+
+.sb-divider{height:0.5px;background:var(--color-border-tertiary);margin:6px 14px}
+
+.sb-style{padding:4px 14px 10px}
+.sb-style-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:7px}
+.sb-style-opts{display:flex;flex-direction:column;gap:4px}
+.sb-style-opt{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:7px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;border:0.5px solid transparent;transition:all .1s}
+.sb-style-opt:hover{background:var(--color-background-secondary)}
+.sb-style-opt.sel{background:#E6F1FB;border-color:#B5D4F4;color:#0C447C}
+.sb-radio{width:13px;height:13px;border-radius:50%;border:0.5px solid var(--color-border-secondary);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sb-radio.on{border-color:#185FA5}
+.sb-radio.on::after{content:'';width:6px;height:6px;border-radius:50%;background:#185FA5;display:block}
+
+.sb-run{margin:auto 14px 14px;padding:9px 0;border-radius:8px;background:#185FA5;color:#fff;font-size:13px;font-weight:500;text-align:center;cursor:pointer;transition:opacity .1s}
+.sb-run:hover{opacity:.88}
+.sb-run:active{opacity:.75}
+
+.main{display:flex;flex-direction:column;min-width:0}
+.main-topbar{padding:10px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:8px}
+.upload-area{flex:1;display:flex;align-items:center;gap:8px;padding:7px 11px;border-radius:8px;border:0.5px dashed var(--color-border-secondary);font-size:12px;color:var(--color-text-secondary);cursor:pointer;transition:background .1s}
+.upload-area:hover{background:var(--color-background-secondary)}
+.upload-icon{width:22px;height:22px;border-radius:5px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.topbar-btn{font-size:12px;padding:6px 12px;border-radius:7px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:transparent;cursor:pointer;white-space:nowrap;transition:background .1s}
+.topbar-btn:hover{background:var(--color-background-secondary)}
+.topbar-btn.pdf-btn{background:#E6F1FB;border-color:#B5D4F4;color:#0C447C}
+.topbar-btn.pdf-btn:hover{background:#B5D4F4}
+.topbar-btn:disabled{opacity:.4;cursor:not-allowed}
+
+.editors{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}
+.editor{display:flex;flex-direction:column;border-right:0.5px solid var(--color-border-tertiary);min-width:0}
+.editor:last-child{border-right:none}
+.ed-head{padding:8px 14px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
+.ed-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--color-text-secondary)}
+.ed-meta{font-size:11px;color:var(--color-text-secondary)}
+.ed-meta.green{color:#185FA5}
+textarea{width:100%;height:280px;font-size:11.5px;font-family:var(--font-mono);line-height:1.7;padding:12px 14px;resize:none;background:transparent;border:none;color:var(--color-text-primary);outline:none}
+.preview{height:280px;font-size:11.5px;font-family:var(--font-mono);line-height:1.7;padding:12px 14px;overflow-y:auto;color:var(--color-text-primary);word-break:break-word;white-space:pre-wrap}
+.preview-empty{font-size:12px;color:var(--color-text-secondary);padding:2rem 14px}
+
+.statsbar{padding:7px 14px;border-top:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:var(--color-background-secondary)}
+.stat-chip{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.stat-chip b{color:var(--color-text-primary)}
+.stat-total{margin-left:auto;font-size:11px;font-weight:500;color:var(--color-text-primary)}
+
+.hn{background:#fef9c3;color:#713f12;border-radius:2px;padding:0 2px}
+.htc{background:#fce7f3;color:#831843;border-radius:2px;padding:0 2px}
+.hph{background:#dbeafe;color:#1e3a8a;border-radius:2px;padding:0 2px}
+.hdt{background:#dcfce7;color:#14532d;border-radius:2px;padding:0 2px}
+.hem{background:#ede9fe;color:#4c1d95;border-radius:2px;padding:0 2px}
+.had{background:#ffedd5;color:#7c2d12;border-radius:2px;padding:0 2px}
+.hib{background:#d1fae5;color:#064e3b;border-radius:2px;padding:0 2px}
+.hco{background:#e0f2fe;color:#0c4a6e;border-radius:2px;padding:0 2px}
+.hpl{background:#fdf4ff;color:#581c87;border-radius:2px;padding:0 2px}
+.hpa{background:#fff7ed;color:#9a3412;border-radius:2px;padding:0 2px}
+.htx{background:#f0fdf4;color:#14532d;border-radius:2px;padding:0 2px}
+</style>
+
+<h2 class="sr-only">PDF anonimleştirici — minimal sidebar tasarımı</h2>
+
+<div class="shell">
+
+  <div class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-mark">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <rect x="2" y="1" width="11" height="13" rx="2" stroke="#185FA5" stroke-width="1.2"/>
+          <path d="M4 5h7M4 7.5h5M4 10h6" stroke="#185FA5" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="sb-name">Anonimleştirici</span>
+      <span class="sb-ver">v5</span>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-title">Maskeleme</div>
+      <label class="sb-check"><div class="sb-box on" id="b_name"></div>Kişi adları</label>
+      <label class="sb-check"><div class="sb-box on" id="b_tc"></div>TC kimlik no</label>
+      <label class="sb-check"><div class="sb-box on" id="b_phone"></div>Telefon numarası</label>
+      <label class="sb-check"><div class="sb-box on" id="b_date"></div>Tarihler</label>
+      <label class="sb-check"><div class="sb-box on" id="b_email"></div>E-posta adresi</label>
+      <label class="sb-check"><div class="sb-box on" id="b_addr"></div>Adres / şehir</label>
+      <label class="sb-check"><div class="sb-box on" id="b_iban"></div>IBAN / hesap no</label>
+      <label class="sb-check"><div class="sb-box on" id="b_company"></div>Şirket / kurum</label>
+      <label class="sb-check"><div class="sb-box on" id="b_plate"></div>Plaka numarası</label>
+      <label class="sb-check"><div class="sb-box on" id="b_passport"></div>Pasaport / ehliyet</label>
+      <label class="sb-check"><div class="sb-box on" id="b_tax"></div>Vergi numarası</label>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <div class="sb-style">
+      <div class="sb-style-label">Maskeleme stili</div>
+      <div class="sb-style-opts">
+        <div class="sb-style-opt sel" data-val="label" onclick="setStyle(this)">
+          <div class="sb-radio on"></div><span>[KİŞİ_1] etiket</span>
+        </div>
+        <div class="sb-style-opt" data-val="star" onclick="setStyle(this)">
+          <div class="sb-radio"></div><span>[*****] yıldız</span>
+        </div>
+        <div class="sb-style-opt" data-val="hash" onclick="setStyle(this)">
+          <div class="sb-radio"></div><span>[GİZLİ] blok</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-run" onclick="run()">Anonimleştir</div>
+  </div>
+
+  <div class="main">
+    <div class="main-topbar">
+      <div class="upload-area" id="dropZone" onclick="document.getElementById('fi').click()">
+        <div class="upload-icon">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M6.5 2v7M3 5l3.5-3 3.5 3M2 11h9" stroke="#185FA5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span id="uploadLabel">PDF yükle veya sürükle bırak</span>
+      </div>
+      <input type="file" id="fi" accept=".pdf" style="display:none">
+      <button class="topbar-btn" onclick="doCopy()" id="btnCopy" disabled>Kopyala</button>
+      <button class="topbar-btn" onclick="doTxt()" id="btnTxt" disabled>TXT</button>
+      <button class="topbar-btn pdf-btn" onclick="doPdf()" id="btnPdf" disabled>PDF indir</button>
+    </div>
+
+    <div class="editors">
+      <div class="editor">
+        <div class="ed-head">
+          <span class="ed-label">Orijinal metin</span>
+          <span class="ed-meta" id="origMeta"></span>
+        </div>
+        <textarea id="inp" placeholder="PDF yüklenince burada görünür&#10;ya da doğrudan metin yapıştırın..."></textarea>
+      </div>
+      <div class="editor">
+        <div class="ed-head">
+          <span class="ed-label">Anonimleştirilmiş</span>
+          <span class="ed-meta green" id="anonMeta"></span>
+        </div>
+        <div class="preview" id="prev"><div class="preview-empty">Anonimleştir butonuna basın</div></div>
+      </div>
+    </div>
+
+    <div class="statsbar" id="statsbar" style="display:none"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+let cleanText='', origLines=[], maskStyle='label';
+const counters={};
+
+const NAMES=['Ahmet','Mehmet','Mustafa','Ali','Hüseyin','Hasan','İbrahim','İsmail','Ömer','Süleyman','Murat','Osman','Yusuf','Can','Cem','Caner','Emre','Berk','Alp','Serkan','Volkan','Burak','Tolga','Kemal','Selim','Tarık','Tarkan','Uğur','Utku','Umut','Taner','Tuncay','Turgut','Savaş','Samet','Serhat','Ercan','Erdem','Erhan','Ersin','Erdal','Enes','Fatih','Ferhat','Fikret','Furkan','Gökhan','Görkem','Haluk','Hamza','Hayri','İlhan','Kadir','Kamil','Koray','Kürşat','Levent','Lütfi','Mesut','Metin','Mücahit','Nuri','Oğuz','Onur','Orhan','Özcan','Ramazan','Recep','Rıza','Sami','Sedat','Semih','Tamer','Tayfun','Tunç','Ümit','Veli','Yaşar','Yiğit','Zafer','Zeki','Çağatay','Çağrı','Batuhan','Bahadır','Barış','Berkay','Cenk','Cevdet','Cihan','Deniz','Doğan','Doğukan','Doruk','Ege','Emir','Eren','Eyüp','Hakan','Harun','Kaan','Kenan','Mahmut','Mert','Muhammet','Ozan','Özgür','Ayşe','Fatma','Zeynep','Emine','Hatice','Elif','Merve','Aslı','Selin','Derya','Burcu','Gözde','Leyla','Nur','Nalan','Pınar','Sevda','Sevinç','Sibel','Songül','Suna','Şule','Tuba','Tuğba','Tuğçe','Türkan','Ülkü','Ümran','Yasemin','Yeliz','Zühal','Arzu','Aycan','Aynur','Aysel','Aysu','Ayten','Azize','Bahar','Berrak','Beyza','Binnaz','Canan','Cemre','Defne','Didem','Dilara','Dilan','Ebru','Ece','Esra','Figen','Filiz','Gül','Gülcan','Güler','Gülnur','Gülsüm','Hacer','Hanife','Havva','Hilal','İnci','İrem','Kadriye','Kübra','Latife','Mehtap','Melek','Melisa','Meral','Mine','Müge','Nazan','Neşe','Nihal','Nilüfer','Nisa','Nuray','Özge','Özlem','Reyhan','Rukiye','Sabiha','Saadet','Şerife','Şeyma','Şükran','Tülay','Vildan','Yılmaz','Kaya','Demir','Çelik','Şahin','Yıldız','Özdemir','Arslan','Doğan','Kılıç','Kaplan','Korkmaz','Kurt','Polat','Aydın','Erdoğan','Tekin','Aktaş','Çetin','Sarı','Yavuz','Öztürk','Koç','Aslan','Kara','Taş','Cengiz','Bayrak','Duman','Özer','Ateş','Acar','Bulut','Keskin','Güven','Akın','Akman','Aksu','Altın','Arıkan','Avcı','Aydoğan','Aygün','Ayhan','Balcı','Baş','Başaran','Bayraktar','Bayram','Bilgin','Bozkurt','Boz','Budak','Coşkun','Çakır','Çalışkan','Çoban','Dalkılıç','Demirci','Demirkol','Dinç','Doğru','Dursun','Ekici','Elmas','Ergin','Erkan','Eroğlu','Erol','Ertan','Esen','Genç','Gökçe','Güçlü','Güneş','Gürbüz','Işık','İnan','Karahan','Karataş','Koçak','Kuş','Küçük','Mutlu','Okay','Oral','Önal','Önder','Özer','Özkan','Özmen','Sağlam','Saraç','Sevim','Soylu','Şener','Şimşek','Tatar','Tekeli','Temiz','Tok','Toprak','Tunca','Uçar','Usta','Uzun','Ünsal','Ünal','Yalçın','Yanık','Yıldırım','Yücel'];
+const CITIES=['İstanbul','Ankara','İzmir','Bursa','Antalya','Adana','Konya','Gaziantep','Şanlıurfa','Kocaeli','Mersin','Diyarbakır','Hatay','Manisa','Kayseri','Samsun','Balıkesir','Kahramanmaraş','Van','Aydın','Denizli','Sakarya','Tekirdağ','Muğla','Trabzon','Erzurum','Ordu','Eskişehir','Malatya','Elazığ','Mardin','Gebze','Pendik','Kadıköy','Üsküdar','Bağcılar','Bahçelievler','Esenler','Başakşehir','Kartal','Maltepe','Ataşehir','Beşiktaş','Beyoğlu','Şişli','Bakırköy','Güngören','Fatih','Eyüpsultan','Gaziosmanpaşa','Sultangazi','Çekmeköy','Sancaktepe','Tuzla','Ümraniye','Zeytinburnu','Kağıthane','Sarıyer','Adıyaman','Afyon','Ağrı','Aksaray','Amasya','Artvin','Bartın','Batman','Bilecik','Bingöl','Bitlis','Bolu','Burdur','Çanakkale','Çankırı','Çorum','Edirne','Erzincan','Giresun','Gümüşhane','Hakkari','Iğdır','Isparta','Karabük','Karaman','Kastamonu','Kilis','Kırıkkale','Kırklareli','Kırşehir','Kütahya','Muş','Nevşehir','Niğde','Osmaniye','Rize','Siirt','Sinop','Sivas','Şırnak','Tokat','Tunceli','Uşak','Yalova','Yozgat','Zonguldak'];
+
+function setStyle(el){
+  document.querySelectorAll('.sb-style-opt').forEach(o=>{
+    o.classList.remove('sel');
+    o.querySelector('.sb-radio').classList.remove('on');
+  });
+  el.classList.add('sel');
+  el.querySelector('.sb-radio').classList.add('on');
+  maskStyle=el.dataset.val;
+}
+
+document.querySelectorAll('.sb-check').forEach(lbl=>{
+  lbl.addEventListener('click',()=>{
+    const box=lbl.querySelector('.sb-box');
+    box.classList.toggle('on');
+  });
+});
+
+const dz=document.getElementById('dropZone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.style.background='var(--color-background-secondary)'});
+dz.addEventListener('dragleave',()=>dz.style.background='');
+dz.addEventListener('drop',e=>{e.preventDefault();dz.style.background='';handleFile(e.dataTransfer.files[0])});
+document.getElementById('fi').addEventListener('change',e=>handleFile(e.target.files[0]));
+
+async function handleFile(f){
+  if(!f||f.type!=='application/pdf')return;
+  document.getElementById('uploadLabel').textContent='Okunuyor…';
+  try{
+    const ab=await f.arrayBuffer();
+    const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+    let full='';
+    for(let i=1;i<=pdf.numPages;i++){
+      const pg=await pdf.getPage(i);
+      const tc=await pg.getTextContent();
+      let lastY=null,line='';
+      for(const item of tc.items){
+        const y=item.transform?item.transform[5]:null;
+        if(lastY!==null&&Math.abs(y-lastY)>4){full+=line.trim()+'\n';line='';}
+        line+=item.str+(item.hasEOL?' ':' ');
+        lastY=y;
+      }
+      if(line.trim())full+=line.trim()+'\n';
+      full+='\n';
+    }
+    const t=full.trim();
+    document.getElementById('inp').value=t;
+    origLines=t.split('\n');
+    document.getElementById('uploadLabel').textContent=f.name+' — '+pdf.numPages+' sayfa';
+    document.getElementById('origMeta').textContent=pdf.numPages+' sayfa';
+  }catch(e){
+    document.getElementById('uploadLabel').textContent='Hata: PDF okunamadı';
+  }
+}
+
+document.getElementById('inp').addEventListener('input',()=>{
+  origLines=document.getElementById('inp').value.split('\n');
+  document.getElementById('origMeta').textContent=origLines.length+' satır';
+});
+
+function isOn(id){return document.getElementById(id).classList.contains('on')}
+
+function getLabel(type){
+  if(maskStyle==='star')return '[*****]';
+  if(maskStyle==='hash')return '[GİZLİ]';
+  if(!counters[type])counters[type]=0;
+  counters[type]++;
+  const L={name:'KİŞİ',tc:'TC_NO',phone:'TELEFON',date:'TARİH',email:'EPOSTA',addr:'ADRES',iban:'IBAN',company:'KURUM',plate:'PLAKA',passport:'PASAPORT',tax:'VERGİ_NO'};
+  return '['+L[type]+'_'+counters[type]+']';
+}
+
+function run(){
+  Object.keys(counters).forEach(k=>counters[k]=0);
+  let text=document.getElementById('inp').value;
+  if(!text.trim()){alert('Önce PDF yükleyin veya metin girin.');return;}
+  origLines=text.split('\n');
+  const cnt={};
+  const rep=(type,re)=>{text=text.replace(re,()=>{cnt[type]=(cnt[type]||0)+1;return getLabel(type)})};
+
+  if(isOn('b_tc'))      rep('tc',/\b[1-9]\d{10}\b/g);
+  if(isOn('b_iban'))    rep('iban',/\bTR\s?\d{2}[\s\d]{20,28}\b/gi);
+  if(isOn('b_phone')){
+    rep('phone',/(?:\+90|0090)[\s\-]?\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);
+    rep('phone',/0\s?[5][0-9]{2}\s?\d{3}\s?\d{2}\s?\d{2}/g);
+    rep('phone',/\(\d{3,4}\)\s?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}/g);
+  }
+  if(isOn('b_email'))   rep('email',/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g);
+  if(isOn('b_plate'))   rep('plate',/\b\d{2}\s?[A-ZÇĞİÖŞÜa-zçğişöü]{1,3}\s?\d{2,4}\b/g);
+  if(isOn('b_tax'))     rep('tax',/\b\d{10}\b/g);
+  if(isOn('b_passport'))rep('passport',/\b[A-Z]{1,2}\d{7,9}\b/g);
+  if(isOn('b_date')){
+    rep('date',/\b\d{1,2}[.\/\-]\d{1,2}[.\/\-]\d{4}\b/g);
+    rep('date',/\b\d{1,2}\s+(?:Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık)\s+\d{4}\b/gi);
+  }
+  if(isOn('b_company')) rep('company',/\b[\wÇçĞğİıÖöŞşÜü]+(?:\s[\wÇçĞğİıÖöŞşÜü]+){0,3}\s*(?:A\.?Ş\.?|Anonim\s*Şirket|Ltd\.?\s*Şti\.?|Limited\s*Şirket|Holding|Group|Grup|Bankası|Bank|Sigorta|Finans|Faktoring|Leasing|Yatırım|Menkul|Teknoloji|Yazılım|Danışmanlık|Müşavirlik|Hukuk|Avukatlık|Bürosu|Ortaklığı|Kooperatif)\b/gi);
+  if(isOn('b_addr')){
+    rep('addr',new RegExp('\\b('+CITIES.join('|')+')\\b','g'));
+    rep('addr',/\b(?:Cad(?:desi)?\.?|Sok(?:ak)?\.?|Mah(?:allesi)?\.?|Blv\.?|Bulvarı|No\s*[:.]?\s*\d+(?:\/\d+)?|Apt\.?|Daire\s*\d+|Kat\s*\d+|Posta\s*[Kk]odu\s*:?\s*\d{5})\b[^.\n]*/gi);
+  }
+  if(isOn('b_name')){
+    const nr=new RegExp('\\b('+NAMES.join('|')+')'+'(\\s+('+NAMES.join('|')+'))?\\b','g');
+    rep('name',nr);
+    rep('name',/\b[A-ZÇĞİÖŞÜ]{2,}(?:\s[A-ZÇĞİÖŞÜ]{2,})+\b/g);
+    rep('name',/(?:Sayın|Sevgili|Davacı|Sanık|Başvurucu|Müvekkil|Müşteri|Vatandaş)\s+[A-ZÇĞİÖŞÜa-zçğişöü]+(?:\s+[A-ZÇĞİÖŞÜa-zçğişöü]+)*/gi);
+  }
+
+  cleanText=text;
+  const total=Object.values(cnt).reduce((a,b)=>a+b,0);
+
+  const CM={KİŞİ:'hn',TC_NO:'htc',TELEFON:'hph',TARİH:'hdt',EPOSTA:'hem',ADRES:'had',IBAN:'hib',KURUM:'hco',PLAKA:'hpl',PASAPORT:'hpa',VERGİ_NO:'htx'};
+  let html=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if(maskStyle==='label'){
+    html=html.replace(/\[([A-ZÇĞİÖŞÜ_]+)_\d+\]/g,(m,k)=>{
+      const base=Object.keys(CM).find(x=>k.startsWith(x));
+      return '<span class="'+(base?CM[base]:'hn')+'">'+m+'</span>';
+    });
+  }
+  document.getElementById('prev').innerHTML=html||'<div class="preview-empty">Maskelenecek veri bulunamadı</div>';
+  document.getElementById('anonMeta').textContent=total+' veri maskelendi';
+
+  const TL={name:'Kişi',tc:'TC',phone:'Tel',date:'Tarih',email:'E-posta',addr:'Adres',iban:'IBAN',company:'Kurum',plate:'Plaka',passport:'Pasaport',tax:'Vergi'};
+  let sh='';
+  Object.entries(cnt).forEach(([k,v])=>{sh+='<span class="stat-chip">'+TL[k]+': <b>'+v+'</b></span>'});
+  sh+='<span class="stat-total">Toplam: '+total+'</span>';
+  const sb=document.getElementById('statsbar');
+  sb.style.display='flex';sb.innerHTML=sh;
+
+  ['btnCopy','btnTxt','btnPdf'].forEach(id=>document.getElementById(id).disabled=false);
+}
+
+function doCopy(){
+  if(!cleanText)return;
+  navigator.clipboard.writeText(cleanText).then(()=>{
+    const b=document.getElementById('btnCopy'),o=b.textContent;
+    b.textContent='✓';setTimeout(()=>b.textContent=o,1500);
+  });
+}
+
+function doTxt(){
+  if(!cleanText)return;
+  const a=document.createElement('a');
+  a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(cleanText);
+  a.download='anonimlestirilmis.txt';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+const TR_MAP={'ş':'s','Ş':'S','ı':'i','İ':'I','ğ':'g','Ğ':'G','ü':'u','Ü':'U','ö':'o','Ö':'O','ç':'c','Ç':'C'};
+const lat=s=>s.replace(/[şŞıİğĞüÜöÖçÇ]/g,m=>TR_MAP[m]||m);
+
+function isHeading(line){
+  const t=line.trim();
+  if(!t||t.length>80||/[.,:;?!]$/.test(t))return false;
+  return /^[A-ZÇĞİÖŞÜ\s\d\-\.\/]{4,}$/.test(t);
+}
+
+function doPdf(){
+  if(!cleanText)return;
+  const btn=document.getElementById('btnPdf');
+  btn.disabled=true;btn.textContent='Oluşturuluyor…';
+  try{
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({orientation:'portrait',unit:'pt',format:'a4'});
+    const PW=doc.internal.pageSize.getWidth(),PH=doc.internal.pageSize.getHeight();
+    const ML=50,MR=50,MT=70,MB=55,TW=PW-ML-MR,LH=15;
+
+    doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(25);
+    doc.text(lat('ANONIMLESTIRILMİS BELGE'),ML,MT-22);
+    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(150);
+    doc.text(lat('Kisisel veriler maskelenmistir  —  '+new Date().toLocaleDateString('tr-TR')),ML,MT-10);
+    doc.setDrawColor(210);doc.setLineWidth(0.5);doc.line(ML,MT,PW-MR,MT);
+
+    let y=MT+LH+6;
+    const anonLines=cleanText.split('\n');
+    for(let i=0;i<anonLines.length;i++){
+      const line=anonLines[i];
+      const orig=(origLines[i]||'').trim();
+      const h=isHeading(orig);
+      if(!line.trim()){y+=h?8:LH*0.45;continue;}
+      if(h){y+=10;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(20);}
+      else{doc.setFont('helvetica','normal');doc.setFontSize(9.5);doc.setTextColor(40);}
+      const wrapped=doc.splitTextToSize(lat(line),TW);
+      for(const wl of wrapped){
+        if(y+LH>PH-MB){
+          doc.addPage();y=MT;
+          doc.setFont('helvetica','italic');doc.setFontSize(8);doc.setTextColor(160);
+          doc.text('(devami)',ML,y);doc.line(ML,y+4,PW-MR,y+4);y+=LH+6;
+          doc.setFont(h?'helvetica':'helvetica',h?'bold':'normal');
+          doc.setFontSize(h?11:9.5);doc.setTextColor(h?20:40);
+        }
+        doc.text(wl,ML,y);y+=LH;
+      }
+      if(h)y+=5;
+    }
+    const tp=doc.internal.getNumberOfPages();
+    for(let i=1;i<=tp;i++){
+      doc.setPage(i);doc.setFontSize(8);doc.setTextColor(170);
+      doc.setDrawColor(220);doc.setLineWidth(0.4);doc.line(ML,PH-30,PW-MR,PH-30);
+      doc.text(i+' / '+tp,PW/2,PH-18,{align:'center'});
+    }
+    const blob=doc.output('blob');
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download='anonimlestirilmis.pdf';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),8000);
+  }catch(e){alert('PDF hatası: '+e.message);}
+  finally{btn.disabled=false;btn.textContent='PDF indir';}
+}
+</script>
